@@ -5,12 +5,12 @@ import 'package:tijarat/utils/dynamic_sizes.dart';
 import '../utils/config.dart';
 
 Widget inputTextField(context, label, myController,
-    {function, function2, password = false}) {
+    {function, function2, password = false, icon}) {
   return ClipRRect(
     borderRadius:
         BorderRadius.circular(CustomSizes().dynamicWidth(context, 0.04)),
     child: Container(
-      color: CustomColors.customGrey.withOpacity(0.7),
+      color: CustomColors.customGrey.withOpacity(0.1),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (function == "")
@@ -33,6 +33,10 @@ Widget inputTextField(context, label, myController,
         ),
         decoration: InputDecoration(
           hintText: "Type Something",
+          suffixIcon: Icon(
+            icon,
+            color: CustomColors.customGrey.withOpacity(0.4),
+          ),
           hintStyle: const TextStyle(color: CustomColors.customWhite),
           enabledBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: CustomColors.noColor),

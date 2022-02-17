@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tijarat/app%20screens/login.dart';
 import 'package:tijarat/utils/config.dart';
 
 import 'app screens/home.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: const Home(),
+      home: const Login(),
     );
   }
 }
