@@ -16,22 +16,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(540, 1179),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: () =>
-    
-     MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Tijarat',
-      theme: ThemeData(
-        primarySwatch: CustomColors.primaryColor,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
-      home: const Login(),
-     )
-    );
+        designSize: Size(540, 1179),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: () => MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Tijarat',
+              builder: (context, widget) {
+                //add this line
+                ScreenUtil.setContext(context);
+                return MediaQuery(
+                  //Setting font does not change with system font size
+                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                  child: widget!,
+                );
+              },
+              theme: ThemeData(
+                primarySwatch: CustomColors.primaryColor,
+                textTheme: GoogleFonts.poppinsTextTheme(
+                  Theme.of(context).textTheme,
+                ),
+              ),
+              home: const Login(),
+            ));
   }
 }
