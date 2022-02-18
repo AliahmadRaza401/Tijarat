@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tijarat/app%20screens/login.dart';
 import 'package:tijarat/utils/config.dart';
@@ -14,7 +15,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ScreenUtilInit(
+      designSize: Size(540, 1179),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: () =>
+    
+     MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tijarat',
       theme: ThemeData(
@@ -24,6 +31,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const Login(),
+     )
     );
   }
 }
