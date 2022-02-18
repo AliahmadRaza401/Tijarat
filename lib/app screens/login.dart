@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tijarat/app%20screens/signup.dart';
+import 'package:tijarat/utils/app_routes.dart';
 import 'package:tijarat/utils/config.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 import 'package:tijarat/widgets/buttons.dart';
@@ -129,10 +131,19 @@ class _LoginState extends State<Login> {
                         width: CustomSizes().dynamicWidth(context, .6),
                         function: () {},
                       ),
+                      coloredButton(
+                        context,
+                        "Sign up",
+                        CustomColors.lightGreen,
+                        width: CustomSizes().dynamicWidth(context, .6),
+                        function: () {
+                          CustomRoutes().push(context, Signup());
+                        },
+                      ),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
