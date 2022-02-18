@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../utils/config.dart';
-import '../utils/dynamic_sizes.dart';
-import '../widgets/buttons.dart';
-import '../widgets/form_fields.dart';
-import '../widgets/text_widget.dart';
+import '../../utils/app_color.dart';
+import '../../utils/dynamic_sizes.dart';
+import '../../widgets/buttons.dart';
+import '../../widgets/form_fields.dart';
+import '../../widgets/text_widget.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -34,8 +34,8 @@ class _SignupState extends State<Signup> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                CustomColors.darkGreen,
-                CustomColors.lightGreen,
+                AppColors.darkGreen,
+                AppColors.lightGreen,
               ],
             ),
           ),
@@ -49,7 +49,7 @@ class _SignupState extends State<Signup> {
                 width: CustomSizes().dynamicWidth(context, 1),
                 height: CustomSizes().dynamicHeight(context, .14),
                 decoration: BoxDecoration(
-                  color: CustomColors.customWhite,
+                  color: AppColors.customWhite,
                   borderRadius: BorderRadius.circular(
                     CustomSizes().dynamicWidth(context, .05),
                   ),
@@ -65,7 +65,7 @@ class _SignupState extends State<Signup> {
                 width: CustomSizes().dynamicWidth(context, 1),
                 height: CustomSizes().dynamicHeight(context, .78),
                 decoration: BoxDecoration(
-                  color: CustomColors.customWhite,
+                  color: AppColors.customWhite,
                   borderRadius: BorderRadius.circular(
                     CustomSizes().dynamicWidth(context, .05),
                   ),
@@ -81,14 +81,14 @@ class _SignupState extends State<Signup> {
                       context,
                       "Signup",
                       .05,
-                      CustomColors.customBlack,
+                      AppColors.customBlack,
                       bold: true,
                     ),
                     text(
                       context,
                       "By signing in you are agreeing our Term and privacy policy",
                       .032,
-                      CustomColors.customBlack,
+                      AppColors.customBlack,
                     ),
                     inputTextField(
                       context,
@@ -129,7 +129,7 @@ class _SignupState extends State<Signup> {
                     coloredButton(
                       context,
                       "Signup",
-                      CustomColors.lightGreen,
+                      AppColors.lightGreen,
                       width: CustomSizes().dynamicWidth(context, .6),
                       function: () {},
                     ),

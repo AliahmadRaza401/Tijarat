@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tijarat/utils/constants.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 
-import '../utils/config.dart';
+import '../utils/app_color.dart';
 
 Widget inputTextField(context, label, myController,
     {function, function2, password = false, icon}) {
@@ -10,7 +10,7 @@ Widget inputTextField(context, label, myController,
     borderRadius:
         BorderRadius.circular(CustomSizes().dynamicWidth(context, 0.04)),
     child: Container(
-      color: CustomColors.customGrey.withOpacity(0.1),
+      color: AppColors.customGrey.withOpacity(0.1),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (function == "")
@@ -24,28 +24,28 @@ Widget inputTextField(context, label, myController,
             ? TextInputType.visiblePassword
             : TextInputType.emailAddress,
         obscureText: password == true ? obscureText : false,
-        cursorColor: CustomColors.customBlack,
+        cursorColor: AppColors.customBlack,
         cursorWidth: 2.0,
         cursorHeight: CustomSizes().dynamicHeight(context, .03),
         style: TextStyle(
-          color: CustomColors.customBlack,
+          color: AppColors.customBlack,
           fontSize: CustomSizes().dynamicWidth(context, .04),
         ),
         decoration: InputDecoration(
           hintText: "Type Something",
           suffixIcon: Icon(
             icon,
-            color: CustomColors.customGrey.withOpacity(0.4),
+            color: AppColors.customGrey.withOpacity(0.4),
           ),
-          hintStyle: const TextStyle(color: CustomColors.customWhite),
+          hintStyle: const TextStyle(color: AppColors.customWhite),
           enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: CustomColors.noColor),
+            borderSide: BorderSide(color: AppColors.noColor),
           ),
           focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: CustomColors.noColor),
+            borderSide: BorderSide(color: AppColors.noColor),
           ),
           border: const UnderlineInputBorder(
-            borderSide: BorderSide(color: CustomColors.customBlack),
+            borderSide: BorderSide(color: AppColors.customBlack),
           ),
           contentPadding: EdgeInsets.symmetric(
             horizontal: CustomSizes().dynamicWidth(context, .05),

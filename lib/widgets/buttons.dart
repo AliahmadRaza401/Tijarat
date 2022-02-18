@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 
-import '../utils/config.dart';
+import '../utils/app_color.dart';
 
 Widget coloredButton(context, text, color,
     {function = "", width = "", fontSize = 0.04}) {
@@ -10,10 +10,10 @@ Widget coloredButton(context, text, color,
     child: Container(
       width: width == "" ? CustomSizes().dynamicWidth(context, 1) : width,
       height: CustomSizes().dynamicWidth(context, .12),
-      decoration: color == CustomColors.noColor
+      decoration: color == AppColors.noColor
           ? BoxDecoration(
               color: color,
-              border: Border.all(width: 1, color: CustomColors.customWhite),
+              border: Border.all(width: 1, color: AppColors.customWhite),
             )
           : BoxDecoration(
               color: color,
@@ -28,7 +28,7 @@ Widget coloredButton(context, text, color,
         child: Text(
           text,
           style: TextStyle(
-            color: CustomColors.customWhite,
+            color: AppColors.customWhite,
             fontWeight: FontWeight.bold,
             fontSize: CustomSizes().dynamicWidth(context, fontSize),
           ),

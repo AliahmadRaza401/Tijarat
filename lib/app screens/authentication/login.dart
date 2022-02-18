@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tijarat/app%20screens/signup.dart';
+import 'package:provider/provider.dart';
+import 'package:tijarat/app%20screens/authentication/signup.dart';
+import 'package:tijarat/providers/auth_provider.dart';
+import 'package:tijarat/services/auth_services.dart';
 import 'package:tijarat/utils/app_routes.dart';
-import 'package:tijarat/utils/config.dart';
+import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 import 'package:tijarat/widgets/buttons.dart';
 import 'package:tijarat/widgets/form_fields.dart';
@@ -17,9 +20,17 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final email = TextEditingController();
   final password = TextEditingController();
+  late AuthServices _authServices;
+  late AuthProvider _authProvider;
+  @override
+  void initState() {
+    super.initState();
+    _authServices = AuthServices();
+  }
 
   @override
   Widget build(BuildContext context) {
+    bool _loading = Provider.of<AuthProvider>(context).loading;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -31,8 +42,8 @@ class _LoginState extends State<Login> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                CustomColors.darkGreen,
-                CustomColors.lightGreen,
+                AppColors.darkGreen,
+                AppColors.lightGreen,
               ],
             ),
           ),
@@ -68,14 +79,14 @@ class _LoginState extends State<Login> {
                         context,
                         "Welcome",
                         .05,
-                        CustomColors.customBlack,
+                        AppColors.customBlack,
                         bold: true,
                       ),
                       text(
                         context,
                         "By logging in you are agreeing\nour Term and privacy policy",
                         .032,
-                        CustomColors.customBlack,
+                        AppColors.customBlack,
                       ),
                       inputTextField(
                         context,
@@ -96,13 +107,13 @@ class _LoginState extends State<Login> {
                             context,
                             "Remember Password",
                             .032,
-                            CustomColors.customBlack,
+                            AppColors.customBlack,
                           ),
                           text(
                             context,
                             "Forgot Password",
                             .032,
-                            CustomColors.lightGreen,
+                            AppColors.lightGreen,
                           ),
                         ],
                       ),
@@ -124,17 +135,23 @@ class _LoginState extends State<Login> {
                   height: CustomSizes().dynamicHeight(context, .28),
                   child: Column(
                     children: [
-                      coloredButton(
-                        context,
-                        "Login",
-                        CustomColors.lightGreen,
-                        width: CustomSizes().dynamicWidth(context, .6),
-                        function: () {},
-                      ),
+                      _loading == true
+                          ? CircularProgressIndicator()
+                          : coloredButton(
+                              context,
+                              "Login",
+                              AppColors.lightGreen,
+                              width: CustomSizes().dynamicWidth(context, .6),
+                              function: () {
+                                _authProvider.setLoading(true);
+                                _authServices.signIn(
+                                    email: email.text, password: password.text);
+                              },
+                            ),
                       coloredButton(
                         context,
                         "Sign up",
-                        CustomColors.lightGreen,
+                        AppColors.lightGreen,
                         width: CustomSizes().dynamicWidth(context, .6),
                         function: () {
                           CustomRoutes().push(context, Signup());

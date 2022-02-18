@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tijarat/utils/config.dart';
+import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 import 'package:tijarat/widgets/text_widget.dart';
 
@@ -15,7 +15,7 @@ appBar(context) {
         context,
         "BuildYourCake",
         0.06,
-        CustomColors.customBlack,
+        AppColors.customBlack,
         font: true,
       ),
     ],
