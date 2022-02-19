@@ -60,12 +60,14 @@ class AuthServices {
     @required email,
     @required password,
     @required cPassword,
-    bool userTypeFac = true,
+    @required bool userTypeFac = true,
     @required factoryName,
     @required factoryImage,
   }) async {
     try {
       print("Sign Up ---------------------------");
+              Provider.of<AuthProvider>(context).setLoading(true);
+
       final _response = await http.post(
         Uri.parse(API.signUp),
         headers: {
@@ -91,21 +93,20 @@ class AuthServices {
               }),
       );
       result = jsonDecode(_response.body);
-      //  Map<String, dynamic> jsonRes = jsonDecode(_response.body['errors']);
+      Map<String, dynamic> jsonRes = jsonDecode(_response.body);
+      // print('jsonRes: $jsonRes');
       print('result: $result');
 
       if (result['status'] == 'Success') {
+        Provider.of<AuthProvider>(context).setLoading(false);
         var token = result['data']['token'];
         SpServices.saveUserToken(token);
         MyMotionToast.success(context, "SignUp Success!",
             "Your account created successfully Done");
       } else {
-        // if (jsonRes.containsKey(['email'][0]) ) {
-
-        // } else {
-        // }
+                Provider.of<AuthProvider>(context).setLoading(false);
         MyMotionToast.warning(
-            context, "Fail".toString(), "Some thing went wrong".toString());
+            context, "SignUp Fail", "Email is not valid".toString());
 
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
       }

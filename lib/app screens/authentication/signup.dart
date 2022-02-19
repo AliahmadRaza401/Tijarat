@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motion_toast/motion_toast.dart';
+import 'package:tijarat/services/auth_services.dart';
 
 import '../../utils/app_color.dart';
 import '../../utils/dynamic_sizes.dart';
@@ -19,16 +20,24 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  final fName = TextEditingController();
+  final name = TextEditingController();
   final number = TextEditingController();
   final email = TextEditingController();
   final factoryName = TextEditingController();
   final password = TextEditingController();
   final cPassword = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  late AuthServices _authServices;
+
+  @override
+  void initState() {
+    super.initState();
+    _authServices = AuthServices();
+  }
 
   @override
   Widget build(BuildContext context) {
+    print('userType: ${widget.userType}');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -116,7 +125,7 @@ class _SignupState extends State<Signup> {
                         inputTextField(
                           context,
                           "Full Name",
-                          fName,
+                          name,
                           icon: "assets/formField/user.png",
                           keyboardType: TextInputType.name,
                           function: (value) {
@@ -169,8 +178,7 @@ class _SignupState extends State<Signup> {
                           icon: "assets/formField/lock.png",
                           keyboardType: TextInputType.visiblePassword,
                           function: (value) {
-                            if (password.text.toString() ==
-                                value.toString()) {
+                            if (password.text.toString() != value.toString()) {
                               return 'Password must be same';
                             }
                             return null;
@@ -223,6 +231,18 @@ class _SignupState extends State<Signup> {
                                 description: const Text("Fill all Fields!!!"),
                               ).show(context);
                               return;
+                            } else {
+                              _authServices.signUp(
+                                context: context,
+                                name: name.text,
+                                email: email.text,
+                                password: password.text,
+                                cPassword: cPassword.text,
+                                factoryName: factoryName.text,
+                                factoryImage: 'factoryImage',
+                                userTypeFac:
+                                    widget.userType == 'owner' ? true : false,
+                              );
                             }
                           },
                         ),
