@@ -137,48 +137,21 @@ class _LoginState extends State<Login> {
                           ),
                           SizedBox(
                             width: 430.w,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Checkbox(
-                                      value: remember,
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      activeColor: AppColors.buttonGreen,
-                                      splashRadius: 20.r,
-                                      visualDensity: const VisualDensity(
-                                          horizontal: -4, vertical: -4),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          remember = !remember;
-                                        });
-                                      },
-                                    ),
-                                    CustomSizes().widthBox(context, .02),
-                                    text(
-                                      context,
-                                      "Remember Password",
-                                      18.sp,
-                                      AppColors.customBlack.withOpacity(.8),
-                                    ),
-                                  ],
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  MotionToast.info(
+                                    description: const Text("Coming Soon..."),
+                                  ).show(context);
+                                },
+                                child: text(
+                                  context,
+                                  "Forgot Password",
+                                  18.sp,
+                                  AppColors.buttonGreen,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    MotionToast.info(
-                                      description: const Text("Coming Soon..."),
-                                    ).show(context);
-                                  },
-                                  child: text(
-                                    context,
-                                    "Forgot Password",
-                                    18.sp,
-                                    AppColors.buttonGreen,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ],

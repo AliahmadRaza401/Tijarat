@@ -11,6 +11,7 @@ import '../../widgets/text_widget.dart';
 
 class Signup extends StatefulWidget {
   final String userType;
+
   const Signup({Key? key, required this.userType}) : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ class _SignupState extends State<Signup> {
   final fName = TextEditingController();
   final number = TextEditingController();
   final email = TextEditingController();
-  final address = TextEditingController();
+  final factoryName = TextEditingController();
   final password = TextEditingController();
   final cPassword = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -81,127 +82,152 @@ class _SignupState extends State<Signup> {
                     vertical: CustomSizes().dynamicHeight(context, .03),
                     horizontal: CustomSizes().dynamicWidth(context, .06),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      text(
-                        context,
-                        "Signup",
-                        36.sp,
-                        AppColors.customBlack,
-                        bold: true,
-                      ),
-                      richTextWidget(
-                        context,
-                        "By signing in you are agreeing\nour",
-                        " Term and privacy policy",
-                        20.sp,
-                        20.sp,
-                        "",
-                        AppColors.customBlack,
-                        AppColors.buttonGreen,
-                        "",
-                      ),
-                      text(
-                        context,
-                        "By signing in you are agreeing our Term and privacy policy",
-                        20.sp,
-                        AppColors.customBlack,
-                      ),
-                      inputTextField(
-                        context,
-                        "Full Name",
-                        fName,
-                        icon: "assets/formField/user.png",
-                        keyboardType: TextInputType.name,
-                        function: (value) {
-                          if (value!.isEmpty) {
-                            return "Name can't be empty";
-                          }
-                          return null;
-                        },
-                      ),
-                      // inputTextField(
-                      //   context,
-                      //   "Number",
-                      //   number,
-                      //   icon: "assets/formField/home.png",
-                      //   keyboardType: TextInputType.number,
-                      //   function: (value) {
-                      //     if (value!.isEmpty || value.toString().length < ) {
-                      //       return "Number is not valid";
-                      //     }
-                      //     return null;
-                      //   },
-                      // ),
-                      inputTextField(
-                        context,
-                        "Email Address",
-                        email,
-                        icon: "assets/formField/mail.png",
-                        keyboardType: TextInputType.emailAddress,
-                        function: (value) {
-                          if (EmailValidator.validate(value)) {
-                          } else {
-                            return "Enter Valid Email";
-                          }
-                          return null;
-                        },
-                      ),
-                      inputTextField(
-                        context,
-                        "Address",
-                        address,
-                        icon: "assets/formField/home.png",
-                        keyboardType: TextInputType.text,
-                        function: (value) {
-                          if (value!.isEmpty) {
-                            return "Address can't be empty";
-                          }
-                          return null;
-                        },
-                      ),
-                      inputTextField(
-                        context,
-                        "Password",
-                        password,
-                        icon: "assets/formField/lock.png",
-                        keyboardType: TextInputType.visiblePassword,
-                        function: (value) {
-                          if (value!.isEmpty || value.length < 8) {
-                            return 'Password must have 8 characters';
-                          }
-                          return null;
-                        },
-                      ),
-                      inputTextField(
-                        context,
-                        "Confirm Password",
-                        cPassword,
-                        icon: "assets/formField/lock.png",
-                        keyboardType: TextInputType.visiblePassword,
-                        function: (value) {
-                          if (password.text.toString() == value.toString()) {
-                            return 'Password must be same';
-                          }
-                          return null;
-                        },
-                      ),
-                      coloredButton(
-                        context,
-                        "Signup",
-                        AppColors.lightGreen,
-                        width: CustomSizes().dynamicWidth(context, .6),
-                        function: () {
-                          if (!_formKey.currentState!.validate()) {
-                            MotionToast.error(
-                              description: const Text("Fill all Fields!!!"),
-                            ).show(context);
-                            return;
-                          }
-                        },
-                      ),
-                    ],
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        text(
+                          context,
+                          "Signup",
+                          36.sp,
+                          AppColors.customBlack,
+                          bold: true,
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        richTextWidget(
+                          context,
+                          "By signing in you are agreeing\nour",
+                          " Term and privacy policy",
+                          20.sp,
+                          20.sp,
+                          "",
+                          AppColors.customBlack,
+                          AppColors.buttonGreen,
+                          "",
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        inputTextField(
+                          context,
+                          "Full Name",
+                          fName,
+                          icon: "assets/formField/user.png",
+                          keyboardType: TextInputType.name,
+                          function: (value) {
+                            if (value!.isEmpty) {
+                              return "Name can't be empty";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        inputTextField(
+                          context,
+                          "Email Address",
+                          email,
+                          icon: "assets/formField/mail.png",
+                          keyboardType: TextInputType.emailAddress,
+                          function: (value) {
+                            if (EmailValidator.validate(value)) {
+                            } else {
+                              return "Enter Valid Email";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        inputTextField(
+                          context,
+                          "Password",
+                          password,
+                          icon: "assets/formField/lock.png",
+                          keyboardType: TextInputType.visiblePassword,
+                          function: (value) {
+                            if (value!.isEmpty || value.length < 8) {
+                              return 'Password must have 8 characters';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        inputTextField(
+                          context,
+                          "Confirm Password",
+                          cPassword,
+                          icon: "assets/formField/lock.png",
+                          keyboardType: TextInputType.visiblePassword,
+                          function: (value) {
+                            if (password.text.toString() ==
+                                value.toString()) {
+                              return 'Password must be same';
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: widget.userType == "owner" ? 30.h : 0,
+                        ),
+                        // inputTextField(
+                        //   context,
+                        //   "Number",
+                        //   number,
+                        //   icon: "assets/formField/home.png",
+                        //   keyboardType: TextInputType.number,
+                        //   function: (value) {
+                        //     if (value!.isEmpty || value.toString().length < ) {
+                        //       return "Number is not valid";
+                        //     }
+                        //     return null;
+                        //   },
+                        // ),
+                        widget.userType == "owner"
+                            ? inputTextField(
+                                context,
+                                "Factory name",
+                                factoryName,
+                                icon: "assets/formField/home.png",
+                                keyboardType: TextInputType.text,
+                                function: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Factory Name can't be empty";
+                                  }
+                                  return null;
+                                },
+                              )
+                            : const SizedBox(
+                                height: 0.0,
+                              ),
+                        SizedBox(
+                          height: 50.h,
+                        ),
+                        coloredButton(
+                          context,
+                          "Signup",
+                          AppColors.lightGreen,
+                          width: CustomSizes().dynamicWidth(context, .6),
+                          function: () {
+                            if (!_formKey.currentState!.validate()) {
+                              MotionToast.error(
+                                description: const Text("Fill all Fields!!!"),
+                              ).show(context);
+                              return;
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
