@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables, avoid_types_as_parameter_names
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables, avoid_types_as_parameter_names, unused_local_variable
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -92,6 +92,7 @@ class AuthServices {
               }),
       );
       result = jsonDecode(_response.body);
+      //  Map<String, dynamic> jsonRes = jsonDecode(_response.body['errors']);
       print('result: $result');
 
       if (result['status'] == 'Success') {
@@ -100,6 +101,10 @@ class AuthServices {
         MyMotionToast.success(context, "SignUp Success!",
             "Your account created successfully Done");
       } else {
+        // if (jsonRes.containsKey(['email'][0]) ) {
+
+        // } else {
+        // }
         MyMotionToast.warning(
             context, "Fail".toString(), "Some thing went wrong".toString());
 
