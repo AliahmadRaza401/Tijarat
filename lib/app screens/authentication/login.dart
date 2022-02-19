@@ -26,6 +26,7 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     _authServices = AuthServices();
+    _authProvider = Provider.of<AuthProvider>(context, listen: false);
   }
 
   @override
@@ -143,9 +144,12 @@ class _LoginState extends State<Login> {
                               AppColors.lightGreen,
                               width: CustomSizes().dynamicWidth(context, .6),
                               function: () {
+                                print("sdfds");
                                 _authProvider.setLoading(true);
                                 _authServices.signIn(
-                                    email: email.text, password: password.text);
+                                    email: email.text,
+                                    password: password.text,
+                                    context: context);
                               },
                             ),
                       coloredButton(

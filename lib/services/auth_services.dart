@@ -1,15 +1,22 @@
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables, avoid_types_as_parameter_names
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tijarat/api/api.dart';
 import 'package:tijarat/providers/auth_provider.dart';
+import 'package:tijarat/services/sp_services.dart';
+import 'package:tijarat/utils/motion_toast.dart';
 
 class AuthServices {
   var result;
   late AuthProvider _authProvider;
 
-  Future signIn({@required email, @required password}) async {
+  Future signIn(
+      {required BuildContext context,
+      @required email,
+      @required password}) async {
     try {
       print(email);
       print("Sign In ---------------------------");
@@ -19,23 +26,44 @@ class AuthServices {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: jsonEncode({'email': email}),
+        body: jsonEncode({"email": email, "password": password}),
       );
 
       result = jsonDecode(_response.body);
+      print('result: $result');
+      if (result['status'] == 'Success') {
+        Provider.of<AuthProvider>(context, listen: false).setLoading(false);
+        var token = result['data']['token'];
+        SpServices.saveUserToken(token);
+        SpServices.saveUserLoggedIn(true);
+        MyMotionToast.success(context, "Success", "Login Successfully Done");
+      } else {
+        print("User Login False");
+        Provider.of<AuthProvider>(context, listen: false).setLoading(false);
+        MyMotionToast.warning(context, "UnAuthorized".toString(),
+            "Your given Email Password is Wrong".toString());
+      }
       return result;
     } catch (e) {
+      MyMotionToast.warning(
+          context, "Oops!".toString(), "Some thing went wrong".toString());
+      print('e: $e');
+      Provider.of<AuthProvider>(context, listen: false).setLoading(false);
       return e.toString();
     }
   }
 
   //  _________________ sign Up__________________________________
 
-  Future signUp(
-      {@required fName,
-      @required lName,
-      @required email,
-      @required password}) async {
+  Future signUp({
+    @required name,
+    @required email,
+    @required password,
+    @required c_password,
+    @required bool userType_fac = true,
+    @required factory_name,
+    @required factory_image,
+  }) async {
     try {
       print("Sign Up ---------------------------");
       final _response = await http.post(
@@ -44,12 +72,26 @@ class AuthServices {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: jsonEncode({
-          'email': email,
-        }),
+        body: userType_fac
+            ? jsonEncode({
+                "name": name,
+                "email": email,
+                "password": password,
+                "c_password": c_password,
+                "user_type": "factory",
+                "factory_name": factory_name,
+                "factory_image": factory_image,
+              })
+            : jsonEncode({
+                "name": name,
+                "email": email,
+                "password": password,
+                "c_password": c_password,
+                "user_type": "farmer"
+              }),
       );
       result = jsonDecode(_response.body);
-      // print('result: $result');
+      print('result: $result');
       return result;
     } catch (e) {
       return e;
