@@ -56,6 +56,7 @@ class AuthServices {
   //  _________________ sign Up__________________________________
 
   Future signUp({
+    required BuildContext context,
     @required name,
     @required email,
     @required password,
@@ -92,8 +93,24 @@ class AuthServices {
       );
       result = jsonDecode(_response.body);
       print('result: $result');
+
+      if (result['status'] == 'Success') {
+        var token = result['data']['token'];
+        SpServices.saveUserToken(token);
+        MyMotionToast.success(context, "SignUp Success!",
+            "Your account created successfully Done");
+      } else {
+        MyMotionToast.warning(
+            context, "Fail".toString(), "Some thing went wrong".toString());
+
+        Provider.of<AuthProvider>(context, listen: false).setLoading(false);
+      }
       return result;
     } catch (e) {
+      MyMotionToast.warning(
+          context, "Oops!".toString(), "Some thing went wrong".toString());
+      Provider.of<AuthProvider>(context, listen: false).setLoading(false);
+      print('e: $e');
       return e;
     }
   }
