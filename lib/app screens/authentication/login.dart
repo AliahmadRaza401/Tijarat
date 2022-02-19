@@ -93,13 +93,13 @@ class _LoginState extends State<Login> {
                         context,
                         "Email Address",
                         email,
-                        icon: Icons.email_outlined,
+                        icon: "assets/formField/user.png",
                       ),
                       inputTextField(
                         context,
                         "Password",
                         password,
-                        icon: Icons.lock_outline_rounded,
+                        icon: "assets/formField/user.png",
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,7 +156,6 @@ class _LoginState extends State<Login> {
                         context,
                         "Sign up",
                         AppColors.lightGreen,
-                        width: CustomSizes().dynamicWidth(context, .6),
                         function: () {
                           CustomRoutes().push(context, Signup());
                         },

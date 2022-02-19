@@ -9,6 +9,11 @@ import 'package:tijarat/widgets/text_widget.dart';
 // farmer ka lea *far*        eg: far_profile.dart / FarProfile
 // Factory Owner ka lea *onr*  eg: onr_profile.dart / OnrProfile
 
+/// Note 2
+///
+/// file ka name poora hi likh lo far or onr se kya hota he
+/// farmer_profile ya owner_profile
+
 class OnrHome extends StatefulWidget {
   const OnrHome({Key? key}) : super(key: key);
 
