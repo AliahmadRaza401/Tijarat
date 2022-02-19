@@ -1,7 +1,5 @@
-import 'dart:html';
-
- Map<String, String> requestHeaders = {
-       'Content-type': 'application/json',
-       'Accept': 'application/json',
-       'Authorization': '<Your token>'
-     };
+Map<String, String> requestHeaders = {
+  'Content-type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': '<Your token>'
+};

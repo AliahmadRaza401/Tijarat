@@ -1,55 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tijarat/utils/constants.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 
 import '../utils/app_color.dart';
 
 Widget inputTextField(context, label, myController,
-    {function, function2, password = false, icon}) {
-  return ClipRRect(
-    borderRadius:
-        BorderRadius.circular(CustomSizes().dynamicWidth(context, 0.04)),
-    child: Container(
-      color: AppColors.customGrey.withOpacity(0.1),
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (function == "")
-            ? () {
-                return null;
-              }
-            : function,
-        controller: myController,
-        textInputAction: TextInputAction.next,
-        keyboardType: password == true
-            ? TextInputType.visiblePassword
-            : TextInputType.emailAddress,
-        obscureText: password == true ? obscureText : false,
-        cursorColor: AppColors.customBlack,
-        cursorWidth: 2.0,
-        cursorHeight: CustomSizes().dynamicHeight(context, .03),
-        style: TextStyle(
-          color: AppColors.customBlack,
-          fontSize: CustomSizes().dynamicWidth(context, .04),
+    {function, function2, password = false, icon, keyboardType = ""}) {
+  return Container(
+    width: 424.w,
+    height: 57.h,
+    color: AppColors.noColor,
+    child: TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (function == "")
+          ? () {
+              return null;
+            }
+          : function,
+      controller: myController,
+      textInputAction: TextInputAction.next,
+      keyboardType:
+          keyboardType == "" ? TextInputType.emailAddress : keyboardType,
+      obscureText: password == true ? obscureText : false,
+      cursorColor: AppColors.customBlack,
+      cursorWidth: 1.0,
+      style: TextStyle(
+        color: AppColors.customBlack,
+        fontSize: 18.sp,
+      ),
+      textAlign: TextAlign.start,
+      textAlignVertical: TextAlignVertical.center,
+      decoration: InputDecoration(
+        fillColor: AppColors.customGrey2,
+        filled: true,
+        hintText: label,
+        suffixIcon: Image.asset(
+          "$icon",
+          width: 24.w,
+          height: 24.h,
+          color: const Color(0xffC4C4C4),
         ),
-        decoration: InputDecoration(
-          hintText: "Type Something",
-          suffixIcon: Icon(
-            icon,
-            color: AppColors.customGrey.withOpacity(0.4),
-          ),
-          hintStyle: const TextStyle(color: AppColors.customWhite),
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.noColor),
-          ),
-          focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.noColor),
-          ),
-          border: const UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.customBlack),
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: CustomSizes().dynamicWidth(context, .05),
-          ),
+        hintStyle: TextStyle(
+          fontSize: 18.sp,
+          color: const Color(0xffC4C4C4),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: Color(0xffCCC9C9)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        contentPadding: EdgeInsets.only(
+          left: CustomSizes().dynamicWidth(context, .05),
+          bottom: CustomSizes().dynamicHeight(context, .014),
         ),
       ),
     ),
