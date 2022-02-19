@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tijarat/utils/dynamic_sizes.dart';
 
 import '../utils/app_color.dart';
 
@@ -14,7 +13,8 @@ Widget coloredButton(context, text, color,
       decoration: color == AppColors.noColor
           ? BoxDecoration(
               color: color,
-              border: Border.all(width: 1, color: AppColors.customWhite),
+              border: Border.all(width: 1, color: AppColors.buttonGreen),
+              borderRadius: BorderRadius.circular(15.r),
             )
           : BoxDecoration(
               gradient: const LinearGradient(
@@ -31,9 +31,11 @@ Widget coloredButton(context, text, color,
         child: Text(
           text,
           style: TextStyle(
-            color: AppColors.customWhite,
+            color: color == AppColors.noColor
+                ? AppColors.buttonGreen
+                : AppColors.customWhite,
             fontWeight: FontWeight.bold,
-            fontSize: fontSize == "" ? 24.sp : fontSize.sp,
+            fontSize: fontSize == "" ? 24.sp : fontSize,
           ),
         ),
       ),

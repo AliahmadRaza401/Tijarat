@@ -1,5 +1,7 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:motion_toast/motion_toast.dart';
 
 import '../../utils/app_color.dart';
 import '../../utils/dynamic_sizes.dart';
@@ -8,7 +10,8 @@ import '../../widgets/form_fields.dart';
 import '../../widgets/text_widget.dart';
 
 class Signup extends StatefulWidget {
-  const Signup({Key? key}) : super(key: key);
+  final String userType;
+  const Signup({Key? key, required this.userType}) : super(key: key);
 
   @override
   _SignupState createState() => _SignupState();
@@ -21,6 +24,7 @@ class _SignupState extends State<Signup> {
   final address = TextEditingController();
   final password = TextEditingController();
   final cPassword = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,148 +47,165 @@ class _SignupState extends State<Signup> {
           padding: EdgeInsets.all(
             CustomSizes().dynamicHeight(context, .014),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 500.w,
-                height: 180.h,
-                decoration: BoxDecoration(
-                  color: AppColors.customWhite,
-                  borderRadius: BorderRadius.circular(
-                    39.r,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 500.w,
+                  height: 180.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.customWhite,
+                    borderRadius: BorderRadius.circular(
+                      39.r,
+                    ),
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      "assets/logo.png",
+                      height: 115.h,
+                    ),
                   ),
                 ),
-                child: Center(
-                  child: Image.asset(
-                    "assets/logo.png",
-                    height: 115.h,
+                Container(
+                  width: 500.w,
+                  height: 900.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.customWhite,
+                    borderRadius: BorderRadius.circular(
+                      39.r,
+                    ),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: CustomSizes().dynamicHeight(context, .03),
+                    horizontal: CustomSizes().dynamicWidth(context, .06),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      text(
+                        context,
+                        "Signup",
+                        36.sp,
+                        AppColors.customBlack,
+                        bold: true,
+                      ),
+                      richTextWidget(
+                        context,
+                        "By signing in you are agreeing\nour",
+                        " Term and privacy policy",
+                        20.sp,
+                        20.sp,
+                        "",
+                        AppColors.customBlack,
+                        AppColors.buttonGreen,
+                        "",
+                      ),
+                      text(
+                        context,
+                        "By signing in you are agreeing our Term and privacy policy",
+                        20.sp,
+                        AppColors.customBlack,
+                      ),
+                      inputTextField(
+                        context,
+                        "Full Name",
+                        fName,
+                        icon: "assets/formField/user.png",
+                        keyboardType: TextInputType.name,
+                        function: (value) {
+                          if (value!.isEmpty) {
+                            return "Name can't be empty";
+                          }
+                          return null;
+                        },
+                      ),
+                      // inputTextField(
+                      //   context,
+                      //   "Number",
+                      //   number,
+                      //   icon: "assets/formField/home.png",
+                      //   keyboardType: TextInputType.number,
+                      //   function: (value) {
+                      //     if (value!.isEmpty || value.toString().length < ) {
+                      //       return "Number is not valid";
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
+                      inputTextField(
+                        context,
+                        "Email Address",
+                        email,
+                        icon: "assets/formField/mail.png",
+                        keyboardType: TextInputType.emailAddress,
+                        function: (value) {
+                          if (EmailValidator.validate(value)) {
+                          } else {
+                            return "Enter Valid Email";
+                          }
+                          return null;
+                        },
+                      ),
+                      inputTextField(
+                        context,
+                        "Address",
+                        address,
+                        icon: "assets/formField/home.png",
+                        keyboardType: TextInputType.text,
+                        function: (value) {
+                          if (value!.isEmpty) {
+                            return "Address can't be empty";
+                          }
+                          return null;
+                        },
+                      ),
+                      inputTextField(
+                        context,
+                        "Password",
+                        password,
+                        icon: "assets/formField/lock.png",
+                        keyboardType: TextInputType.visiblePassword,
+                        function: (value) {
+                          if (value!.isEmpty || value.length < 8) {
+                            return 'Password must have 8 characters';
+                          }
+                          return null;
+                        },
+                      ),
+                      inputTextField(
+                        context,
+                        "Confirm Password",
+                        cPassword,
+                        icon: "assets/formField/lock.png",
+                        keyboardType: TextInputType.visiblePassword,
+                        function: (value) {
+                          if (password.text.toString() == value.toString()) {
+                            return 'Password must be same';
+                          }
+                          return null;
+                        },
+                      ),
+                      coloredButton(
+                        context,
+                        "Signup",
+                        AppColors.lightGreen,
+                        width: CustomSizes().dynamicWidth(context, .6),
+                        function: () {
+                          if (!_formKey.currentState!.validate()) {
+                            MotionToast.error(
+                              description: const Text("Fill all Fields!!!"),
+                            ).show(context);
+                            return;
+                          }
+                        },
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              Container(
-                width: 500.w,
-                height: 900.h,
-                decoration: BoxDecoration(
-                  color: AppColors.customWhite,
-                  borderRadius: BorderRadius.circular(
-                    39.r,
-                  ),
-                ),
-                padding: EdgeInsets.symmetric(
-                  vertical: CustomSizes().dynamicHeight(context, .03),
-                  horizontal: CustomSizes().dynamicWidth(context, .06),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    text(
-                      context,
-                      "Signup",
-                      36.sp,
-                      AppColors.customBlack,
-                      bold: true,
-                    ),
-                    richTextWidget(
-                      context,
-                      "By signing in you are agreeing\nour",
-                      "Term and privacy policy",
-                      20.sp,
-                      20.sp,
-                      "",
-                      AppColors.customBlack,
-                      AppColors.buttonGreen,
-                      "",
-                    ),
-                    text(
-                      context,
-                      "By signing in you are agreeing our Term and privacy policy",
-                      20.sp,
-                      AppColors.customBlack,
-                    ),
-                    inputTextField(
-                      context,
-                      "Full Name",
-                      fName,
-                      icon: "assets/formField/user.png",
-                      keyboardType: TextInputType.name,
-                      function: (value) {
-                        if (value!.isEmpty) {
-                          return "Name can't be empty";
-                        }
-                        return null;
-                      },
-                    ),
-                    // inputTextField(
-                    //   context,
-                    //   "Number",
-                    //   number,
-                    //   icon: "assets/formField/home.png",
-                    //   keyboardType: TextInputType.number,
-                    //   function: (value) {
-                    //     if (value!.isEmpty || value.toString().length < ) {
-                    //       return "Number is not valid";
-                    //     }
-                    //     return null;
-                    //   },
-                    // ),
-                    inputTextField(
-                      context,
-                      "Email Address",
-                      email,
-                      icon: "assets/formField/mail.png",
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    inputTextField(
-                      context,
-                      "Address",
-                      address,
-                      icon: "assets/formField/home.png",
-                      keyboardType: TextInputType.text,
-                      function: (value) {
-                        if (value!.isEmpty) {
-                          return "Address can't be empty";
-                        }
-                        return null;
-                      },
-                    ),
-                    inputTextField(
-                      context,
-                      "Password",
-                      password,
-                      icon: "assets/formField/lock.png",
-                      keyboardType: TextInputType.visiblePassword,
-                      function: (value) {
-                        if (value!.isEmpty || value.length < 8) {
-                          return 'Password must have 8 characters';
-                        }
-                        return null;
-                      },
-                    ),
-                    inputTextField(
-                      context,
-                      "Confirm Password",
-                      cPassword,
-                      icon: "assets/formField/lock.png",
-                      keyboardType: TextInputType.visiblePassword,
-                      function: (value) {
-                        if (password.text.toString() == value.toString()) {
-                          return 'Password must be same';
-                        }
-                        return null;
-                      },
-                    ),
-                    coloredButton(
-                      context,
-                      "Signup",
-                      AppColors.lightGreen,
-                      width: CustomSizes().dynamicWidth(context, .6),
-                      function: () {},
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

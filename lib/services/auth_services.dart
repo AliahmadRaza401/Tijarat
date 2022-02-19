@@ -11,7 +11,6 @@ import 'package:tijarat/utils/motion_toast.dart';
 
 class AuthServices {
   var result;
-  late AuthProvider _authProvider;
 
   Future signIn(
       {required BuildContext context,
@@ -60,10 +59,10 @@ class AuthServices {
     @required name,
     @required email,
     @required password,
-    @required c_password,
-    @required bool userType_fac = true,
-    @required factory_name,
-    @required factory_image,
+    @required cPassword,
+    bool userTypeFac = true,
+    @required factoryName,
+    @required factoryImage,
   }) async {
     try {
       print("Sign Up ---------------------------");
@@ -73,21 +72,21 @@ class AuthServices {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: userType_fac
+        body: userTypeFac
             ? jsonEncode({
                 "name": name,
                 "email": email,
                 "password": password,
-                "c_password": c_password,
+                "c_password": cPassword,
                 "user_type": "factory",
-                "factory_name": factory_name,
-                "factory_image": factory_image,
+                "factory_name": factoryName,
+                "factory_image": factoryImage,
               })
             : jsonEncode({
                 "name": name,
                 "email": email,
                 "password": password,
-                "c_password": c_password,
+                "c_password": cPassword,
                 "user_type": "farmer"
               }),
       );

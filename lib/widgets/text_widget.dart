@@ -19,6 +19,7 @@ Widget text(context, text, size, color,
 Widget richTextWidget(
     context, text1, text2, size1, size2, page, color1, color2, push) {
   return RichText(
+    textAlign: TextAlign.center,
     text: TextSpan(
       children: [
         TextSpan(

@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:tijarat/app%20screens/authentication/login.dart';
 import 'package:tijarat/services/sp_services.dart';
+import 'package:tijarat/utils/app_color.dart';
 
 class OnBoardingPage extends StatefulWidget {
+  const OnBoardingPage({Key? key}) : super(key: key);
+
   @override
   _OnBoardingPageState createState() => _OnBoardingPageState();
 }
@@ -15,7 +18,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   void _onIntroEnd(context) {
     SpServices.saveUserFirstTime(true);
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => Login()),
+      MaterialPageRoute(
+        builder: (_) => const Login(),
+      ),
     );
   }
 
@@ -41,13 +46,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
+      pageColor: AppColors.customWhite,
       imagePadding: EdgeInsets.zero,
     );
 
     return IntroductionScreen(
       key: introKey,
-      globalBackgroundColor: Colors.white,
+      globalBackgroundColor: AppColors.customWhite,
       globalHeader: Align(
         alignment: Alignment.topRight,
         child: SafeArea(
@@ -112,7 +117,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             },
             child: const Text(
               'FooButton',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: AppColors.customWhite),
             ),
             style: ElevatedButton.styleFrom(
               primary: Colors.lightBlue,

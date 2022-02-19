@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(540, 1179),
+      designSize: const Size(540, 1179),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: () => MultiProvider(
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               Theme.of(context).textTheme,
             ),
           ),
-          home: OnBoardingPage(),
+          home: const OnBoardingPage(),
         ),
       ),
     );

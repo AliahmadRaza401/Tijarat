@@ -32,8 +32,11 @@ Widget inputTextField(context, label, myController,
       textAlign: TextAlign.start,
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
+        focusColor: AppColors.customGrey2,
+        hoverColor: AppColors.customGrey2,
         fillColor: AppColors.customGrey2,
         filled: true,
+        isDense: true,
         hintText: label,
         suffixIcon: Image.asset(
           "$icon",
@@ -50,6 +53,14 @@ Widget inputTextField(context, label, myController,
           borderSide: const BorderSide(color: Color(0xffCCC9C9)),
         ),
         focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(9.r),
           borderSide: const BorderSide(color: AppColors.customBlack),
         ),
