@@ -10,6 +10,8 @@ import 'package:tijarat/utils/app_routes.dart';
 import '../services/sp_services.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
