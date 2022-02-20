@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:tijarat/app%20screens/authentication/login.dart';
 import 'package:tijarat/common/splash_screen.dart';
 import 'package:tijarat/utils/app_color.dart';
 
-import 'common/onBoarding_screen.dart';
 import 'providers/multiProviders.dart';
 
 void main() {
@@ -40,7 +38,7 @@ class MyApp extends StatelessWidget {
               Theme.of(context).textTheme,
             ),
           ),
-          home:  SplashScreen(),
+          home: const SplashScreen(),
         ),
       ),
     );
