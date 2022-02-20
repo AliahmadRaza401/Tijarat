@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
     if (isUserFirstTime) {
       AppRoutes.push(context, OnBoardingPage());
     } else {
-      AppRoutes.push(context, FarmerNavBar());
+      AppRoutes.push(context, OnBoardingPage());
     }
   }
 

@@ -43,6 +43,7 @@ dependencies:
   email_validator: ^2.0.1
   introduction_screen: ^3.0.0
   persistent_bottom_nav_bar_v2: ^4.1.1
+  lottie: ^1.2.2
 
 
 dev_dependencies:
@@ -71,6 +72,8 @@ flutter:
   assets:
     - assets/
     - assets/formField/
+    - assets/gif/
+    - assets/json/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
