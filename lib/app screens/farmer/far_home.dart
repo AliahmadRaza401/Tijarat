@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/widgets/appbar/far_app_bar.dart';
 import 'package:tijarat/widgets/form_fields.dart';
@@ -14,12 +15,16 @@ class FarmerHome extends StatefulWidget {
 
 class _FarmerHomeState extends State<FarmerHome> {
   final searchQuery = TextEditingController();
+  var userName = 'farmer';
   @override
   void initState() {
     super.initState();
   }
 
-  getData(){}
+  getData() async {
+    userName = await SpServices.getUserName();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,7 +44,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                   alignment: Alignment.topLeft,
                   child: text(
                     context,
-                    "Hi, farmer",
+                    "Hi, $userName",
                     28.sp,
                     AppColors.darkGreen,
                     bold: true,
@@ -192,7 +197,8 @@ class _FarmerHomeState extends State<FarmerHome> {
                                 borderRadius: BorderRadius.circular(5.r),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   text(
