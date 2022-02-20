@@ -16,7 +16,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    SpServices.saveUserFirstTime(true);
+    SpServices.saveUserFirstTime(false);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => const FarmerNavBar(),

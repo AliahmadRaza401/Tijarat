@@ -8,6 +8,7 @@ import 'package:tijarat/providers/auth_provider.dart';
 import 'package:tijarat/services/auth_services.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
+import 'package:tijarat/utils/motion_toast.dart';
 import 'package:tijarat/widgets/buttons.dart';
 import 'package:tijarat/widgets/form_fields.dart';
 import 'package:tijarat/widgets/text_widget.dart';
@@ -88,6 +89,7 @@ class _LoginState extends State<Login> {
                             child: Image.asset(
                               "assets/logo.png",
                               height: 157.h,
+                              width: 423.w,
                             ),
                           ),
                           text(
@@ -179,28 +181,25 @@ class _LoginState extends State<Login> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _loading == true
-                              ? const CircularProgressIndicator.adaptive()
-                              : coloredButton(
-                                  context,
-                                  "Login",
-                                  AppColors.lightGreen,
-                                  function: () async {
-                                    if (!_formKey.currentState!.validate()) {
-                                      MotionToast.error(
-                                        description:
-                                            const Text("Fill all Fields!!!"),
-                                      ).show(context);
-                                      return;
-                                    }
-                                    _authProvider.setLoading(true);
-                                    var loginCheck = await _authServices.signIn(
-                                      email: email.text,
-                                      password: password.text,
-                                      context: context,
-                                    );
-                                  },
-                                ),
+                          coloredButton(
+                            context,
+                            "Login",
+                            AppColors.lightGreen,
+                            function: () async {
+                              if (!_formKey.currentState!.validate()) {
+                                MotionToast.error(
+                                  description: const Text("Fill all Fields!!!"),
+                                ).show(context);
+                                return;
+                              }
+                              _authProvider.setLoading(true);
+                              var loginCheck = await _authServices.signIn(
+                                email: email.text,
+                                password: password.text,
+                                context: context,
+                              );
+                            },
+                          ),
                           coloredButton(
                             context,
                             "Sign up",
@@ -289,9 +288,7 @@ class _LoginState extends State<Login> {
 Widget socialAvatar(context, icon, color) {
   return GestureDetector(
     onTap: () {
-      MotionToast.info(
-        description: const Text("Coming Soon..."),
-      ).show(context);
+      MyMotionToast.info(context, "", "Comming Soon...");
     },
     child: CircleAvatar(
       radius: 30.r,
@@ -310,13 +307,13 @@ Widget socialAvatar(context, icon, color) {
 Widget signUpChoice(context, title) {
   return InkWell(
     onTap: () {
-      CustomRoutes().push(
+      AppRoutes.push(
         context,
         Signup(
           userType: title,
         ),
       );
-      // CustomRoutes().pop(context);
+      // AppRoutes().pop(context);
     },
     child: Container(
       width: 210.w,

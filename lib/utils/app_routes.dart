@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomRoutes {
-  void push(context, Widget page) {
+class AppRoutes {
+  static void push(context, Widget page) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => page,
@@ -9,11 +9,11 @@ class CustomRoutes {
     );
   }
 
-  void pop(context) {
+ static void pop(context) {
     Navigator.of(context).pop();
   }
 
-  void pushAndRemoveUntil(context, Widget page) {
+ static void pushAndRemoveUntil(context, Widget page) {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (BuildContext context) => page,
@@ -21,7 +21,7 @@ class CustomRoutes {
         (Route<dynamic> route) => false);
   }
 
-  void popUntil(context) {
+ static void popUntil(context) {
     Navigator.popUntil(context, (route) => route.isFirst);
   }
 }

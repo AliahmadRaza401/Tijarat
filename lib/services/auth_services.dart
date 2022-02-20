@@ -5,8 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tijarat/api/api.dart';
+import 'package:tijarat/navbar/far_navbar.dart';
+import 'package:tijarat/navbar/onr_navbar.dart';
 import 'package:tijarat/providers/auth_provider.dart';
 import 'package:tijarat/services/sp_services.dart';
+import 'package:tijarat/utils/app_routes.dart';
 import 'package:tijarat/utils/motion_toast.dart';
 
 class AuthServices {
@@ -34,6 +37,8 @@ class AuthServices {
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
         var token = result['data']['token'];
         SpServices.saveUserToken(token);
+        SpServices.saveUserLoggedIn(true);
+
         SpServices.saveUserLoggedIn(true);
         MyMotionToast.success(context, "Success", "Login Successfully Done");
       } else {
@@ -66,7 +71,7 @@ class AuthServices {
   }) async {
     try {
       print("Sign Up ---------------------------");
-              Provider.of<AuthProvider>(context).setLoading(true);
+      Provider.of<AuthProvider>(context, listen: false).setLoading(true);
 
       final _response = await http.post(
         Uri.parse(API.signUp),
@@ -98,13 +103,22 @@ class AuthServices {
       print('result: $result');
 
       if (result['status'] == 'Success') {
-        Provider.of<AuthProvider>(context).setLoading(false);
+        Provider.of<AuthProvider>(context, listen: false).setLoading(false);
         var token = result['data']['token'];
+        var userType = result['data']['data']['user_type'];
+        print('userType: $userType');
+        SpServices.saveUserLoggedIn(true);
         SpServices.saveUserToken(token);
+        SpServices.saveUserType(userType);
+        if (userType == 'farmer') {
+          AppRoutes.pushAndRemoveUntil(context, FarmerNavBar());
+        } else {
+          AppRoutes.pushAndRemoveUntil(context, OwnerNavBar());
+        }
         MyMotionToast.success(context, "SignUp Success!",
             "Your account created successfully Done");
       } else {
-                Provider.of<AuthProvider>(context).setLoading(false);
+        Provider.of<AuthProvider>(context, listen: false).setLoading(false);
         MyMotionToast.warning(
             context, "SignUp Fail", "Email is not valid".toString());
 

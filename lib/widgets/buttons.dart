@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:tijarat/providers/auth_provider.dart';
 
 import '../utils/app_color.dart';
 
@@ -28,16 +30,20 @@ Widget coloredButton(context, text, color,
               borderRadius: BorderRadius.circular(15.r),
             ),
       child: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: color == AppColors.noColor
-                ? AppColors.buttonGreen
-                : AppColors.customWhite,
-            fontWeight: FontWeight.bold,
-            fontSize: fontSize == "" ? 24.sp : fontSize,
-          ),
-        ),
+        child: Provider.of<AuthProvider>(context).loading == true
+            ? CircularProgressIndicator(
+                color: Colors.white,
+              )
+            : Text(
+                text,
+                style: TextStyle(
+                  color: color == AppColors.noColor
+                      ? AppColors.buttonGreen
+                      : AppColors.customWhite,
+                  fontWeight: FontWeight.bold,
+                  fontSize: fontSize == "" ? 24.sp : fontSize,
+                ),
+              ),
       ),
     ),
   );
