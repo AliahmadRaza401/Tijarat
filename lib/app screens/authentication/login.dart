@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,6 @@ import 'package:tijarat/providers/auth_provider.dart';
 import 'package:tijarat/services/auth_services.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
-import 'package:tijarat/utils/motion_toast.dart';
 import 'package:tijarat/widgets/buttons.dart';
 import 'package:tijarat/widgets/form_fields.dart';
 import 'package:tijarat/widgets/text_widget.dart';
@@ -42,6 +42,7 @@ class _LoginState extends State<Login> {
     bool _loading = Provider.of<AuthProvider>(context).loading;
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      bottomNavigationBar: const SizedBox(),
       body: SafeArea(
         child: Container(
           width: CustomSizes().dynamicWidth(context, 1),
@@ -143,9 +144,12 @@ class _LoginState extends State<Login> {
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: () {
-                                  MotionToast.info(
-                                    description: const Text("Coming Soon..."),
-                                  ).show(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                    content: Text("Coming Soon..."),
+                                  ));
+                                  // MotionToast.info(
+                                  //   description: const Text("Coming Soon..."),
+                                  // ).show(context);
                                 },
                                 child: text(
                                   context,
@@ -288,7 +292,16 @@ class _LoginState extends State<Login> {
 Widget socialAvatar(context, icon, color) {
   return GestureDetector(
     onTap: () {
-      MyMotionToast.info(context, "", "Comming Soon...");
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Coming Soon..."),
+      ));
+      // EasyLoading.showInfo("Coming Soon...");
+      // MotionToast.info(
+      //   description: const Text("Coming Soon..."),
+      //   onClose: (){
+      //     AppRoutes.pop(context);
+      //   },
+      // ).show(context);
     },
     child: CircleAvatar(
       radius: 30.r,

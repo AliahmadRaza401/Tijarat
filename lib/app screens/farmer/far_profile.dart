@@ -62,7 +62,7 @@ class _FarmerProfileState extends State<FarmerProfile> {
                   height: 10.h,
                 ),
                 profileText(
-                    context, "assets/formField/user.png", "Name", "ghkkk"),
+                    context, "assets/formField/user.png", "Name", ""),
                 profileText(context, "assets/formField/user.png", "Address", ""),
                 profileText(context, "assets/formField/mail.png", "Email", ""),
                 profileText(

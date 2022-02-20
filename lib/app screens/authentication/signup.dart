@@ -227,9 +227,10 @@ class _SignupState extends State<Signup> {
                           width: CustomSizes().dynamicWidth(context, .6),
                           function: () {
                             if (!_formKey.currentState!.validate()) {
-                              MotionToast.error(
-                                description: const Text("Fill all Fields!!!"),
-                              ).show(context);
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                content: Text("Fill All Fields!!!"),
+                              ));
+
                               return;
                             } else {
                               _authServices.signUp(

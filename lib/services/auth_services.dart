@@ -1,8 +1,10 @@
 // ignore_for_file: avoid_print, prefer_typing_uninitialized_variables, avoid_types_as_parameter_names, unused_local_variable
 
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:motion_toast/motion_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:tijarat/api/api.dart';
 import 'package:tijarat/navbar/far_navbar.dart';
@@ -10,7 +12,6 @@ import 'package:tijarat/navbar/onr_navbar.dart';
 import 'package:tijarat/providers/auth_provider.dart';
 import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_routes.dart';
-import 'package:tijarat/utils/motion_toast.dart';
 
 class AuthServices {
   var result;
@@ -46,17 +47,31 @@ class AuthServices {
         } else {
           AppRoutes.pushAndRemoveUntil(context, FarmerNavBar());
         }
-        MyMotionToast.success(context, "Success", "Login Successfully Done");
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Login Successful"),
+        ));
+        // MotionToast.success(description: const Text("Login Successfully Done"))
+        //     .show(context);
       } else {
         print("User Login False");
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
-        MyMotionToast.warning(context, "UnAuthorized".toString(),
-            "Your given Email Password is Wrong".toString());
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Your given Email Password is Wrong"),
+        ));
+        // MotionToast.warning(
+        //   title: Text("UnAuthorized"),
+        //   description: Text("Your given Email Password is Wrong"),
+        // ).show(context);
       }
       return result;
     } catch (e) {
-      MyMotionToast.warning(
-          context, "Oops!".toString(), "Some thing went wrong".toString());
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Something went wrong!!!"),
+      ));
+      // MotionToast.warning(
+      //   title: Text("Oops!"),
+      //   description: Text("Some thing went wrong"),
+      // ).show(context);
       print('e: $e');
       Provider.of<AuthProvider>(context, listen: false).setLoading(false);
       return e.toString();
@@ -123,19 +138,36 @@ class AuthServices {
         } else {
           AppRoutes.pushAndRemoveUntil(context, OwnerNavBar());
         }
-        MyMotionToast.success(context, "SignUp Success!",
-            "Your account created successfully Done");
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Account created!"),
+        ));
+        // MotionToast.success(
+        //   title: const Text("SignUp Success!"),
+        //   description: const Text("Your account created successfully Done"),
+        // ).show(context);
       } else {
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
-        MyMotionToast.warning(
-            context, "SignUp Fail", "Email is alredy exist".toString());
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Email already exist"),
+        ));
+
+        // MotionToast.warning(
+        //   title: const Text("SignUp Fail"),
+        //   description: const Text("Email is already exist"),
+        // ).show(context);
 
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
       }
       return result;
     } catch (e) {
-      MyMotionToast.warning(
-          context, "Oops!".toString(), "Some thing went wrong".toString());
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Your given Email Password is Wrong"),
+      ));
+      // MotionToast.warning(
+      //   title: Text("Oops!"),
+      //   description: Text("Some thing went wrong"),
+      // ).show(context);
       Provider.of<AuthProvider>(context, listen: false).setLoading(false);
       print('e: $e');
       return e;
