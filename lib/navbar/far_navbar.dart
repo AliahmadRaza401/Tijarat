@@ -3,14 +3,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:tijarat/app%20screens/farmer/far_home.dart';
 import 'package:tijarat/app%20screens/farmer/far_notification.dart';
 import 'package:tijarat/app%20screens/farmer/far_orders.dart';
 import 'package:tijarat/app%20screens/farmer/far_profile.dart';
-import 'package:tijarat/app%20screens/farmer/login_check.dart';
-import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
+
+import '../app screens/farmer/login_check.dart';
+import '../services/sp_services.dart';
 
 class FarmerNavBar extends StatefulWidget {
   const FarmerNavBar({Key? key}) : super(key: key);
@@ -19,8 +20,7 @@ class FarmerNavBar extends StatefulWidget {
   _FarmerNavBarState createState() => _FarmerNavBarState();
 }
 
-class _FarmerNavBarState extends State<FarmerNavBar>
-    with TickerProviderStateMixin {
+class _FarmerNavBarState extends State<FarmerNavBar> {
   int currentPage = 0;
   bool isUserLoggedIn = false;
 
@@ -35,93 +35,89 @@ class _FarmerNavBarState extends State<FarmerNavBar>
     setState(() {
       isUserLoggedIn = a;
     });
-    print('isUserLoggedIn: $isUserLoggedIn');
-  }
-
-  final PersistentTabController _controller =
-      PersistentTabController(initialIndex: 0);
-
-  List<Widget> _buildScreens() {
-    return [
-      const FarmerHome(),
-      const FarmerOrders(),
-      const FarmerNotification(),
-      isUserLoggedIn ? const FarmerProfile() : const LoginCheck(),
-    ];
-  }
-
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          CupertinoIcons.home,
-          size: 40.r,
-        ),
-        title: ("Home"),
-        activeColorPrimary: AppColors.buttonGreen,
-        inactiveColorPrimary: AppColors.customGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          CupertinoIcons.cart,
-          size: 40.r,
-        ),
-        title: ("Orders"),
-        activeColorPrimary: AppColors.buttonGreen,
-        inactiveColorPrimary: AppColors.customGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          CupertinoIcons.bell,
-          size: 40.r,
-        ),
-        title: ("Notifications"),
-        activeColorPrimary: AppColors.buttonGreen,
-        inactiveColorPrimary: AppColors.customGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          CupertinoIcons.person_crop_circle,
-          size: 40.r,
-        ),
-        title: ("Profile"),
-        activeColorPrimary: AppColors.buttonGreen,
-        inactiveColorPrimary: AppColors.customGrey,
-      ),
-    ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
-      confineInSafeArea: true,
+    return Scaffold(
       backgroundColor: AppColors.customWhite,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true,
-      stateManagement: true,
-      hideNavigationBarWhenKeyboardShows: true,
-      decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+      body: Center(
+        child: _getPage(currentPage),
       ),
-
-      popAllScreensOnTapOfSelectedTab: true,
-      popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: const ItemAnimationProperties(
-        duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: currentPage,
+        onTap: (i) => setState(() => currentPage = i),
+        items: [
+          SalomonBottomBarItem(
+            icon: const Icon(CupertinoIcons.home),
+            title: Text(
+              "Home",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            ),
+            selectedColor: AppColors.buttonGreen,
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(
+              CupertinoIcons.cart,
+            ),
+            title: Text(
+              "Orders",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            ),
+            selectedColor: AppColors.buttonGreen,
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(
+              CupertinoIcons.bell,
+            ),
+            title: Text(
+              "Notifications",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            ),
+            selectedColor: AppColors.buttonGreen,
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(
+              CupertinoIcons.person_crop_circle,
+            ),
+            title: Text(
+              "Profile",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            ),
+            selectedColor: AppColors.buttonGreen,
+          ),
+        ],
       ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        animateTabTransition: true,
-        curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
-      ),
-      navBarStyle:
-          NavBarStyle.style6, // Choose the nav bar style with this property.
     );
+  }
+
+  _getPage(int page) {
+    switch (page) {
+      case 0:
+        return const FarmerHome();
+      case 1:
+        return const FarmerOrders();
+      case 2:
+        return const FarmerNotification();
+      case 3:
+        return isUserLoggedIn ? const FarmerProfile() : const LoginCheck();
+      default:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const <Widget>[
+            Text(
+              ('TabBar Index Error'),
+            ),
+          ],
+        );
+    }
   }
 }

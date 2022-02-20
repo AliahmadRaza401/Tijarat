@@ -1,15 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tijarat/navbar/onr_navbar.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:tijarat/app%20screens/farmer/login_check.dart';
+import 'package:tijarat/app%20screens/owner/onr_home.dart';
+import 'package:tijarat/app%20screens/owner/onr_notification.dart';
+import 'package:tijarat/app%20screens/owner/onr_orders.dart';
 import 'package:tijarat/services/sp_services.dart';
-import 'package:tijarat/utils/app_routes.dart';
-import 'package:tijarat/widgets/appbar/onr_app_bar.dart';
 
 import '../../utils/app_color.dart';
-import '../../widgets/text_widget.dart';
-import '../farmer/far_profile.dart';
 
 class OwnerProfile extends StatefulWidget {
   const OwnerProfile({Key? key}) : super(key: key);
@@ -19,115 +20,103 @@ class OwnerProfile extends StatefulWidget {
 }
 
 class _OwnerProfileState extends State<OwnerProfile> {
+  int currentPage = 0;
+  bool isUserLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkUSer();
+  }
+
+  checkUSer() async {
+    var a = await SpServices.getUserLoggedIn();
+    setState(() {
+      isUserLoggedIn = a;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.customWhite,
-        appBar: ownerAppBar(),
-        body: Padding(
-          padding: EdgeInsets.all(15.r),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 40.h,
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: CircleAvatar(
-                    radius: 80.r,
-                    backgroundColor: AppColors.customGrey2,
-                    child: Image.asset("assets/formField/user.png"),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                text(
-                  context,
-                  "Username",
-                  28.sp,
-                  AppColors.customBlack,
-                  bold: true,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: text(
-                    context,
-                    "Personal Information",
-                    22.sp,
-                    AppColors.customBlack,
-                    bold: true,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                profileText(context, "assets/formField/user.png", "Name", ""),
-                profileText(
-                    context, "assets/formField/user.png", "Address", ""),
-                profileText(context, "assets/formField/mail.png", "Email", ""),
-                profileText(
-                    context, "assets/formField/user.png", "Phone Number", ""),
-                profileText(
-                    context, "assets/formField/user.png", "User name", ""),
-                profileText(
-                    context, "assets/formField/user.png", "Created On", ""),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: text(
-                    context,
-                    "Password",
-                    22.sp,
-                    AppColors.customBlack,
-                    bold: true,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                profileText(
-                  context,
-                  "assets/formField/lock.png",
-                  "Change Password",
-                  "",
-                  nextIcon: true,
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: text(
-                    context,
-                    "Other",
-                    22.sp,
-                    AppColors.customBlack,
-                    bold: true,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      SpServices.saveUserLoggedIn(false);
-                      AppRoutes.pushAndRemoveUntil(context, OwnerNavBar());
-                    },
-                    child: profileText(
-                        context, "assets/formField/user.png", "Logout", "")),
-              ],
+    return Scaffold(
+      backgroundColor: AppColors.customWhite,
+      body: Center(
+        child: _getPage(currentPage),
+      ),
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: currentPage,
+        onTap: (i) => setState(() => currentPage = i),
+        items: [
+          SalomonBottomBarItem(
+            icon: const Icon(CupertinoIcons.home),
+            title: Text(
+              "Home",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
             ),
+            selectedColor: AppColors.buttonGreen,
           ),
-        ),
+          SalomonBottomBarItem(
+            icon: const Icon(
+              CupertinoIcons.cart,
+            ),
+            title: Text(
+              "Orders",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            ),
+            selectedColor: AppColors.buttonGreen,
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(
+              CupertinoIcons.bell,
+            ),
+            title: Text(
+              "Notifications",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            ),
+            selectedColor: AppColors.buttonGreen,
+          ),
+          SalomonBottomBarItem(
+            icon: const Icon(
+              CupertinoIcons.person_crop_circle,
+            ),
+            title: Text(
+              "Profile",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            ),
+            selectedColor: AppColors.buttonGreen,
+          ),
+        ],
       ),
     );
+  }
+
+  _getPage(int page) {
+    switch (page) {
+      case 0:
+        return const OwnerHome();
+      case 1:
+        return const OwnerOrders();
+      case 2:
+        return const OwnerNotification();
+      case 3:
+        return isUserLoggedIn ? const OwnerProfile() : const LoginCheck();
+      default:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const <Widget>[
+            Text(
+              ('TabBar Index Error'),
+            ),
+          ],
+        );
+    }
   }
 }

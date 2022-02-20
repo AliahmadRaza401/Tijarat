@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tijarat/common/splash_screen.dart';
 import 'package:tijarat/navbar/far_navbar.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/widgets/appbar/far_app_bar.dart';
 import 'package:tijarat/widgets/text_widget.dart';
 
-import '../../navbar/onr_navbar.dart';
 import '../../services/sp_services.dart';
-import '../../utils/app_routes.dart';
 
 class FarmerProfile extends StatefulWidget {
   const FarmerProfile({Key? key}) : super(key: key);
@@ -67,9 +64,9 @@ class _FarmerProfileState extends State<FarmerProfile> {
                 SizedBox(
                   height: 10.h,
                 ),
+                profileText(context, "assets/formField/user.png", "Name", ""),
                 profileText(
-                    context, "assets/formField/user.png", "Name", ""),
-                profileText(context, "assets/formField/user.png", "Address", ""),
+                    context, "assets/formField/user.png", "Address", ""),
                 profileText(context, "assets/formField/mail.png", "Email", ""),
                 profileText(
                     context, "assets/formField/user.png", "Phone Number", ""),
@@ -117,14 +114,21 @@ class _FarmerProfileState extends State<FarmerProfile> {
                   height: 10.h,
                 ),
                 GestureDetector(
-                    onTap: () {
-                      SpServices.saveUserLoggedIn(false);
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => SplashScreen()));
-                      // AppRoutes.push(context, FarmerNavBar());
-                    },
-                    child: profileText(
-                        context, "assets/formField/user.png", "Logout", "")),
+                  onTap: () {
+                    SpServices.saveUserLoggedIn(false);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const FarmerNavBar(),
+                      ),
+                    );
+                  },
+                  child: profileText(
+                    context,
+                    "assets/formField/user.png",
+                    "Logout",
+                    "",
+                  ),
+                ),
               ],
             ),
           ),
