@@ -1,6 +1,5 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:provider/provider.dart';
@@ -144,7 +143,8 @@ class _LoginState extends State<Login> {
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
                                     content: Text("Coming Soon..."),
                                   ));
                                   // MotionToast.info(
