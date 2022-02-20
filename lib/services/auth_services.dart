@@ -128,7 +128,7 @@ class AuthServices {
       } else {
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
         MyMotionToast.warning(
-            context, "SignUp Fail", "Email is not valid".toString());
+            context, "SignUp Fail", "Email is alredy exist".toString());
 
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
       }
