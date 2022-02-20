@@ -23,7 +23,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     SpServices.saveUserFirstTime(false);
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => const FarmerNavBar(),
+        builder: (_) => FarmerNavBar(),
       ),
     );
   }
