@@ -7,10 +7,10 @@ import 'package:tijarat/app%20screens/farmer/far_notification.dart';
 import 'package:tijarat/app%20screens/farmer/far_orders.dart';
 import 'package:tijarat/app%20screens/farmer/far_profile.dart';
 import 'package:tijarat/app%20screens/farmer/login_check.dart';
+import 'package:tijarat/app%20screens/owner/onr_home.dart';
+import 'package:tijarat/app%20screens/owner/onr_profile.dart';
 import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
-
-import '../app screens/authentication/login.dart';
 
 class FarmerNavBar extends StatefulWidget {
   const FarmerNavBar({Key? key}) : super(key: key);
@@ -39,12 +39,12 @@ class _FarmerNavBarState extends State<FarmerNavBar>
 
   List<Widget> _buildScreens() {
     return [
-      const FarmerHome(),
+      const OwnerHome(),
       const FarmerOrders(),
       const FarmerNotification(),
-      const LoginCheck(),
+      // const LoginCheck(),
 
-      // isUserLoggedIn ? const FarmerProfile() : const LoginCheck(),
+      isUserLoggedIn ? const FarmerProfile() : const LoginCheck(),
     ];
   }
 
