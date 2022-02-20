@@ -336,7 +336,9 @@ Widget signUpChoice(context, title) {
             width: 210.w,
             height: 210.h,
             child: Center(
-              child: Image.asset("assets/$title.png"),
+              child: title == "owner"
+                  ? Image.asset("assets/gif/Signup as Owner.gif")
+                  : Image.asset("assets/gif/Signup as farmer.gif"),
             ),
           ),
           Container(

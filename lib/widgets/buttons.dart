@@ -6,12 +6,12 @@ import 'package:tijarat/providers/auth_provider.dart';
 import '../utils/app_color.dart';
 
 Widget coloredButton(context, text, color,
-    {function = "", width = "", dynamic fontSize = ""}) {
+    {function = "", width = "", height = "", dynamic fontSize = ""}) {
   return GestureDetector(
     onTap: function == "" ? () {} : function,
     child: Container(
       width: width == "" ? 391.w : width,
-      height: 53.h,
+      height: height == "" ? 53.h : height,
       decoration: color == AppColors.noColor
           ? BoxDecoration(
               color: color,

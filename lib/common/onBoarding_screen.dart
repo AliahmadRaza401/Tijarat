@@ -54,7 +54,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       fontSize: 19.0,
     );
 
-    const pageDecoration = const PageDecoration(
+    const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(
           color: AppColors.darkGreen,
           fontSize: 30,
