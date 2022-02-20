@@ -50,9 +50,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    const bodyStyle = TextStyle(
-      fontSize: 19.0,
-    );
+    const bodyStyle = TextStyle(fontSize: 20);
 
     const pageDecoration = const PageDecoration(
       titleTextStyle: TextStyle(
@@ -114,7 +112,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Why Tijarat?",
           body:
               "We provide you with peace of mind, giving you the best rates for your hard earned fields.",
-          image: _buildImage('assets/json/1stIntro'),
+          image: _buildImage('assets/json/1st'),
           decoration: pageDecoration,
         ),
         PageViewModel(
@@ -129,6 +127,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           body:
               "We made sure to make the user interface and language easy to understand for everyone whether its farmer or factory owner!",
           image: _buildImage('assets/json/3rdIntro'),
+          decoration: pageDecoration,
+        ),
+        PageViewModel(
+          title: "Note Please!",
+          body:
+              "As app is still in development phase so errors and emissions are to be expected",
+          image: _buildImage('assets/json/noteError'),
           decoration: pageDecoration,
         ),
       ],

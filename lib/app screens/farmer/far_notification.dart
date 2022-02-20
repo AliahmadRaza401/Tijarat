@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/underconstruction.dart';
+
 class FarmerNotification extends StatefulWidget {
   const FarmerNotification({Key? key}) : super(key: key);
 
@@ -10,6 +12,8 @@ class FarmerNotification extends StatefulWidget {
 class _FarmerNotificationState extends State<FarmerNotification> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: underConstruction(context),
+    );
   }
 }

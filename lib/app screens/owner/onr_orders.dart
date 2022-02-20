@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/underconstruction.dart';
+
 class OwnerOrders extends StatefulWidget {
   const OwnerOrders({Key? key}) : super(key: key);
 
@@ -10,6 +12,8 @@ class OwnerOrders extends StatefulWidget {
 class _OwnerOrdersState extends State<OwnerOrders> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: underConstruction(context),
+    );
   }
 }

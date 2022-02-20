@@ -21,6 +21,11 @@ class SpServices {
     prefs.setString('userType', value);
   }
 
+  static saveUserName(String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('userName', value);
+  }
+
   static getUserToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -46,6 +51,13 @@ class SpServices {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String? stringValue = prefs.getString('userType');
+    return stringValue;
+  }
+
+  static getUserName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? stringValue = prefs.getString('userName');
     return stringValue;
   }
 }

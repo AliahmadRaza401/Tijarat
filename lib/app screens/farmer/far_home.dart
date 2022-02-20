@@ -14,7 +14,12 @@ class FarmerHome extends StatefulWidget {
 
 class _FarmerHomeState extends State<FarmerHome> {
   final searchQuery = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+  }
 
+  getData(){}
   @override
   Widget build(BuildContext context) {
     return SafeArea(

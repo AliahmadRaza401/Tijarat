@@ -112,10 +112,12 @@ class AuthServices {
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
         var token = result['data']['token'];
         var userType = result['data']['data']['user_type'];
+        var userName = result['data']['data']['name'];
         print('userType: $userType');
         SpServices.saveUserLoggedIn(true);
         SpServices.saveUserToken(token);
         SpServices.saveUserType(userType);
+        SpServices.saveUserName(userName);
         if (userType == 'farmer') {
           AppRoutes.pushAndRemoveUntil(context, FarmerNavBar());
         } else {
