@@ -7,8 +7,6 @@ import 'package:tijarat/app%20screens/farmer/far_notification.dart';
 import 'package:tijarat/app%20screens/farmer/far_orders.dart';
 import 'package:tijarat/app%20screens/farmer/far_profile.dart';
 import 'package:tijarat/app%20screens/farmer/login_check.dart';
-import 'package:tijarat/app%20screens/owner/onr_home.dart';
-import 'package:tijarat/app%20screens/owner/onr_profile.dart';
 import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
 
@@ -39,11 +37,9 @@ class _FarmerNavBarState extends State<FarmerNavBar>
 
   List<Widget> _buildScreens() {
     return [
-      const OwnerHome(),
+      const FarmerHome(),
       const FarmerOrders(),
       const FarmerNotification(),
-      // const LoginCheck(),
-
       isUserLoggedIn ? const FarmerProfile() : const LoginCheck(),
     ];
   }
