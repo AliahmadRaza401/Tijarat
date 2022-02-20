@@ -76,3 +76,74 @@ Widget inputTextField(context, label, myController,
     ),
   );
 }
+
+Widget inputTextField1(context, label, myController,
+    {function, function2, password = false, icon, keyboardType = ""}) {
+  return Container(
+    width: 520.w,
+    height: 64.h,
+    color: AppColors.noColor,
+    child: TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (function == "")
+          ? () {
+              return null;
+            }
+          : function,
+      controller: myController,
+      textInputAction: TextInputAction.next,
+      keyboardType:
+          keyboardType == "" ? TextInputType.emailAddress : keyboardType,
+      obscureText: password == true ? obscureText : false,
+      cursorColor: AppColors.customBlack,
+      cursorWidth: 1.0,
+      style: TextStyle(
+        color: AppColors.customBlack,
+        fontSize: 18.sp,
+      ),
+      textAlign: TextAlign.start,
+      textAlignVertical: TextAlignVertical.center,
+      decoration: InputDecoration(
+        focusColor: AppColors.customGrey2,
+        hoverColor: AppColors.customGrey2,
+        fillColor: AppColors.customGrey2,
+        filled: true,
+        isDense: true,
+        hintText: label,
+        prefixIcon: Image.asset(
+          "$icon",
+          scale: 4.0,
+          color: AppColors.customBlack,
+        ),
+        hintStyle: TextStyle(
+          fontSize: 18.sp,
+          color: const Color(0xffC4C4C4),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: Color(0xffCCC9C9)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(9.r),
+          borderSide: const BorderSide(color: AppColors.customBlack),
+        ),
+        contentPadding: EdgeInsets.only(
+          left: CustomSizes().dynamicWidth(context, .05),
+          bottom: CustomSizes().dynamicHeight(context, .014),
+        ),
+      ),
+    ),
+  );
+}

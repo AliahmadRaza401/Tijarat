@@ -52,7 +52,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 20);
 
-    const pageDecoration = const PageDecoration(
+    const pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(
           color: AppColors.darkGreen,
           fontSize: 30,

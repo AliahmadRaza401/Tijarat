@@ -59,7 +59,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                 SizedBox(
                   height: 30.h,
                 ),
-                inputTextField(
+                inputTextField1(
                   context,
                   "Search products and factories",
                   searchQuery,
@@ -223,7 +223,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: 240.w,
+                            width: 245.w,
                             height: 170.h,
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
