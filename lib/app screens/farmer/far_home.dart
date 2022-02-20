@@ -37,8 +37,15 @@ class _FarmerHomeState extends State<FarmerHome> {
             ),
             child: Column(
               children: [
-                SizedBox(
-                  height: 10.h,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Image.asset(
+                      'assets/fruits.png',
+                      width: 345.w,
+                      height: 170.h,
+                    )
+                  ],
                 ),
                 Align(
                   alignment: Alignment.topLeft,
@@ -131,7 +138,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                         ],
                       ),
                       Image.asset(
-                        "assets/formField/grains.png",
+                        "assets/grains.png",
                         width: 190.w,
                         height: 140.h,
                       ),
@@ -170,7 +177,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  "assets/formField/grains.png",
+                                  "assets/vagetable.png",
                                   width: 200.w,
                                   height: 160.h,
                                 ),
@@ -252,7 +259,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                                       bold: true,
                                     ),
                                     Image.asset(
-                                      "assets/formField/grains.png",
+                                      "assets/fruits.png",
                                       width: 120.w,
                                       height: 100.h,
                                     ),
@@ -297,7 +304,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                                       bold: true,
                                     ),
                                     Image.asset(
-                                      "assets/formField/grains.png",
+                                      "assets/spices.png",
                                       width: 100.w,
                                       height: 70.h,
                                     ),

@@ -32,10 +32,10 @@ class _SplashScreenState extends State<SplashScreen>
     bool isUserFirstTime = true;
     isUserFirstTime = await SpServices.getUserFirstTime();
     print('isUserFirstTime: $isUserFirstTime');
-    if (isUserFirstTime == true) {
-      AppRoutes.push(context, OnBoardingPage());
-    } else {
+    if (isUserFirstTime == false) {
       AppRoutes.push(context, FarmerNavBar());
+    } else {
+      AppRoutes.push(context, OnBoardingPage());
     }
   }
 

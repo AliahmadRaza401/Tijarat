@@ -108,7 +108,9 @@ class _FarmerNavBarState extends State<FarmerNavBar> {
       case 2:
         return const FarmerNotification();
       case 3:
-        return isUserLoggedIn ? const FarmerProfile() : const LoginCheck();
+        return isUserLoggedIn == true
+            ? const FarmerProfile()
+            : const LoginCheck();
       default:
         return Column(
           mainAxisSize: MainAxisSize.min,
