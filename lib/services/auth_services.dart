@@ -37,7 +37,6 @@ class AuthServices {
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
         var token = result['data']['token'];
         var userType = result['data']['user_type'][0];
-        print('userType: $userType');
         SpServices.saveUserToken(token);
         SpServices.saveUserLoggedIn(true);
         SpServices.saveUserLoggedIn(true);
