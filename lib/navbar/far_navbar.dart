@@ -29,8 +29,8 @@ class _FarmerNavBarState extends State<FarmerNavBar>
       const FarmerHome(),
       const FarmerOrders(),
       const FarmerNotification(),
-      const Login(),
-      // const FarmerProfile(),
+      // const Login(),
+      const FarmerProfile(),
     ];
   }
 
