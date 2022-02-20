@@ -8,6 +8,8 @@ import 'package:tijarat/app%20screens/farmer/far_orders.dart';
 import 'package:tijarat/app%20screens/farmer/far_profile.dart';
 import 'package:tijarat/utils/app_color.dart';
 
+import '../app screens/authentication/login.dart';
+
 class FarmerNavBar extends StatefulWidget {
   const FarmerNavBar({Key? key}) : super(key: key);
 
@@ -27,7 +29,8 @@ class _FarmerNavBarState extends State<FarmerNavBar>
       const FarmerHome(),
       const FarmerOrders(),
       const FarmerNotification(),
-      const FarmerProfile(),
+      const Login(),
+      // const FarmerProfile(),
     ];
   }
 
@@ -81,12 +84,9 @@ class _FarmerNavBarState extends State<FarmerNavBar>
       items: _navBarsItems(),
       confineInSafeArea: true,
       backgroundColor: AppColors.customWhite,
-
       handleAndroidBackButtonPress: true,
-
       resizeToAvoidBottomInset: true,
       stateManagement: true,
-
       hideNavigationBarWhenKeyboardShows: true,
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(10.0),
