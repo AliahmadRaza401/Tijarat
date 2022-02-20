@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tijarat/navbar/onr_navbar.dart';
+import 'package:tijarat/services/sp_services.dart';
+import 'package:tijarat/utils/app_routes.dart';
 import 'package:tijarat/widgets/appbar/onr_app_bar.dart';
 
 import '../../utils/app_color.dart';
@@ -62,8 +65,7 @@ class _OwnerProfileState extends State<OwnerProfile> {
                 SizedBox(
                   height: 10.h,
                 ),
-                profileText(
-                    context, "assets/formField/user.png", "Name", "ghkkk"),
+                profileText(context, "assets/formField/user.png", "Name", ""),
                 profileText(
                     context, "assets/formField/user.png", "Address", ""),
                 profileText(context, "assets/formField/mail.png", "Email", ""),
@@ -112,7 +114,13 @@ class _OwnerProfileState extends State<OwnerProfile> {
                 SizedBox(
                   height: 10.h,
                 ),
-                profileText(context, "assets/formField/user.png", "Logout", ""),
+                GestureDetector(
+                    onTap: () {
+                      SpServices.saveUserLoggedIn(false);
+                      AppRoutes.pushAndRemoveUntil(context, OwnerNavBar());
+                    },
+                    child: profileText(
+                        context, "assets/formField/user.png", "Logout", "")),
               ],
             ),
           ),
