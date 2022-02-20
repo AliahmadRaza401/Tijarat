@@ -8,6 +8,8 @@ import 'package:tijarat/app%20screens/owner/onr_orders.dart';
 import 'package:tijarat/utils/app_color.dart';
 
 import '../app screens/owner/onr_notification.dart';
+import '../app screens/owner/onr_profile.dart';
+import '../services/sp_services.dart';
 
 class OwnerNavBar extends StatefulWidget {
   const OwnerNavBar({Key? key}) : super(key: key);
@@ -19,6 +21,17 @@ class OwnerNavBar extends StatefulWidget {
 class _OwnerNavBarState extends State<OwnerNavBar>
     with TickerProviderStateMixin {
   int currentPage = 0;
+  bool isUserLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkUSer();
+  }
+
+  checkUSer() async {
+    isUserLoggedIn = await SpServices.getUserLoggedIn();
+  }
 
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
@@ -28,7 +41,8 @@ class _OwnerNavBarState extends State<OwnerNavBar>
       const OwnerHome(),
       const OwnerOrders(),
       const OwnerNotification(),
-      const Login(),
+      isUserLoggedIn ? const OwnerProfile() : const Login(),
+
       // const OwnerProfile(),
     ];
   }

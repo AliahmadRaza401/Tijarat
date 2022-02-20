@@ -6,6 +6,7 @@ import 'package:tijarat/app%20screens/farmer/far_home.dart';
 import 'package:tijarat/app%20screens/farmer/far_notification.dart';
 import 'package:tijarat/app%20screens/farmer/far_orders.dart';
 import 'package:tijarat/app%20screens/farmer/far_profile.dart';
+import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
 
 import '../app screens/authentication/login.dart';
@@ -20,6 +21,17 @@ class FarmerNavBar extends StatefulWidget {
 class _FarmerNavBarState extends State<FarmerNavBar>
     with TickerProviderStateMixin {
   int currentPage = 0;
+  bool isUserLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkUSer();
+  }
+
+  checkUSer() async {
+    isUserLoggedIn = await SpServices.getUserLoggedIn();
+  }
 
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
@@ -30,7 +42,7 @@ class _FarmerNavBarState extends State<FarmerNavBar>
       const FarmerOrders(),
       const FarmerNotification(),
       // const Login(),
-      const FarmerProfile(),
+      isUserLoggedIn ? const FarmerProfile() : const Login(),
     ];
   }
 
