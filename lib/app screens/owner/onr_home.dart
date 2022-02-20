@@ -28,15 +28,15 @@ class _OwnerHomeState extends State<OwnerHome> {
       child: Scaffold(
         backgroundColor: AppColors.customWhite,
         appBar: ownerAppBar(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: AppColors.buttonGreen,
-          child: Icon(
-            Icons.add,
-            color: AppColors.customWhite,
-            size: 70.r,
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {},
+        //   backgroundColor: AppColors.buttonGreen,
+        //   child: Icon(
+        //     Icons.add,
+        //     color: AppColors.customWhite,
+        //     size: 70.r,
+        //   ),
+        // ),
         body: SingleChildScrollView(
           child: Column(
             children: [

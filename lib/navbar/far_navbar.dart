@@ -29,7 +29,11 @@ class _FarmerNavBarState extends State<FarmerNavBar>
   }
 
   checkUSer() async {
-    isUserLoggedIn = await SpServices.getUserLoggedIn();
+    var a = await SpServices.getUserLoggedIn();
+    setState(() {
+      isUserLoggedIn = a;
+    });
+    print('isUserLoggedIn: $isUserLoggedIn');
   }
 
   final PersistentTabController _controller =

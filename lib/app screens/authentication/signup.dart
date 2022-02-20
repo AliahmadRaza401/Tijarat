@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:tijarat/services/auth_services.dart';
+import 'package:tijarat/utils/app_routes.dart';
 
 import '../../utils/app_color.dart';
 import '../../utils/dynamic_sizes.dart';
@@ -37,7 +38,7 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
-    print('userType: ${widget.userType}');
+    // print('userType: ${widget.userType}');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -92,161 +93,179 @@ class _SignupState extends State<Signup> {
                     horizontal: CustomSizes().dynamicWidth(context, .06),
                   ),
                   child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        text(
-                          context,
-                          "Signup",
-                          36.sp,
-                          AppColors.customBlack,
-                          bold: true,
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        richTextWidget(
-                          context,
-                          "By signing in you are agreeing\nour",
-                          " Term and privacy policy",
-                          20.sp,
-                          20.sp,
-                          "",
-                          AppColors.customBlack,
-                          AppColors.buttonGreen,
-                          "",
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        inputTextField(
-                          context,
-                          "Full Name",
-                          name,
-                          icon: "assets/formField/user.png",
-                          keyboardType: TextInputType.name,
-                          function: (value) {
-                            if (value!.isEmpty) {
-                              return "Name can't be empty";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        inputTextField(
-                          context,
-                          "Email Address",
-                          email,
-                          icon: "assets/formField/mail.png",
-                          keyboardType: TextInputType.emailAddress,
-                          function: (value) {
-                            if (EmailValidator.validate(value)) {
-                            } else {
-                              return "Enter Valid Email";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        inputTextField(
-                          context,
-                          "Password",
-                          password,
-                          icon: "assets/formField/lock.png",
-                          keyboardType: TextInputType.visiblePassword,
-                          function: (value) {
-                            if (value!.isEmpty || value.length < 8) {
-                              return 'Password must have 8 characters';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        inputTextField(
-                          context,
-                          "Confirm Password",
-                          cPassword,
-                          icon: "assets/formField/lock.png",
-                          keyboardType: TextInputType.visiblePassword,
-                          function: (value) {
-                            if (password.text.toString() != value.toString()) {
-                              return 'Password must be same';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: widget.userType == "owner" ? 30.h : 0,
-                        ),
-                        // inputTextField(
-                        //   context,
-                        //   "Number",
-                        //   number,
-                        //   icon: "assets/formField/home.png",
-                        //   keyboardType: TextInputType.number,
-                        //   function: (value) {
-                        //     if (value!.isEmpty || value.toString().length < ) {
-                        //       return "Number is not valid";
-                        //     }
-                        //     return null;
-                        //   },
-                        // ),
-                        widget.userType == "owner"
-                            ? inputTextField(
-                                context,
-                                "Factory name",
-                                factoryName,
-                                icon: "assets/formField/home.png",
-                                keyboardType: TextInputType.text,
-                                function: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Factory Name can't be empty";
-                                  }
-                                  return null;
-                                },
-                              )
-                            : const SizedBox(
-                                height: 0.0,
-                              ),
-                        SizedBox(
-                          height: 50.h,
-                        ),
-                        coloredButton(
-                          context,
-                          "Signup",
-                          AppColors.lightGreen,
-                          width: CustomSizes().dynamicWidth(context, .6),
-                          function: () {
-                            if (!_formKey.currentState!.validate()) {
-                              MotionToast.error(
-                                description: const Text("Fill all Fields!!!"),
-                              ).show(context);
-                              return;
-                            } else {
-                              _authServices.signUp(
-                                context: context,
-                                name: name.text,
-                                email: email.text,
-                                password: password.text,
-                                cPassword: cPassword.text,
-                                factoryName: factoryName.text,
-                                factoryImage: 'factoryImage',
-                                userTypeFac:
-                                    widget.userType == 'owner' ? true : false,
-                              );
-                            }
-                          },
-                        ),
-                      ],
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          text(
+                            context,
+                            "Signup",
+                            36.sp,
+                            AppColors.customBlack,
+                            bold: true,
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          richTextWidget(
+                            context,
+                            "By signing in you are agreeing\nour",
+                            " Term and privacy policy",
+                            20.sp,
+                            20.sp,
+                            "",
+                            AppColors.customBlack,
+                            AppColors.buttonGreen,
+                            "",
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          inputTextField(
+                            context,
+                            "Full Name",
+                            name,
+                            icon: "assets/formField/user.png",
+                            keyboardType: TextInputType.name,
+                            function: (value) {
+                              if (value!.isEmpty) {
+                                return "Name can't be empty";
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          inputTextField(
+                            context,
+                            "Email Address",
+                            email,
+                            icon: "assets/formField/mail.png",
+                            keyboardType: TextInputType.emailAddress,
+                            function: (value) {
+                              if (EmailValidator.validate(value)) {
+                              } else {
+                                return "Enter Valid Email";
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          inputTextField(
+                            context,
+                            "Password",
+                            password,
+                            icon: "assets/formField/lock.png",
+                            keyboardType: TextInputType.visiblePassword,
+                            function: (value) {
+                              if (value!.isEmpty || value.length < 8) {
+                                return 'Password must have 8 characters';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          inputTextField(
+                            context,
+                            "Confirm Password",
+                            cPassword,
+                            icon: "assets/formField/lock.png",
+                            keyboardType: TextInputType.visiblePassword,
+                            function: (value) {
+                              if (password.text.toString() !=
+                                  value.toString()) {
+                                return 'Password must be same';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: widget.userType == "owner" ? 30.h : 0,
+                          ),
+                          // inputTextField(
+                          //   context,
+                          //   "Number",
+                          //   number,
+                          //   icon: "assets/formField/home.png",
+                          //   keyboardType: TextInputType.number,
+                          //   function: (value) {
+                          //     if (value!.isEmpty || value.toString().length < ) {
+                          //       return "Number is not valid";
+                          //     }
+                          //     return null;
+                          //   },
+                          // ),
+                          widget.userType == "owner"
+                              ? inputTextField(
+                                  context,
+                                  "Factory name",
+                                  factoryName,
+                                  icon: "assets/formField/home.png",
+                                  keyboardType: TextInputType.text,
+                                  function: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Factory Name can't be empty";
+                                    }
+                                    return null;
+                                  },
+                                )
+                              : const SizedBox(
+                                  height: 0.0,
+                                ),
+                          SizedBox(
+                            height: 50.h,
+                          ),
+                          coloredButton(
+                            context,
+                            "Signup",
+                            AppColors.lightGreen,
+                            width: CustomSizes().dynamicWidth(context, .6),
+                            function: () {
+                              if (!_formKey.currentState!.validate()) {
+                                MotionToast.error(
+                                  description: const Text("Fill all Fields!!!"),
+                                ).show(context);
+                                return;
+                              } else {
+                                _authServices.signUp(
+                                  context: context,
+                                  name: name.text,
+                                  email: email.text,
+                                  password: password.text,
+                                  cPassword: cPassword.text,
+                                  factoryName: factoryName.text,
+                                  factoryImage: 'factoryImage',
+                                  userTypeFac:
+                                      widget.userType == 'owner' ? true : false,
+                                );
+                              }
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          coloredButton(
+                            context,
+                            "Sign In",
+                            AppColors.noColor,
+                            function: () {
+                              AppRoutes.pop(context);
+                            },
+                            width: CustomSizes().dynamicWidth(context, .6),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

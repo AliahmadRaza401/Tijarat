@@ -9,7 +9,7 @@ Widget inputTextField(context, label, myController,
     {function, function2, password = false, icon, keyboardType = ""}) {
   return Container(
     width: 424.w,
-    height: 57.h,
+    height: 77.h,
     color: AppColors.noColor,
     child: TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -81,7 +81,7 @@ Widget inputTextField1(context, label, myController,
     {function, function2, password = false, icon, keyboardType = ""}) {
   return Container(
     width: 520.w,
-    height: 64.h,
+    height: 77.h,
     color: AppColors.noColor,
     child: TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
