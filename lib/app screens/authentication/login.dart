@@ -185,7 +185,7 @@ class _LoginState extends State<Login> {
                                   context,
                                   "Login",
                                   AppColors.lightGreen,
-                                  function: () {
+                                  function: () async {
                                     if (!_formKey.currentState!.validate()) {
                                       MotionToast.error(
                                         description:
@@ -194,7 +194,7 @@ class _LoginState extends State<Login> {
                                       return;
                                     }
                                     _authProvider.setLoading(true);
-                                    _authServices.signIn(
+                                    var loginCheck = await _authServices.signIn(
                                       email: email.text,
                                       password: password.text,
                                       context: context,

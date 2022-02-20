@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:tijarat/app%20screens/authentication/login.dart';
+import 'package:tijarat/navbar/far_navbar.dart';
 import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
 
@@ -19,7 +19,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     SpServices.saveUserFirstTime(true);
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => const Login(),
+        builder: (_) => const FarmerNavBar(),
       ),
     );
   }
