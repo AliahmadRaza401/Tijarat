@@ -9,7 +9,6 @@ Widget inputTextField(context, label, myController,
     {function, function2, password = false, icon, keyboardType = ""}) {
   return Container(
     width: 424.w,
-    height: 77.h,
     color: AppColors.noColor,
     child: TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
