@@ -16,6 +16,11 @@ class SpServices {
     prefs.setBool('userFirstTime', value);
   }
 
+  static saveOwnerLoggedIn(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('ownerLoggedIn', value);
+  }
+
   static saveUserType(String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('userType', value);
@@ -37,6 +42,13 @@ class SpServices {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return bool
     bool? boolValue = prefs.getBool('userFirstTime');
+    return boolValue;
+  }
+
+  static getownerLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return bool
+    bool? boolValue = prefs.getBool('ownerLoggedIn');
     return boolValue;
   }
 

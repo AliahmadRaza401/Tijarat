@@ -2,7 +2,10 @@ import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:tijarat/app%20screens/owner/create_post/create_post.dart';
+import 'package:tijarat/navbar/far_navbar.dart';
 import 'package:tijarat/utils/app_color.dart';
+import 'package:tijarat/utils/app_routes.dart';
 import 'package:tijarat/widgets/appbar/onr_app_bar.dart';
 import 'package:tijarat/widgets/text_widget.dart';
 
@@ -21,6 +24,7 @@ class _OwnerHomeState extends State<OwnerHome> {
     'Last Month',
     'All',
   ];
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +32,24 @@ class _OwnerHomeState extends State<OwnerHome> {
       child: Scaffold(
         backgroundColor: AppColors.customWhite,
         appBar: ownerAppBar(),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {},
-        //   backgroundColor: AppColors.buttonGreen,
-        //   child: Icon(
-        //     Icons.add,
-        //     color: AppColors.customWhite,
-        //     size: 70.r,
-        //   ),
-        // ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            AppRoutes.push(context, CreatePostStepper());
+          },
+          backgroundColor: AppColors.buttonGreen,
+          child: Icon(
+            Icons.add,
+            color: AppColors.customWhite,
+            size: 70.r,
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               SizedBox(
                 height: 40.h,
               ),
+              consumerModeButton(context),
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(
@@ -255,6 +262,47 @@ class _OwnerHomeState extends State<OwnerHome> {
       ),
     );
   }
+
+  consumerModeButton(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Owner',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              )),
+          SizedBox(
+            width: 10,
+          ),
+          Switch(
+            value: isSwitched,
+            onChanged: (value) async {
+              setState(() {
+                isSwitched = value;
+                print(isSwitched);
+              });
+              AppRoutes.push(context, FarmerNavBar());
+            },
+            activeTrackColor: AppColors.darkGreen,
+            activeColor: Colors.blue,
+            inactiveTrackColor: AppColors.lightGreen,
+            inactiveThumbColor: AppColors.customGrey,
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Text('Famer',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              )),
+        ],
+      ),
+    );
+  }
+
 }
 
 Widget ownerChoiceCard(context, title, image, value, value2, icon, cColor) {

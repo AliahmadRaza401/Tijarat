@@ -18,8 +18,7 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with TickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(Duration(seconds: 3), () {
@@ -33,6 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
     isUserFirstTime = await SpServices.getUserFirstTime();
     print('isUserFirstTime: $isUserFirstTime');
     if (isUserFirstTime == false) {
+      // AppRoutes.push(context, OnBoardingPage());
       AppRoutes.push(context, FarmerNavBar());
     } else {
       AppRoutes.push(context, OnBoardingPage());

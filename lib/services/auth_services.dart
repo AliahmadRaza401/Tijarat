@@ -43,6 +43,7 @@ class AuthServices {
         SpServices.saveUserLoggedIn(true);
         SpServices.saveUserType(userType);
         if (userType == 'factory') {
+          SpServices.saveOwnerLoggedIn(true);
           AppRoutes.pushAndRemoveUntil(context, OwnerNavBar());
         } else {
           AppRoutes.pushAndRemoveUntil(context, FarmerNavBar());

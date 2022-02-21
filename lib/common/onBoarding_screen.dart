@@ -133,7 +133,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Note Please!",
           body:
               "As app is still in development phase so errors and emissions are to be expected",
-          image: _buildImage('assets/json/noteError'),
+          image: _buildImage('assets/json/alert.json'),
           decoration: pageDecoration,
         ),
       ],

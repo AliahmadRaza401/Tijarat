@@ -109,7 +109,7 @@ class _OwnerNavBarState extends State<OwnerNavBar>
       case 2:
         return const OwnerNotification();
       case 3:
-        return isUserLoggedIn ? const OwnerProfile() : const LoginCheck();
+        return const OwnerProfile();
       default:
         return Column(
           mainAxisSize: MainAxisSize.min,
