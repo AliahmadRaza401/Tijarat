@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:tijarat/app%20screens/farmer/far_home.dart';
 import 'package:tijarat/common/onBoarding_screen.dart';
 import 'package:tijarat/navbar/far_navbar.dart';
+import 'package:tijarat/navbar/onr_navbar.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/app_routes.dart';
 
@@ -28,12 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   checkUSer() async {
-    bool isUserFirstTime = true;
+    dynamic isUserFirstTime = true;
     isUserFirstTime = await SpServices.getUserFirstTime();
     print('isUserFirstTime: $isUserFirstTime');
     if (isUserFirstTime == false) {
       // AppRoutes.push(context, OnBoardingPage());
-      AppRoutes.push(context, FarmerNavBar());
+      AppRoutes.push(context, OwnerNavBar());
     } else {
       AppRoutes.push(context, OnBoardingPage());
     }

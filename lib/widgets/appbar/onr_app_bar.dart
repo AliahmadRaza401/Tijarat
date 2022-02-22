@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tijarat/utils/app_color.dart';
 
-PreferredSizeWidget ownerAppBar() {
+PreferredSizeWidget ownerAppBar({back = false}) {
   return PreferredSize(
     preferredSize: Size.fromHeight(100.h),
     child: Container(
@@ -29,11 +29,17 @@ PreferredSizeWidget ownerAppBar() {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(
-            Icons.menu_rounded,
-            color: AppColors.darkGreen,
-            size: 60.r,
-          ),
+          back == false
+              ? Icon(
+                  Icons.menu_rounded,
+                  color: AppColors.darkGreen,
+                  size: 60.r,
+                )
+              : Icon(
+                  Icons.arrow_back,
+                  color: AppColors.darkGreen,
+                  size: 60.r,
+                ),
           Image.asset(
             "assets/logo.png",
             height: 55.h,
