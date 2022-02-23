@@ -1,7 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:motion_toast/motion_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:tijarat/app%20screens/authentication/signup.dart';
 import 'package:tijarat/providers/auth_provider.dart';
@@ -191,9 +190,12 @@ class _LoginState extends State<Login> {
                             AppColors.lightGreen,
                             function: () async {
                               if (!_formKey.currentState!.validate()) {
-                                MotionToast.error(
-                                  description: const Text("Fill all Fields!!!"),
-                                ).show(context);
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text("Fill all Fields!!!"),
+                                ));
+                                // MotionToast.error(
+                                //   description: const Text("Fill all Fields!!!"),
+                                // ).show(context);
                                 return;
                               }
                               _authProvider.setLoading(true);

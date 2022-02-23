@@ -3,6 +3,7 @@ import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/widgets/appbar/onr_app_bar.dart';
 
@@ -20,6 +21,9 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
   final _addressKey = GlobalKey<FormState>();
   final _contactKey = GlobalKey<FormState>();
   final _descKey = GlobalKey<FormState>();
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? image;
 
   TextEditingController description = TextEditingController();
   TextEditingController offer = TextEditingController();
@@ -295,60 +299,74 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Container(
-                          width: 180.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.r),
-                            border: Border.all(
-                              color: const Color(0xffc4c4c4),
-                              width: 1.0,
-                            ),
-                          ),
-                          padding: EdgeInsets.all(2.r),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(
-                                Icons.camera_alt_outlined,
-                                size: 24.r,
+                        GestureDetector(
+                          onTap: () async {
+                            image = await _picker.pickImage(
+                              source: ImageSource.camera,
+                            );
+                          },
+                          child: Container(
+                            width: 180.w,
+                            height: 40.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              border: Border.all(
                                 color: const Color(0xffc4c4c4),
+                                width: 1.0,
                               ),
-                              text(
-                                context,
-                                "Open Camera",
-                                18.sp,
-                                const Color(0xffc4c4c4),
-                              ),
-                            ],
+                            ),
+                            padding: EdgeInsets.all(2.r),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.camera_alt_outlined,
+                                  size: 24.r,
+                                  color: const Color(0xffc4c4c4),
+                                ),
+                                text(
+                                  context,
+                                  "Open Camera",
+                                  18.sp,
+                                  const Color(0xffc4c4c4),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        Container(
-                          width: 180.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.r),
-                            border: Border.all(
-                              color: const Color(0xffc4c4c4),
-                              width: 1.0,
-                            ),
-                          ),
-                          padding: EdgeInsets.all(2.r),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(
-                                Icons.image,
-                                size: 24.r,
+                        GestureDetector(
+                          onTap: () async {
+                            image = await _picker.pickImage(
+                              source: ImageSource.gallery,
+                            );
+                          },
+                          child: Container(
+                            width: 180.w,
+                            height: 40.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.r),
+                              border: Border.all(
                                 color: const Color(0xffc4c4c4),
+                                width: 1.0,
                               ),
-                              text(
-                                context,
-                                "Browse",
-                                18.sp,
-                                const Color(0xffc4c4c4),
-                              ),
-                            ],
+                            ),
+                            padding: EdgeInsets.all(2.r),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(
+                                  Icons.image,
+                                  size: 24.r,
+                                  color: const Color(0xffc4c4c4),
+                                ),
+                                text(
+                                  context,
+                                  "Browse",
+                                  18.sp,
+                                  const Color(0xffc4c4c4),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

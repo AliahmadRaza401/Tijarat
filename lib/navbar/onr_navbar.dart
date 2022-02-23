@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:tijarat/app%20screens/authentication/login.dart';
 import 'package:tijarat/app%20screens/owner/onr_home.dart';
 import 'package:tijarat/app%20screens/owner/onr_orders.dart';
 import 'package:tijarat/utils/app_color.dart';
 
-import '../app screens/farmer/login_check.dart';
 import '../app screens/owner/onr_notification.dart';
 import '../app screens/owner/onr_profile.dart';
 import '../services/sp_services.dart';

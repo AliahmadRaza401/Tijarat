@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:motion_toast/motion_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:tijarat/api/api.dart';
 import 'package:tijarat/navbar/far_navbar.dart';

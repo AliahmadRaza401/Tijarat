@@ -1,7 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:motion_toast/motion_toast.dart';
 import 'package:tijarat/services/auth_services.dart';
 import 'package:tijarat/utils/app_routes.dart';
 

@@ -1,6 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:motion_toast/motion_toast.dart';
-import 'package:motion_toast/resources/arrays.dart';
 
 // class MyMotionToast {
 //   static success(BuildContext context, title, desc) {

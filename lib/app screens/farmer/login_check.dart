@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:tijarat/app%20screens/authentication/login.dart';
 import 'package:tijarat/utils/app_color.dart';
+import 'package:tijarat/utils/app_routes.dart';
 import 'package:tijarat/widgets/appbar/far_app_bar.dart';
 import 'package:tijarat/widgets/buttons.dart';
 import 'package:tijarat/widgets/text_widget.dart';
@@ -75,13 +75,7 @@ class _LoginCheckState extends State<LoginCheck> {
                   width: 480.w,
                   height: 70.h,
                   function: () {
-                    pushNewScreen(
-                      context,
-                      screen: const Login(),
-                      withNavBar: false,
-                      pageTransitionAnimation:
-                          PageTransitionAnimation.cupertino,
-                    );
+                    AppRoutes.push(context, const Login());
                   },
                 ),
               ),
