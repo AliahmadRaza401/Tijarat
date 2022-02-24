@@ -146,7 +146,7 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
                             return GridView.builder(
-                              itemCount: category.length,
+                              itemCount: categories.length,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -258,7 +258,7 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                                         },
                                         child: customChoiceChip(
                                           context,
-                                          categories[index]["name"],
+                                          products[index]["name"],
                                         ),
                                       );
                                     },
