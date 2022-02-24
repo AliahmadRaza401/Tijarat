@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:cool_stepper/cool_stepper.dart';
 import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
+import 'package:tijarat/api/api.dart';
+import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/widgets/appbar/onr_app_bar.dart';
 
@@ -24,10 +30,27 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
 
   final ImagePicker _picker = ImagePicker();
   XFile? image;
+  String category = "", product = "";
 
   TextEditingController description = TextEditingController();
   TextEditingController offer = TextEditingController();
   TextEditingController price = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    category = "";
+    product = "";
+    getData();
+  }
+
+  var token = '', catId = "";
+  List categories = [], products = [];
+
+  getData() async {
+    token = await SpServices.getUserToken();
+    await getCategory();
+  }
 
   String? selectedValue;
   List<String> items = [
@@ -36,18 +59,39 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
     'Per Mann',
   ];
 
-// TextEditingController volNumber = TextEditingController();
-// TextEditingController userIns = TextEditingController();
-// TextEditingController eventcharges = TextEditingController();
-// TextEditingController type = TextEditingController();
-// TextEditingController home = TextEditingController();
-// TextEditingController street = TextEditingController();
-// TextEditingController floor = TextEditingController();
-// TextEditingController city = TextEditingController();
-// TextEditingController postelCode = TextEditingController();
-// TextEditingController email = TextEditingController();
-// TextEditingController phone = TextEditingController();
-// TextEditingController description = TextEditingController();
+  Map<String, String> get headers => {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      };
+
+  getCategory() async {
+    categories.clear();
+    print("fetching Post");
+    final response =
+        await http.get(Uri.parse(API.getCategory), headers: headers);
+
+    var responseData = json.decode(response.body);
+    print('responseData: $responseData');
+    for (var data in responseData['data']['data']) {
+      categories.add(data);
+    }
+    return categories;
+  }
+
+  getProducts(id) async {
+    products.clear();
+    print("fetching Post");
+    final response =
+        await http.get(Uri.parse(API.getProduct(id)), headers: headers);
+
+    var responseData = json.decode(response.body);
+    print('responseData: $responseData');
+    for (var data in responseData['data']['data']) {
+      products.add(data);
+    }
+    return products;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,22 +138,45 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                     SizedBox(
                       height: 50.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        customChoiceChip(context, "Agri Commodities"),
-                        customChoiceChip(context, "Fine Products"),
-                      ],
-                    ),
                     SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        customChoiceChip(context, "Fruits"),
-                        customChoiceChip(context, "Spices & pulses"),
-                      ],
+                      height: 140.h,
+                      child: FutureBuilder(
+                        future: getCategory(),
+                        builder: ((context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return GridView.builder(
+                              itemCount: categories.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 4.2 / 1.0,
+                                mainAxisSpacing: 20.0,
+                                crossAxisSpacing: 10.0,
+                              ),
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      catId =
+                                          categories[index]["id"].toString();
+                                      category =
+                                          categories[index]["name"].toString();
+                                    });
+                                  },
+                                  child: customChoiceChip(
+                                    context,
+                                    categories[index]["name"],
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                          return LottieBuilder.asset(
+                            "assets/json/Loading 2.json",
+                          );
+                        }),
+                      ),
                     ),
                   ],
                 ),
@@ -152,23 +219,57 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                     SizedBox(
                       height: 50.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        customChoiceChip(context, "Corn"),
-                        customChoiceChip(context, "Cotton"),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        customChoiceChip(context, "Wheat"),
-                        customChoiceChip(context, "Paddy"),
-                      ],
-                    ),
+                    category == ""
+                        ? SizedBox(
+                            height: 140.h,
+                            child: Center(
+                              child: text(
+                                context,
+                                "Select category",
+                                .04,
+                                AppColors.darkGreen,
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            height: 140.h,
+                            child: FutureBuilder(
+                              future: getProducts(catId),
+                              builder: ((context, AsyncSnapshot snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return GridView.builder(
+                                    itemCount: products.length,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 4.2 / 1.0,
+                                      mainAxisSpacing: 20.0,
+                                      crossAxisSpacing: 10.0,
+                                    ),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            category = categories[index]["name"]
+                                                .toString();
+                                          });
+                                        },
+                                        child: customChoiceChip(
+                                          context,
+                                          products[index]["name"],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                }
+                                return LottieBuilder.asset(
+                                  "assets/json/Loading 2.json",
+                                );
+                              }),
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -176,7 +277,7 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
           ),
         ),
         validation: () {
-          if (!_formKey.currentState!.validate()) {
+          if (category == "" && product == "") {
             return 'Fill form correctly';
           }
           return null;
@@ -565,7 +666,8 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
       onCompleted: stepComplete,
       steps: steps,
       config: const CoolStepperConfig(
-        backText: 'PREV',
+        backText: 'BACK',
+        finalText: "ADD",
         headerColor: AppColors.lightGreen1,
         titleTextStyle: TextStyle(
           color: AppColors.buttonGreen,
@@ -580,7 +682,7 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: ownerAppBar(back: true),
+        appBar: ownerAppBar(context, back: true),
         body: stepper,
       ),
     );

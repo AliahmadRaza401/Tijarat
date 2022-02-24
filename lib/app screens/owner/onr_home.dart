@@ -24,14 +24,13 @@ class _OwnerHomeState extends State<OwnerHome> {
     'Last Month',
     'All',
   ];
-  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.customWhite,
-        appBar: ownerAppBar(),
+        appBar: ownerAppBar(context),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             AppRoutes.push(context, CreatePostStepper());
@@ -49,7 +48,7 @@ class _OwnerHomeState extends State<OwnerHome> {
               SizedBox(
                 height: 40.h,
               ),
-              consumerModeButton(context),
+
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(
@@ -263,45 +262,7 @@ class _OwnerHomeState extends State<OwnerHome> {
     );
   }
 
-  consumerModeButton(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Owner',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Switch(
-            value: isSwitched,
-            onChanged: (value) async {
-              setState(() {
-                isSwitched = value;
-                print(isSwitched);
-              });
-              AppRoutes.push(context, FarmerNavBar());
-            },
-            activeTrackColor: AppColors.darkGreen,
-            activeColor: Colors.blue,
-            inactiveTrackColor: AppColors.lightGreen,
-            inactiveThumbColor: AppColors.customGrey,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Text('Famer',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              )),
-        ],
-      ),
-    );
-  }
+
 
 }
 

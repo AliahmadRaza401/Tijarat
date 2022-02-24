@@ -3,9 +3,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tijarat/app%20screens/farmer/far_post.dart';
 import 'package:tijarat/navbar/onr_navbar.dart';
 import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/app_color.dart';
+import 'package:tijarat/utils/app_routes.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 import 'package:tijarat/widgets/appbar/far_app_bar.dart';
 import 'package:tijarat/widgets/form_fields.dart';
@@ -23,8 +25,6 @@ class _FarmerHomeState extends State<FarmerHome> {
   var userName = 'farmer';
   var isOwner = false;
   bool isSwitched = false;
-
-  var AppRoutes;
 
   final List<String> imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -117,118 +117,41 @@ class _FarmerHomeState extends State<FarmerHome> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  Container(
-                    width: 510.w,
-                    height: 180.h,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          AppColors.darkGreen,
-                          AppColors.lightGreen,
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(15.r),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            text(
-                              context,
-                              "Agri Commodities",
-                              28.sp,
-                              AppColors.customWhite,
-                              bold: true,
-                            ),
-                            text(
-                              context,
-                              "Lorem ipsum lorem",
-                              22.sp,
-                              AppColors.customWhite,
-                            ),
-                            Container(
-                              width: 160.w,
-                              height: 40.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.customWhite,
-                                borderRadius: BorderRadius.circular(5.r),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  text(
-                                    context,
-                                    "Select",
-                                    20.sp,
-                                    AppColors.darkGreen,
-                                    bold: true,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_rounded,
-                                    color: AppColors.darkGreen,
-                                    size: 26.r,
-                                  )
-                                ],
-                              ),
-                            )
+                  GestureDetector(
+                    onTap: () {
+                      AppRoutes.push(
+                        context,
+                        FarmerPost(
+                          title: "Agri Commodities",
+                          desc: "Lorem ipsum lorem",
+                          img: "assets/grains.png",
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 510.w,
+                      height: 180.h,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            AppColors.darkGreen,
+                            AppColors.lightGreen,
                           ],
                         ),
-                        Image.asset(
-                          "assets/grains.png",
-                          width: 190.w,
-                          height: 140.h,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  SizedBox(
-                    width: 500.w,
-                    height: 330.r,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 245.w,
-                          height: 330.h,
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                AppColors.darkGreen,
-                                AppColors.lightGreen,
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(15.r),
-                          ),
-                          padding: EdgeInsets.all(12.r),
-                          child: Column(
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/vagetable.png",
-                                    width: 200.w,
-                                    height: 160.h,
-                                  ),
-                                ],
-                              ),
                               text(
                                 context,
-                                "Fine Products",
+                                "Agri Commodities",
                                 28.sp,
                                 AppColors.customWhite,
                                 bold: true,
@@ -265,103 +188,229 @@ class _FarmerHomeState extends State<FarmerHome> {
                                     )
                                   ],
                                 ),
-                              ),
+                              )
                             ],
+                          ),
+                          Image.asset(
+                            "assets/grains.png",
+                            width: 190.w,
+                            height: 140.h,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  SizedBox(
+                    width: 500.w,
+                    height: 330.r,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            AppRoutes.push(
+                              context,
+                              FarmerPost(
+                                title: "Fine Products",
+                                desc: "Lorem ipsum lorem",
+                                img: "assets/vagetable.png",
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 245.w,
+                            height: 330.h,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.darkGreen,
+                                  AppColors.lightGreen,
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(15.r),
+                            ),
+                            padding: EdgeInsets.all(12.r),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/vagetable.png",
+                                      width: 200.w,
+                                      height: 160.h,
+                                    ),
+                                  ],
+                                ),
+                                text(
+                                  context,
+                                  "Fine Products",
+                                  28.sp,
+                                  AppColors.customWhite,
+                                  bold: true,
+                                ),
+                                text(
+                                  context,
+                                  "Lorem ipsum lorem",
+                                  22.sp,
+                                  AppColors.customWhite,
+                                ),
+                                Container(
+                                  width: 160.w,
+                                  height: 40.h,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.customWhite,
+                                    borderRadius: BorderRadius.circular(5.r),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      text(
+                                        context,
+                                        "Select",
+                                        20.sp,
+                                        AppColors.darkGreen,
+                                        bold: true,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_rounded,
+                                        color: AppColors.darkGreen,
+                                        size: 26.r,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              width: 245.w,
-                              height: 170.h,
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    AppColors.darkGreen,
-                                    AppColors.lightGreen,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(15.r),
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      text(
-                                        context,
-                                        "Fruits",
-                                        28.sp,
-                                        AppColors.customWhite,
-                                        bold: true,
-                                      ),
-                                      Image.asset(
-                                        "assets/fruits.png",
-                                        width: 120.w,
-                                        height: 100.h,
-                                      ),
+                            GestureDetector(
+                              onTap: () {
+                                AppRoutes.push(
+                                  context,
+                                  FarmerPost(
+                                    title: "Fruits",
+                                    desc: "Lorem ipsum lorem",
+                                    img: "assets/fruits.png",
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 245.w,
+                                height: 170.h,
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      AppColors.darkGreen,
+                                      AppColors.lightGreen,
                                     ],
                                   ),
-                                  text(
-                                    context,
-                                    "Lorem ipsum lorem",
-                                    22.sp,
-                                    AppColors.customWhite,
-                                  ),
-                                ],
+                                  borderRadius: BorderRadius.circular(15.r),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        text(
+                                          context,
+                                          "Fruits",
+                                          28.sp,
+                                          AppColors.customWhite,
+                                          bold: true,
+                                        ),
+                                        Image.asset(
+                                          "assets/fruits.png",
+                                          width: 120.w,
+                                          height: 100.h,
+                                        ),
+                                      ],
+                                    ),
+                                    text(
+                                      context,
+                                      "Lorem ipsum lorem",
+                                      22.sp,
+                                      AppColors.customWhite,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              width: 245.w,
-                              height: 140.h,
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    AppColors.darkGreen,
-                                    AppColors.lightGreen,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(15.r),
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      text(
-                                        context,
-                                        "Spices\n& Pulses",
-                                        28.sp,
-                                        AppColors.customWhite,
-                                        bold: true,
-                                      ),
-                                      Image.asset(
-                                        "assets/spices.png",
-                                        width: 100.w,
-                                        height: 70.h,
-                                      ),
+                            GestureDetector(
+                              onTap: () {
+                                AppRoutes.push(
+                                  context,
+                                  FarmerPost(
+                                    title: "Spices & Pulses",
+                                    desc: "Lorem ipsum lorem",
+                                    img: "assets/spices.png",
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 245.w,
+                                height: 140.h,
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      AppColors.darkGreen,
+                                      AppColors.lightGreen,
                                     ],
                                   ),
-                                  text(
-                                    context,
-                                    "Lorem ipsum lorem",
-                                    22.sp,
-                                    AppColors.customWhite,
-                                  ),
-                                ],
+                                  borderRadius: BorderRadius.circular(15.r),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        text(
+                                          context,
+                                          "Spices\n& Pulses",
+                                          28.sp,
+                                          AppColors.customWhite,
+                                          bold: true,
+                                        ),
+                                        Image.asset(
+                                          "assets/spices.png",
+                                          width: 100.w,
+                                          height: 70.h,
+                                        ),
+                                      ],
+                                    ),
+                                    text(
+                                      context,
+                                      "Lorem ipsum lorem",
+                                      22.sp,
+                                      AppColors.customWhite,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

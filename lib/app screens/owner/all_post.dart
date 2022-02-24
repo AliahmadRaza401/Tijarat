@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
@@ -81,12 +82,16 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: ownerAppBar(),
+        appBar: ownerAppBar(context),
         body: Container(
             // color: Colors.blue,
             height: CustomSizes().dynamicHeight(context, 1),
             child: loading
-                ? Center(child: Lottie.asset('assets/json/Loading 2.json'))
+                ? Center(
+                    child: Lottie.asset(
+                    'assets/json/Loading 2.json',
+                    width: CustomSizes().dynamicWidth(context, 0.5),
+                  ))
                 : Container(
                     // color: Colors.amber,
                     width: CustomSizes().dynamicWidth(context, 1),
@@ -130,9 +135,14 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
                                     physics: ClampingScrollPhysics(),
                                     itemCount: allpost.length,
                                     itemBuilder: (ctx, index) {
+                                      DateTime p = DateTime.parse(
+                                          allpost[index].createdAt.toString());
+                                      String formattedDate =
+                                          DateFormat('dd-MM-yyyy hh:mm a')
+                                              .format(p);
                                       return PostCard(
                                         allpost[index].image,
-                                        allpost[index].createdAt.toString(),
+                                        formattedDate,
                                         allpost[index].description,
                                         allpost[index].productId,
                                         allpost[index].price,

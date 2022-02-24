@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tijarat/app%20screens/owner/drawer.dart';
 import 'package:tijarat/utils/app_color.dart';
+import 'package:tijarat/utils/app_routes.dart';
 
-PreferredSizeWidget ownerAppBar({back = false}) {
+PreferredSizeWidget ownerAppBar(context, {back = false}) {
   return PreferredSize(
     preferredSize: Size.fromHeight(100.h),
     child: Container(
@@ -30,15 +32,25 @@ PreferredSizeWidget ownerAppBar({back = false}) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           back == false
-              ? Icon(
-                  Icons.menu_rounded,
-                  color: AppColors.darkGreen,
-                  size: 60.r,
+              ? GestureDetector(
+                  onTap: () {
+                    drawer(context);
+                  },
+                  child: Icon(
+                    Icons.menu_rounded,
+                    color: AppColors.darkGreen,
+                    size: 60.r,
+                  ),
                 )
-              : Icon(
-                  Icons.arrow_back,
-                  color: AppColors.darkGreen,
-                  size: 60.r,
+              : GestureDetector(
+                  onTap: () {
+                    AppRoutes.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.darkGreen,
+                    size: 60.r,
+                  ),
                 ),
           Image.asset(
             "assets/logo.png",
