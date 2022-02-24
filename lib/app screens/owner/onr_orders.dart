@@ -3,13 +3,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
 import 'package:tijarat/api/api.dart';
 import 'package:tijarat/model/allpostList.dart';
 import 'package:tijarat/services/sp_services.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
-import '../../widgets/underconstruction.dart';
 
 class OwnerOrders extends StatefulWidget {
   const OwnerOrders({Key? key}) : super(key: key);
@@ -67,6 +65,7 @@ class _OwnerOrdersState extends State<OwnerOrders> {
   }
 
   var token = '';
+
   getData() async {
     token = await SpServices.getUserToken();
     await getRequest();
