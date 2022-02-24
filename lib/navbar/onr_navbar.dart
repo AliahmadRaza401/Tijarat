@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:tijarat/app%20screens/owner/onr_home.dart';
-import 'package:tijarat/app%20screens/owner/onr_orders.dart';
+import 'package:tijarat/app%20screens/owner/all_post.dart';
 import 'package:tijarat/utils/app_color.dart';
 
 import '../app screens/owner/onr_notification.dart';
@@ -58,10 +58,10 @@ class _OwnerNavBarState extends State<OwnerNavBar>
           ),
           SalomonBottomBarItem(
             icon: const Icon(
-              CupertinoIcons.cart,
+              Icons.gradient,
             ),
             title: Text(
-              "Orders",
+              "Post",
               style: TextStyle(
                 fontSize: 18.sp,
               ),
@@ -102,7 +102,7 @@ class _OwnerNavBarState extends State<OwnerNavBar>
       case 0:
         return const OwnerHome();
       case 1:
-        return const OwnerOrders();
+        return const AllPostsScreen();
       case 2:
         return const OwnerNotification();
       case 3:

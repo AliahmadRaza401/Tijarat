@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../widgets/underconstruction.dart';
 
@@ -13,7 +14,14 @@ class _OwnerNotificationState extends State<OwnerNotification> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: underConstruction(context),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+          
+            underConstruction(context),
+          ],
+        ),
+      ),
     );
   }
 }

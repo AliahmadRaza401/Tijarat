@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 import 'package:tijarat/widgets/text_widget.dart';
 
@@ -10,8 +11,8 @@ Widget underConstruction(BuildContext context) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            'assets/image 5415.png',
+          Lottie.asset(
+            'assets/json/Underconstruction girl.json',
             width: 500.w,
             height: 500.h,
           ),

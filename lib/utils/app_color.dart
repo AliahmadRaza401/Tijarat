@@ -28,4 +28,13 @@ class AppColors {
       900: Color(0xff000000),
     },
   );
+
+  static const greenGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      AppColors.darkGreen,
+      AppColors.lightGreen,
+    ],
+  );
 }
