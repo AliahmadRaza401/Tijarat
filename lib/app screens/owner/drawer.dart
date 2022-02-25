@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tijarat/navbar/onr_navbar.dart';
 import 'package:tijarat/widgets/text_widget.dart';
 
 import '../../navbar/far_navbar.dart';
@@ -29,6 +32,7 @@ consumerModeButton(BuildContext context) {
             setState(() {
               isSwitched = value;
             });
+
             AppRoutes.push(context, const FarmerNavBar());
           },
           activeTrackColor: AppColors.lightGreen1,
@@ -51,7 +55,7 @@ consumerModeButton(BuildContext context) {
   });
 }
 
-drawer(context) {
+drawer(context,) {
   return showDialog(
     barrierDismissible: true,
     barrierColor: Colors.white54,

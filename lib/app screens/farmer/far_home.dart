@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +14,11 @@ import 'package:tijarat/utils/dynamic_sizes.dart';
 import 'package:tijarat/widgets/appbar/far_app_bar.dart';
 import 'package:tijarat/widgets/form_fields.dart';
 import 'package:tijarat/widgets/text_widget.dart';
+import 'package:http/http.dart' as http;
+
+import '../../api/api.dart';
+import '../../model/allpostList.dart';
+import '../../widgets/appbar/onr_app_bar.dart';
 
 class FarmerHome extends StatefulWidget {
   const FarmerHome({Key? key}) : super(key: key);
@@ -34,6 +41,48 @@ class _FarmerHomeState extends State<FarmerHome> {
     'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
     'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
   ];
+  List<GetAllPostModel> allpost = [];
+  bool loading = true;
+
+  Map<String, String> get headers => {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      };
+
+  Future<List<GetAllPostModel>> getRequest() async {
+    print("fetching Post");
+    final response =
+        await http.get(Uri.parse(API.getPostList), headers: headers);
+
+    var responseData = json.decode(response.body);
+    print('responseData: $responseData');
+    for (var data in responseData['data']['data']) {
+      GetAllPostModel item = GetAllPostModel(
+        id: data['id'],
+        categoryId: data['category_id'],
+        productId: data['product_id'],
+        userId: data['user_id'],
+        price: data['price'],
+        unit: data['unit'],
+        image: data['image'],
+        description: data['description'],
+        address: data['address'],
+        specialOffer: data['special_offer'],
+        createdAt: DateTime.parse(data['created_at']),
+        updatedAt: DateTime.parse(data['updated_at']),
+      );
+
+      //Adding user to the list.
+      setState(() {
+        allpost.add(item);
+        loading = false;
+      });
+    }
+    return allpost;
+  }
+
+  var token = '';
 
   @override
   void initState() {
@@ -44,6 +93,8 @@ class _FarmerHomeState extends State<FarmerHome> {
   getData() async {
     var name = await SpServices.getUserName();
     var owner = await SpServices.getownerLoggedIn();
+    token = await SpServices.getUserToken();
+    await getRequest();
 
     setState(() {
       userName = name;
@@ -55,6 +106,7 @@ class _FarmerHomeState extends State<FarmerHome> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          // appBar: ownerAppBar(context, false),
           appBar: farmerAppBar(context, "Home"),
           body: Padding(
             padding: EdgeInsets.symmetric(
@@ -64,30 +116,44 @@ class _FarmerHomeState extends State<FarmerHome> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  isOwner ? farmerModeChange(context) : SizedBox(),
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: CustomSizes().dynamicHeight(context, .3),
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 0.8,
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      reverse: false,
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 3),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      scrollDirection: Axis.horizontal,
-                    ),
-                    items: imgList
-                        .map(
-                          (item) => Center(
-                            child: Image.network(item,
-                                fit: BoxFit.cover, width: 1000),
+                  loading
+                      ? SizedBox()
+                      : CarouselSlider(
+                          options: CarouselOptions(
+                            height: 236.h,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 0.98,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 4),
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enlargeCenterPage: true,
+                            scrollDirection: Axis.horizontal,
                           ),
-                        )
-                        .toList(),
+                          items: [
+                            sliderContainr(
+                              "assets/vagetable.png",
+                              allpost[0].createdAt.toString(),
+                              34,
+                              "KG",
+                              "F NAme",
+                            ),
+                          ],
+                          //  imgList
+                          //     .map(
+                          //       (item) => Center(
+                          //         child: Image.network(item,
+                          //             fit: BoxFit.cover, width: 1000),
+                          //       ),
+                          //     )
+                          //     .toList(),
+                        ),
+                  SizedBox(
+                    height: 20.sp,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -105,8 +171,14 @@ class _FarmerHomeState extends State<FarmerHome> {
                     20.sp,
                     AppColors.darkGreen,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      isOwner ? farmerModeChange(context) : SizedBox(),
+                    ],
+                  ),
                   SizedBox(
-                    height: 30.h,
+                    height: 0.h,
                   ),
                   inputTextField1(
                     context,
@@ -115,7 +187,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                     icon: "assets/formField/search.png",
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 0.h,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -460,6 +532,108 @@ class _FarmerHomeState extends State<FarmerHome> {
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               )),
+        ],
+      ),
+    );
+  }
+
+  Widget sliderContainr(img, item, rate, unit, fName) {
+    return Container(
+      height: 236.h,
+      width: 515.h,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(11.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 2,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                // color: Colors.red,
+                width: 180.w,
+                height: 157.h,
+                padding: EdgeInsets.only(
+                  left: 20.sp,
+                ),
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    text(
+                      context,
+                      item ?? "",
+                      28.sp,
+                      AppColors.darkGreen,
+                      bold: true,
+                      maxLines: 1,
+                    ),
+                    text(
+                      context,
+                      "${rate} / ${unit} ",
+                      28.sp,
+                      AppColors.darkGreen,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 300.w,
+                height: 180.h,
+                alignment: Alignment.centerRight,
+                decoration: BoxDecoration(
+                  // color: Colors.amber,
+                  image: DecorationImage(
+                    image: AssetImage(img),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Text(".") /* add child content here */,
+              ),
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 11.w,
+            ),
+            width: 516.w,
+            height: 51.h,
+            decoration: BoxDecoration(
+              gradient: AppColors.greenGradient,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(11.r),
+                bottomRight: Radius.circular(11.r),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                text(
+                  context,
+                  fName ?? "",
+                  28.sp,
+                  Colors.white,
+                  bold: true,
+                ),
+                Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                  size: 36.w,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

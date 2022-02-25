@@ -5,7 +5,7 @@ import 'package:tijarat/app%20screens/owner/drawer.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/app_routes.dart';
 
-PreferredSizeWidget ownerAppBar(context, {back = false}) {
+PreferredSizeWidget ownerAppBar(context, bool isOwner, {back = false}) {
   return PreferredSize(
     preferredSize: Size.fromHeight(100.h),
     child: Container(
@@ -34,7 +34,9 @@ PreferredSizeWidget ownerAppBar(context, {back = false}) {
           back == false
               ? GestureDetector(
                   onTap: () {
-                    drawer(context);
+                    drawer(
+                      context,
+                    );
                   },
                   child: Icon(
                     Icons.menu_rounded,

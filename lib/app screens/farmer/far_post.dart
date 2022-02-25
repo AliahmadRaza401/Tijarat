@@ -76,9 +76,10 @@ class _FarmerPostState extends State<FarmerPost> {
     getData();
   }
 
-  var token = '';
+  var token = '41|RLyWAouZslsYzRWKSNR2XxiPRUYhjqeactfXKunP';
   getData() async {
     token = await SpServices.getUserToken();
+    print('token: $token');
     await getRequest();
   }
 
@@ -99,6 +100,9 @@ class _FarmerPostState extends State<FarmerPost> {
               child: SafeArea(
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 10.sp,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -171,7 +175,11 @@ class _FarmerPostState extends State<FarmerPost> {
               ),
             ),
             loading
-                ? Center(child: Lottie.asset('assets/json/Loading 2.json'))
+                ? Center(
+                    child: Lottie.asset(
+                    'assets/json/Loading 2.json',
+                    width: CustomSizes().dynamicWidth(context, 0.6),
+                  ))
                 : Container(
                     height: CustomSizes().dynamicHeight(context, .65),
                     child: SingleChildScrollView(

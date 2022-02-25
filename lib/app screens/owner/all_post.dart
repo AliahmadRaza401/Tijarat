@@ -72,7 +72,7 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
     getData();
   }
 
-  var token = '';
+  var token = '41|RLyWAouZslsYzRWKSNR2XxiPRUYhjqeactfXKunP';
   getData() async {
     token = await SpServices.getUserToken();
     await getRequest();
@@ -82,7 +82,7 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: ownerAppBar(context),
+        appBar: ownerAppBar(context, true),
         body: Container(
             // color: Colors.blue,
             height: CustomSizes().dynamicHeight(context, 1),

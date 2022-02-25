@@ -30,7 +30,7 @@ class _OwnerHomeState extends State<OwnerHome> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.customWhite,
-        appBar: ownerAppBar(context),
+        appBar: ownerAppBar(context, true),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             AppRoutes.push(context, CreatePostStepper());

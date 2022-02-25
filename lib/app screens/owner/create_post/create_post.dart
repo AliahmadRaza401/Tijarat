@@ -682,7 +682,7 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: ownerAppBar(context, back: true),
+        appBar: ownerAppBar(context, true, back: true),
         body: stepper,
       ),
     );
