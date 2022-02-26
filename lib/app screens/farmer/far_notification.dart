@@ -12,8 +12,6 @@ class FarmerNotification extends StatefulWidget {
 class _FarmerNotificationState extends State<FarmerNotification> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: underConstruction(context),
-    );
+    return Container(child: UnderConstructionNoTabBar());
   }
 }

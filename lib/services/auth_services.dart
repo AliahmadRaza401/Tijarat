@@ -38,13 +38,13 @@ class AuthServices {
         var token = result['data']['token'];
         var userType = result['data']['user_type'][0];
         SpServices.saveUserToken(token);
-        SpServices.saveUserLoggedIn(true);
-        SpServices.saveUserLoggedIn(true);
+        // SpServices.saveOwnerLoggedIn(true);
         SpServices.saveUserType(userType);
         if (userType == 'factory') {
           SpServices.saveOwnerLoggedIn(true);
           AppRoutes.pushAndRemoveUntil(context, OwnerNavBar());
         } else {
+          SpServices.saveUserLoggedIn(true);
           AppRoutes.pushAndRemoveUntil(context, FarmerNavBar());
         }
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -128,12 +128,15 @@ class AuthServices {
         var token = result['data']['token'];
         var userType = result['data']['data']['user_type'];
         var userName = result['data']['data']['name'];
+        var userId = result['data']['data']['id'];
+
         print('userType: $userType');
         SpServices.saveUserLoggedIn(true);
         SpServices.saveUserToken(token);
         SpServices.saveUserType(userType);
-        SpServices.saveUserName(userName);
+        SpServices.saveUserId(userId);
         if (userType == 'farmer') {
+          SpServices.saveUserName(userName);
           AppRoutes.pushAndRemoveUntil(context, FarmerNavBar());
         } else {
           AppRoutes.pushAndRemoveUntil(context, OwnerNavBar());

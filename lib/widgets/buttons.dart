@@ -6,7 +6,11 @@ import 'package:tijarat/providers/auth_provider.dart';
 import '../utils/app_color.dart';
 
 Widget coloredButton(context, text, color,
-    {function = "", width = "", height = "", dynamic fontSize = ""}) {
+    {function = "",
+    width = "",
+    height = "",
+    dynamic fontSize = "",
+    bool loading = true}) {
   return GestureDetector(
     onTap: function == "" ? () {} : function,
     child: Container(
@@ -29,12 +33,25 @@ Widget coloredButton(context, text, color,
               ),
               borderRadius: BorderRadius.circular(15.r),
             ),
-      child: Center(
-        child: Provider.of<AuthProvider>(context).loading == true
-            ? CircularProgressIndicator(
-                color: Colors.white,
-              )
-            : Text(
+      child: loading
+          ? Center(
+              child: Provider.of<AuthProvider>(context).loading == true
+                  ? CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : Text(
+                      text,
+                      style: TextStyle(
+                        color: color == AppColors.noColor
+                            ? AppColors.buttonGreen
+                            : AppColors.customWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontSize == "" ? 24.sp : fontSize,
+                      ),
+                    ),
+            )
+          : Center(
+              child: Text(
                 text,
                 style: TextStyle(
                   color: color == AppColors.noColor
@@ -44,7 +61,7 @@ Widget coloredButton(context, text, color,
                   fontSize: fontSize == "" ? 24.sp : fontSize,
                 ),
               ),
-      ),
+            ),
     ),
   );
 }

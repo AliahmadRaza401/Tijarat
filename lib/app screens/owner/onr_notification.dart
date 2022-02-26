@@ -13,15 +13,6 @@ class OwnerNotification extends StatefulWidget {
 class _OwnerNotificationState extends State<OwnerNotification> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-          
-            underConstruction(context),
-          ],
-        ),
-      ),
-    );
+    return UnderConstructionNoTabBar();
   }
 }

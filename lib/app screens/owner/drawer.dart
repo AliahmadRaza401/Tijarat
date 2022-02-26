@@ -55,7 +55,9 @@ consumerModeButton(BuildContext context) {
   });
 }
 
-drawer(context,) {
+drawer(
+  context,
+) {
   return showDialog(
     barrierDismissible: true,
     barrierColor: Colors.white54,
@@ -100,21 +102,21 @@ drawer(context,) {
                             context, "assets/png/drawerItem1.png", "Dashboard"),
                         SizedBox(height: 20.h),
                         drawerRow(
-                            context, "assets/png/drawerItem1.png", "Posts"),
+                            context, "assets/png/drawerItem2.png", "Posts"),
                         SizedBox(height: 20.h),
-                        drawerRow(context, "assets/png/drawerItem1.png",
+                        drawerRow(context, "assets/png/drawerItem3.png",
                             "Today's Rate"),
                         SizedBox(height: 20.h),
-                        drawerRow(context, "assets/png/drawerItem1.png",
+                        drawerRow(context, "assets/png/drawerItem4.png",
                             "Previous requests"),
-                        SizedBox(height: 20.h),
-                        drawerRow(
-                            context, "assets/png/drawerItem1.png", "Logout"),
-                        SizedBox(height: 20.h),
+                        // SizedBox(height: 20.h),
+                        // drawerRow(
+                        //     context, "assets/png/drawerItem5.png", "Logout"),
+                        SizedBox(height: 140.h),
                         consumerModeButton(context),
                         const Spacer(),
                         drawerRow(
-                            context, "assets/png/drawerItem1.png", "Logout"),
+                            context, "assets/png/drawerItem5.png", "Logout"),
                       ],
                     ),
                   ),

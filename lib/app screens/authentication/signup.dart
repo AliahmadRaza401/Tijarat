@@ -95,6 +95,18 @@ class _SignupState extends State<Signup> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        GestureDetector(
+                          onTap: () {
+                            AppRoutes.pop(context);
+                          },
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: AppColors.darkGreen,
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: 30.h,
                         ),
@@ -227,7 +239,8 @@ class _SignupState extends State<Signup> {
                           width: CustomSizes().dynamicWidth(context, .6),
                           function: () {
                             if (!_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
                                 content: Text("Fill All Fields!!!"),
                               ));
 

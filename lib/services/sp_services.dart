@@ -6,6 +6,11 @@ class SpServices {
     prefs.setString('userToken', value);
   }
 
+  static saveUserId(String value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('userId', value);
+  }
+
   static saveUserLoggedIn(bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('userLoggedIn', value);
@@ -35,6 +40,13 @@ class SpServices {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String? stringValue = prefs.getString('userToken');
+    return stringValue;
+  }
+
+  static getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? stringValue = prefs.getString('userId');
     return stringValue;
   }
 

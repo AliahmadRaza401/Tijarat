@@ -190,7 +190,8 @@ class _LoginState extends State<Login> {
                             AppColors.lightGreen,
                             function: () async {
                               if (!_formKey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
                                   content: Text("Fill all Fields!!!"),
                                 ));
                                 // MotionToast.error(
@@ -210,6 +211,7 @@ class _LoginState extends State<Login> {
                             context,
                             "Sign up",
                             AppColors.noColor,
+                            loading: false,
                             function: () {
                               showDialog(
                                 barrierDismissible: true,

@@ -13,7 +13,7 @@ class _FarmerOrdersState extends State<FarmerOrders> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: underConstruction(context),
+      child:UnderConstructionNoTabBar(),
     );
   }
 }

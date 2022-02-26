@@ -11,6 +11,8 @@ import 'package:http/http.dart' as http;
 import 'package:tijarat/api/api.dart';
 import 'package:tijarat/model/allpostList.dart';
 import 'package:tijarat/services/sp_services.dart';
+import 'package:tijarat/utils/app_routes.dart';
+import 'package:tijarat/utils/constants.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 import '../../utils/app_color.dart';
 import '../../widgets/appbar/onr_app_bar.dart';
@@ -74,7 +76,10 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
 
   var token = '41|RLyWAouZslsYzRWKSNR2XxiPRUYhjqeactfXKunP';
   getData() async {
-    token = await SpServices.getUserToken();
+    var mytoken = await SpServices.getUserToken();
+    setState(() {
+      token = mytoken == null ? authToken : mytoken;
+    });
     await getRequest();
   }
 
@@ -160,171 +165,176 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
   }
 
   Widget PostCard(img, date, desc, item, rate, unit) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(
-            vertical: 10.h,
-          ),
-          padding: EdgeInsets.symmetric(
-            vertical: 10.h,
-            horizontal: 10.w,
-          ),
-          width: 518.w,
-          height: 527.h,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(23.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 1,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              Container(
-                width: 497.w,
-                height: 310.h,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(13.r),
-                    image: img == null
-                        ? DecorationImage(
-                            image: AssetImage("assets/dami.png"),
-                            fit: BoxFit.cover,
-                          )
-                        : DecorationImage(
-                            image: NetworkImage('$img'),
-                            fit: BoxFit.cover,
-                          )),
-                child: Text(".") /* add child content here */,
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Expanded(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          text(
-                            context,
-                            item.toString(),
-                            24.sp,
-                            AppColors.darkGreen,
-                            bold: true,
-                          ),
-                          text(
-                            context,
-                            date.toString(),
-                            18.sp,
-                            AppColors.darkGreen,
-                          ),
-                        ],
-                      ),
-                      text(
-                        context,
-                        desc.toString(),
-                        20.sp,
-                        AppColors.darkGreen,
-                        maxLines: 3,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.h,
-                              horizontal: 10.w,
+    return GestureDetector(
+      onTap: () {
+        AppRoutes.push(context, UnderConstruction());
+      },
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+              vertical: 10.h,
+            ),
+            padding: EdgeInsets.symmetric(
+              vertical: 10.h,
+              horizontal: 10.w,
+            ),
+            width: 518.w,
+            height: 527.h,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(23.r),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 1,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Container(
+                  width: 497.w,
+                  height: 310.h,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13.r),
+                      image: img == null
+                          ? DecorationImage(
+                              image: AssetImage("assets/dami.png"),
+                              fit: BoxFit.cover,
+                            )
+                          : DecorationImage(
+                              image: NetworkImage('$img'),
+                              fit: BoxFit.cover,
+                            )),
+                  child: Text(".") /* add child content here */,
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            text(
+                              context,
+                              item.toString(),
+                              24.sp,
+                              AppColors.darkGreen,
+                              bold: true,
                             ),
-                            width: 320.w,
-                            height: 61.h,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 2,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
+                            text(
+                              context,
+                              date.toString(),
+                              18.sp,
+                              AppColors.darkGreen,
                             ),
-                            child: text(context, item.toString(), 22.sp,
+                          ],
+                        ),
+                        text(
+                          context,
+                          desc.toString(),
+                          20.sp,
+                          AppColors.darkGreen,
+                          maxLines: 3,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.h,
+                                horizontal: 10.w,
+                              ),
+                              width: 320.w,
+                              height: 61.h,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: text(context, item.toString(), 22.sp,
+                                  AppColors.darkGreen,
+                                  bold: true),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 5.h,
+                                horizontal: 10.w,
+                              ),
+                              width: 66.w,
+                              height: 49.h,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: text(
+                                context,
+                                rate.toString(),
+                                24.sp,
                                 AppColors.darkGreen,
-                                bold: true),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5.h,
-                              horizontal: 10.w,
+                              ),
                             ),
-                            width: 66.w,
-                            height: 49.h,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 2,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
+                            Container(
+                              width: 66.w,
+                              height: 49.h,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: text(
+                                context,
+                                unit.toString(),
+                                24.sp,
+                                AppColors.darkGreen,
+                              ),
                             ),
-                            child: text(
-                              context,
-                              rate.toString(),
-                              24.sp,
-                              AppColors.darkGreen,
-                            ),
-                          ),
-                          Container(
-                            width: 66.w,
-                            height: 49.h,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8.r),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 2,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: text(
-                              context,
-                              unit.toString(),
-                              24.sp,
-                              AppColors.darkGreen,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
