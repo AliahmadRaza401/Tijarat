@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tijarat/navbar/onr_navbar.dart';
 import 'package:tijarat/widgets/text_widget.dart';
+import 'package:tijarat/widgets/underconstruction.dart';
 
 import '../../navbar/far_navbar.dart';
+import '../../services/sp_services.dart';
 import '../../utils/app_color.dart';
 import '../../utils/app_routes.dart';
 
@@ -98,25 +100,58 @@ drawer(
                     ),
                     child: Column(
                       children: [
-                        drawerRow(
-                            context, "assets/png/drawerItem1.png", "Dashboard"),
-                        SizedBox(height: 20.h),
-                        drawerRow(
-                            context, "assets/png/drawerItem2.png", "Posts"),
-                        SizedBox(height: 20.h),
-                        drawerRow(context, "assets/png/drawerItem3.png",
-                            "Today's Rate"),
-                        SizedBox(height: 20.h),
-                        drawerRow(context, "assets/png/drawerItem4.png",
-                            "Previous requests"),
+                        GestureDetector(
+                          onTap: () {
+                            AppRoutes.pop(context);
+                          },
+                          child: drawerRow(context,
+                              "assets/png/drawerItem1.png", "Dashboard"),
+                        ),
+                        SizedBox(height: 30.h),
+                        GestureDetector(
+                          onTap: () {
+                            AppRoutes.push(context, UnderConstruction());
+                          },
+                          child: drawerRow(
+                              context, "assets/png/drawerItem2.png", "Posts"),
+                        ),
+                        SizedBox(height: 30.h),
+                        GestureDetector(
+                          onTap: () {
+                            AppRoutes.push(context, UnderConstruction());
+                          },
+                          child: drawerRow(context,
+                              "assets/png/drawerItem3.png", "Today's Rate"),
+                        ),
+                        SizedBox(height: 30.h),
+                        GestureDetector(
+                          onTap: () {
+                            AppRoutes.push(context, UnderConstruction());
+                          },
+                          child: drawerRow(
+                              context,
+                              "assets/png/drawerItem4.png",
+                              "Previous requests"),
+                        ),
                         // SizedBox(height: 20.h),
                         // drawerRow(
                         //     context, "assets/png/drawerItem5.png", "Logout"),
                         SizedBox(height: 140.h),
                         consumerModeButton(context),
                         const Spacer(),
-                        drawerRow(
-                            context, "assets/png/drawerItem5.png", "Logout"),
+                        GestureDetector(
+                          onTap: () {
+                            SpServices.saveOwnerLoggedIn(false);
+                            SpServices.saveUserLoggedIn(false);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const FarmerNavBar(),
+                              ),
+                            );
+                          },
+                          child: drawerRow(
+                              context, "assets/png/drawerItem5.png", "Logout"),
+                        ),
                       ],
                     ),
                   ),

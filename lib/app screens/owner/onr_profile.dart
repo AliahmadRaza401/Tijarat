@@ -115,6 +115,7 @@ class _OwnerProfileState extends State<OwnerProfile> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    SpServices.saveOwnerLoggedIn(false);
                     SpServices.saveUserLoggedIn(false);
                     Navigator.of(context).push(
                       MaterialPageRoute(

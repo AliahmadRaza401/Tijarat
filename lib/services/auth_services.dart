@@ -125,10 +125,10 @@ class AuthServices {
 
       if (result['status'] == 'Success') {
         Provider.of<AuthProvider>(context, listen: false).setLoading(false);
-        var token = result['data']['token'];
-        var userType = result['data']['data']['user_type'];
-        var userName = result['data']['data']['name'];
-        var userId = result['data']['data']['id'];
+        var token = result['data']['token'].toString();
+        var userType = result['data']['data']['user_type'].toString();
+        var userName = result['data']['data']['name'].toString();
+        var userId = result['data']['data']['id'].toString();
 
         print('userType: $userType');
         SpServices.saveUserLoggedIn(true);

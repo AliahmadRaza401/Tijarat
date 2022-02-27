@@ -31,7 +31,36 @@ class FarmerPost extends StatefulWidget {
 }
 
 class _FarmerPostState extends State<FarmerPost> {
-  List<GetAllPostModel> allpost = [];
+  List<GetAllPostModel> allpost = [
+    GetAllPostModel(
+      id: 2,
+      categoryId: "Fine Products",
+      productId: "Flour",
+      userId: "userId",
+      price: "500",
+      unit: "KG",
+      image: null,
+      description: "This is description of item",
+      address: "address This is description of item",
+      specialOffer: "Free pickup",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    GetAllPostModel(
+      id: 2,
+      categoryId: "Agri Commodities	",
+      productId: "Paddy",
+      userId: "userId",
+      price: "333",
+      unit: "KG",
+      image: null,
+      description: "This ksdfj ksdfj f sdkf is description of item",
+      address: " ksjdf s fksfdkf sdfaddress This is description of item",
+      specialOffer: "Free pickup",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
   bool loading = true;
 
   Map<String, String> get headers => {
@@ -41,35 +70,42 @@ class _FarmerPostState extends State<FarmerPost> {
       };
 
   Future<List<GetAllPostModel>> getRequest() async {
-    print("fetching Post");
-    final response =
-        await http.get(Uri.parse(API.getPostList), headers: headers);
+    try {
+      print("fetching Post");
+      final response =
+          await http.get(Uri.parse(API.getPostList), headers: headers);
 
-    var responseData = json.decode(response.body);
-    print('responseData: $responseData');
-    for (var data in responseData['data']['data']) {
-      GetAllPostModel item = GetAllPostModel(
-        id: data['id'],
-        categoryId: data['category_id'],
-        productId: data['product_id'],
-        userId: data['user_id'],
-        price: data['price'],
-        unit: data['unit'],
-        image: data['image'],
-        description: data['description'],
-        address: data['address'],
-        specialOffer: data['special_offer'],
-        createdAt: DateTime.parse(data['created_at']),
-        updatedAt: DateTime.parse(data['updated_at']),
-      );
+      var responseData = json.decode(response.body);
+      print('responseData: $responseData');
+      for (var data in responseData['data']['data']) {
+        GetAllPostModel item = GetAllPostModel(
+          id: data['id'],
+          categoryId: data['category_id'],
+          productId: data['product_id'],
+          userId: data['user_id'],
+          price: data['price'],
+          unit: data['unit'],
+          image: data['image'],
+          description: data['description'],
+          address: data['address'],
+          specialOffer: data['special_offer'],
+          createdAt: DateTime.parse(data['created_at']),
+          updatedAt: DateTime.parse(data['updated_at']),
+        );
 
-      //Adding user to the list.
+        //Adding user to the list.
+        setState(() {
+          allpost.add(item);
+          loading = false;
+        });
+      }
+      return allpost;
+    } catch (e) {
       setState(() {
-        allpost.add(item);
         loading = false;
       });
+      return allpost;
     }
-    return allpost;
   }
 
   @override
@@ -206,6 +242,7 @@ class _FarmerPostState extends State<FarmerPost> {
                                   allpost[index].productId,
                                   allpost[index].price,
                                   allpost[index].unit,
+                                  widget.title.toString(),
                                 );
                               }),
                         ],
@@ -218,7 +255,7 @@ class _FarmerPostState extends State<FarmerPost> {
     );
   }
 
-  Widget PostCard(img, date, desc, item, rate, unit) {
+  Widget PostCard(img, date, desc, item, rate, unit, cateforey) {
     return GestureDetector(
       onTap: () {
         AppRoutes.push(context, UnderConstruction());
@@ -278,7 +315,7 @@ class _FarmerPostState extends State<FarmerPost> {
                           children: [
                             text(
                               context,
-                              item.toString(),
+                              cateforey.toString(),
                               24.sp,
                               AppColors.darkGreen,
                               bold: true,
@@ -391,4 +428,5 @@ class _FarmerPostState extends State<FarmerPost> {
       ),
     );
   }
+
 }
