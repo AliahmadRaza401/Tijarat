@@ -215,16 +215,71 @@ class _FarmerPostState extends State<FarmerPost> {
           ),
           SizedBox(
             height: CustomSizes().dynamicHeight(context, .65),
-            child: Wrap(
-              runSpacing: 15.h,
-              spacing: 15.w,
-              children: [
-                catCard(context, "Wheat", "assets/png/ghandom.png"),
-                catCard(context, "Cotton", "assets/png/coton.png"),
-                catCard(context, "Paddy", "assets/png/handrice.png"),
-                catCard(context, "Maize", "assets/png/gCorn.png"),
-              ],
-            ),
+            child: widget.title == "Agri Commodities"
+                ? Wrap(
+                    runSpacing: 15.h,
+                    spacing: 15.w,
+                    children: [
+                      catCard(context, "Wheat", "assets/png/ghandom.png"),
+                      catCard(context, "Cotton", "assets/png/coton.png"),
+                      catCard(context, "Paddy", "assets/png/handrice.png"),
+                      catCard(context, "Maize", "assets/png/gCorn.png"),
+                    ],
+                  )
+                : widget.title == "Fine Products"
+                    ? Wrap(
+                        runSpacing: 15.h,
+                        spacing: 15.w,
+                        children: [
+                          catCard(context, "Wheat", "assets/png/ghandom.png"),
+                          catCard(context, "Cotton", "assets/png/coton.png"),
+                          catCard(context, "Paddy", "assets/png/handrice.png"),
+                          catCard(context, "Maize", "assets/png/gCorn.png"),
+                        ],
+                      )
+                    : widget.title == "Spices & Pulses"
+                        ? Wrap(
+                            runSpacing: 15.h,
+                            spacing: 15.w,
+                            children: [
+                              catCard(
+                                  context, "Wheat", "assets/png/ghandom.png"),
+                              catCard(
+                                  context, "Cotton", "assets/png/coton.png"),
+                              catCard(
+                                  context, "Paddy", "assets/png/handrice.png"),
+                              catCard(context, "Maize", "assets/png/gCorn.png"),
+                            ],
+                          )
+                        : widget.title == "Fruits"
+                            ? Wrap(
+                                runSpacing: 15.h,
+                                spacing: 15.w,
+                                children: [
+                                  catCard(context, "Wheat",
+                                      "assets/png/ghandom.png"),
+                                  catCard(context, "Cotton",
+                                      "assets/png/coton.png"),
+                                  catCard(context, "Paddy",
+                                      "assets/png/handrice.png"),
+                                  catCard(
+                                      context, "Maize", "assets/png/gCorn.png"),
+                                ],
+                              )
+                            : Wrap(
+                                runSpacing: 15.h,
+                                spacing: 15.w,
+                                children: [
+                                  catCard(context, "Wheat",
+                                      "assets/png/ghandom.png"),
+                                  catCard(context, "Cotton",
+                                      "assets/png/coton.png"),
+                                  catCard(context, "Paddy",
+                                      "assets/png/handrice.png"),
+                                  catCard(
+                                      context, "Maize", "assets/png/gCorn.png"),
+                                ],
+                              ),
           ),
         ],
       ),
