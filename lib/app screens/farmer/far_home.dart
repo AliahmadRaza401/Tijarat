@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -37,42 +38,42 @@ class _FarmerHomeState extends State<FarmerHome> {
   bool isSwitched = false;
 
   List<TopRatePostModel> allpost = [
-    // TopRatePostModel(
-    //   id: "id",
-    //   productName: "Corn",
-    //   price: "750",
-    //   unit: "KG",
-    //   image:
-    //       'https://askthefoodgeek.com/wp-content/uploads/2017/02/corn-in-season.jpg',
-    //   createdAt: DateTime.now(),
-    //   categoryName: "categoryName",
-    //   factoryName: "Akhtar Factory",
-    //   userName: "ad",
-    // ),
-    // TopRatePostModel(
-    //   id: "id",
-    //   productName: "Rice",
-    //   price: "1800",
-    //   unit: "KG",
-    //   image:
-    //       'https://www.mounthopewholesale.com/wp-content/uploads/2015/04/RLG.jpg',
-    //   createdAt: DateTime.now(),
-    //   categoryName: "categoryName",
-    //   factoryName: "Raza Mils",
-    //   userName: "ad",
-    // ),
-    // TopRatePostModel(
-    //   id: "id",
-    //   productName: "Vegetables",
-    //   price: "500",
-    //   unit: "KG",
-    //   image:
-    //       'https://www.kindpng.com/picc/m/46-464276_vegetable-basket-fruit-clip-art-transparent-background-fruits.png',
-    //   createdAt: DateTime.now(),
-    //   categoryName: "categoryName",
-    //   factoryName: "Alharm Factory",
-    //   userName: "ad",
-    // ),
+    TopRatePostModel(
+      id: "id",
+      productName: "Corn",
+      price: "750",
+      unit: "KG",
+      image:
+          'https://askthefoodgeek.com/wp-content/uploads/2017/02/corn-in-season.jpg',
+      createdAt: DateTime.now(),
+      categoryName: "categoryName",
+      factoryName: "Akhtar Factory",
+      userName: "ad",
+    ),
+    TopRatePostModel(
+      id: "id",
+      productName: "Rice",
+      price: "1800",
+      unit: "KG",
+      image:
+          'https://www.mounthopewholesale.com/wp-content/uploads/2015/04/RLG.jpg',
+      createdAt: DateTime.now(),
+      categoryName: "categoryName",
+      factoryName: "Raza Mils",
+      userName: "ad",
+    ),
+    TopRatePostModel(
+      id: "id",
+      productName: "Vegetables",
+      price: "500",
+      unit: "KG",
+      image:
+          'https://www.kindpng.com/picc/m/46-464276_vegetable-basket-fruit-clip-art-transparent-background-fruits.png',
+      createdAt: DateTime.now(),
+      categoryName: "categoryName",
+      factoryName: "Alharm Factory",
+      userName: "ad",
+    ),
   ];
   bool loading = true;
 
@@ -150,9 +151,9 @@ class _FarmerHomeState extends State<FarmerHome> {
                 children: [
                   CarouselSlider(
                     options: CarouselOptions(
-                      height: 236.h,
+                      height: 238.h,
                       aspectRatio: 16 / 9,
-                      viewportFraction: 0.98,
+                      viewportFraction: 1,
                       initialPage: 0,
                       enableInfiniteScroll: true,
                       reverse: false,
@@ -602,115 +603,90 @@ class _FarmerHomeState extends State<FarmerHome> {
         AppRoutes.push(context, UnderConstruction());
       },
       child: Container(
-        height: 236.h,
-        width: 515.h,
+        height: 238.h,
+        width: 516.h,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(11.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 3,
-              blurRadius: 2,
-              offset: Offset(0, 3), // changes position of shadow
+          borderRadius: BorderRadius.circular(14.r),
+          image: DecorationImage(
+            image: AssetImage(
+              "assets/png/fac.png"
             ),
-          ],
+            fit: BoxFit.cover,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  // color: Colors.red,
-                  width: 180.w,
-                  height: 157.h,
-                  padding: EdgeInsets.only(
-                    left: 20.sp,
+            Padding(
+              padding: EdgeInsets.all(13.r),
+              child: ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                  child: Container(
+                    width: 177.w,
+                    height: 107.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.customBlack.withOpacity(.5),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        text(
+                          item ?? "",
+                          28.sp,
+                          AppColors.customWhite,
+                          bold: true,
+                          maxLines: 1,
+                        ),
+                        text(
+                          "$rate / $unit ",
+                          28.sp,
+                          AppColors.customWhite,
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
                   ),
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                ),
+              ),
+            ),
+            ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 17.w,
+                  ),
+                  width: 516.w,
+                  height: 50.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.customBlack.withOpacity(.5),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(11.r),
+                      bottomRight: Radius.circular(11.r),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       text(
-                        item ?? "",
+                        fName ?? "",
                         28.sp,
-                        AppColors.darkGreen,
+                        Colors.white,
                         bold: true,
-                        maxLines: 1,
                       ),
-                      text(
-                        "$rate / $unit ",
-                        28.sp,
-                        AppColors.darkGreen,
-                        maxLines: 1,
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                        size: 36.w,
                       ),
                     ],
                   ),
                 ),
-                // Container(
-                //   width: 300.w,
-                //   height: 160.h,
-                //   alignment: Alignment.centerRight,
-                //   decoration: BoxDecoration(
-                //     // color: Colors.amber,
-                //     image: DecorationImage(
-                //       image: NetworkImage(img),
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ),
-                //   child: Text(".") /* add child content here */,
-                // ),
-                Container(
-                  width: 300.w,
-                  height: 160.h,
-                  alignment: Alignment.centerRight,
-                  child: CachedNetworkImage(
-                      imageUrl: img,
-                      imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                      placeholder: (context, url) =>
-                          Image.asset('assets/vagetable.png'),
-                      errorWidget: (context, url, error) =>
-                          Image.asset('assets/vagetable.png')),
-                ),
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 11.w,
-              ),
-              width: 516.w,
-              height: 51.h,
-              decoration: BoxDecoration(
-                gradient: AppColors.greenGradient,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(11.r),
-                  bottomRight: Radius.circular(11.r),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  text(
-                    fName ?? "",
-                    28.sp,
-                    Colors.white,
-                    bold: true,
-                  ),
-                  Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
-                    size: 36.w,
-                  ),
-                ],
               ),
             ),
           ],
