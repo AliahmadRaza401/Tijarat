@@ -32,7 +32,6 @@ class _LoginCheckState extends State<LoginCheck> {
               Align(
                 alignment: Alignment.topCenter,
                 child: text(
-                  context,
                   "You’re not signed in",
                   36.sp,
                   AppColors.customBlack,
@@ -45,7 +44,6 @@ class _LoginCheckState extends State<LoginCheck> {
               Align(
                 alignment: Alignment.topCenter,
                 child: text(
-                  context,
                   "It seems like you’re not signed in!\nSign in/Login now to continue",
                   20.sp,
                   AppColors.customBlack,
@@ -117,7 +115,6 @@ class _LoginCheckState extends State<LoginCheck> {
                                 Align(
                                   alignment: Alignment.topCenter,
                                   child: text(
-                                    context,
                                     "Sign Up",
                                     36.sp,
                                     AppColors.customBlack,

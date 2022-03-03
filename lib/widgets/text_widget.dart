@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-Widget text(context, text, size, color,
+Widget text(data, size, color,
     {bold = false, alignText = TextAlign.start, maxLines = 2, font = false}) {
   return Text(
-    text,
+    data,
     textAlign: alignText,
     maxLines: maxLines,
     overflow: TextOverflow.ellipsis,

@@ -30,14 +30,12 @@ class UnderConstruction extends StatelessWidget {
                 height: 20,
               ),
               text(
-                context,
                 'This page is under construction',
                 26.sp,
                 Colors.black,
                 bold: true,
               ),
               text(
-                context,
                 'We are working on it!',
                 22.sp,
                 Colors.black,
@@ -72,14 +70,12 @@ class UnderConstructionNoTabBar extends StatelessWidget {
                 height: 20,
               ),
               text(
-                context,
                 'This page is under construction',
                 26.sp,
                 Colors.black,
                 bold: true,
               ),
               text(
-                context,
                 'We are working on it!',
                 22.sp,
                 Colors.black,

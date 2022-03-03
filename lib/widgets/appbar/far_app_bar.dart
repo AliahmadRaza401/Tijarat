@@ -30,7 +30,6 @@ PreferredSizeWidget farmerAppBar(context, title) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           text(
-            context,
             title,
             30.sp,
             AppColors.darkGreen,

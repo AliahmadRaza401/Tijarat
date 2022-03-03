@@ -42,7 +42,6 @@ class _FarmerProfileState extends State<FarmerProfile> {
                   height: 10.h,
                 ),
                 text(
-                  context,
                   "Username",
                   28.sp,
                   AppColors.customBlack,
@@ -54,7 +53,6 @@ class _FarmerProfileState extends State<FarmerProfile> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: text(
-                    context,
                     "Personal Information",
                     22.sp,
                     AppColors.customBlack,
@@ -64,23 +62,18 @@ class _FarmerProfileState extends State<FarmerProfile> {
                 SizedBox(
                   height: 10.h,
                 ),
-                profileText(context, "assets/formField/user.png", "Name", ""),
-                profileText(
-                    context, "assets/formField/user.png", "Address", ""),
-                profileText(context, "assets/formField/mail.png", "Email", ""),
-                profileText(
-                    context, "assets/formField/user.png", "Phone Number", ""),
-                profileText(
-                    context, "assets/formField/user.png", "User name", ""),
-                profileText(
-                    context, "assets/formField/user.png", "Created On", ""),
+                profileText("assets/formField/user.png", "Name", ""),
+                profileText("assets/formField/user.png", "Address", ""),
+                profileText("assets/formField/mail.png", "Email", ""),
+                profileText("assets/formField/user.png", "Phone Number", ""),
+                profileText("assets/formField/user.png", "User name", ""),
+                profileText("assets/formField/user.png", "Created On", ""),
                 SizedBox(
                   height: 10.h,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: text(
-                    context,
                     "Password",
                     22.sp,
                     AppColors.customBlack,
@@ -91,7 +84,6 @@ class _FarmerProfileState extends State<FarmerProfile> {
                   height: 10.h,
                 ),
                 profileText(
-                  context,
                   "assets/formField/lock.png",
                   "Change Password",
                   "",
@@ -103,7 +95,6 @@ class _FarmerProfileState extends State<FarmerProfile> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: text(
-                    context,
                     "Other",
                     22.sp,
                     AppColors.customBlack,
@@ -123,7 +114,6 @@ class _FarmerProfileState extends State<FarmerProfile> {
                     );
                   },
                   child: profileText(
-                    context,
                     "assets/formField/user.png",
                     "Logout",
                     "",
@@ -138,7 +128,7 @@ class _FarmerProfileState extends State<FarmerProfile> {
   }
 }
 
-Widget profileText(context, icon, title, data, {nextIcon = false}) {
+Widget profileText(icon, title, data, {nextIcon = false}) {
   return Container(
     width: 510.w,
     height: 65.h,
@@ -164,7 +154,6 @@ Widget profileText(context, icon, title, data, {nextIcon = false}) {
               ),
             ),
             text(
-              context,
               title,
               22.sp,
               AppColors.customBlack,
@@ -175,7 +164,6 @@ Widget profileText(context, icon, title, data, {nextIcon = false}) {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: nextIcon == false
               ? text(
-                  context,
                   data,
                   18.sp,
                   AppColors.customBlack,

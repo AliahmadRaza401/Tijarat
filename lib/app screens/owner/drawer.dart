@@ -19,7 +19,6 @@ consumerModeButton(BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         text(
-          context,
           "Owner",
           20.sp,
           AppColors.customWhite,
@@ -46,7 +45,6 @@ consumerModeButton(BuildContext context) {
           width: 10.w,
         ),
         text(
-          context,
           "Farmer",
           20.sp,
           AppColors.customWhite,
@@ -177,7 +175,6 @@ Widget drawerRow(context, icon, title) {
         width: 20.w,
       ),
       text(
-        context,
         title,
         26.sp,
         AppColors.customWhite,

@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
+import 'package:http/http.dart' as http;
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/app_routes.dart';
+import 'package:tijarat/widgets/global_widgets.dart';
 import 'package:tijarat/widgets/text_widget.dart';
-import 'package:http/http.dart' as http;
 
 import '../../api/api.dart';
 import '../../model/allpostList.dart';
@@ -20,11 +19,13 @@ class FarmerPost extends StatefulWidget {
   var title;
   var desc;
   var img;
+
   FarmerPost({
+    Key? key,
     required this.title,
     required this.desc,
     required this.img,
-  });
+  }) : super(key: key);
 
   @override
   State<FarmerPost> createState() => _FarmerPostState();
@@ -115,6 +116,7 @@ class _FarmerPostState extends State<FarmerPost> {
   }
 
   var token = '41|RLyWAouZslsYzRWKSNR2XxiPRUYhjqeactfXKunP';
+
   getData() async {
     var mytoken = await SpServices.getUserToken();
     setState(() {
@@ -126,139 +128,113 @@ class _FarmerPostState extends State<FarmerPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            Container(
-              height: 312.h,
-              decoration: BoxDecoration(
-                gradient: AppColors.greenGradient,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(100.r),
-                ),
+      body: Column(
+        children: [
+          Container(
+            height: 312.h,
+            decoration: BoxDecoration(
+              gradient: AppColors.greenGradient,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(100.r),
               ),
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10.sp,
+            ),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          AppRoutes.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 42.w,
+                        ),
+                      ),
+                      text(
+                        widget.title,
+                        36.sp,
+                        Colors.white,
+                        bold: true,
+                      ),
+                      SizedBox(
+                        width: 30.w,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
                     ),
-                    Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            AppRoutes.pop(context);
-                          },
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                            size: 42.w,
-                          ),
-                        ),
-                        text(
-                          context,
-                          widget.title,
-                          36.sp,
-                          Colors.white,
-                          bold: true,
-                        ),
                         SizedBox(
-                          width: 30.w,
+                          width: 164.w,
+                          child: text(widget.desc, 22.sp, Colors.white),
+                        ),
+                        Container(
+                          width: 332.w,
+                          height: 175.h,
+                          decoration: BoxDecoration(
+                            // color: Colors.amber,
+                            image: DecorationImage(
+                              image: AssetImage(widget.img),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: const Text("."),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 164.w,
-                            child:
-                                text(context, widget.desc, 22.sp, Colors.white),
-                          ),
-                          Container(
-                            width: 332.w,
-                            height: 175.h,
-                            decoration: BoxDecoration(
-                              // color: Colors.amber,
-                              image: DecorationImage(
-                                image: AssetImage(widget.img),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(20.r),
-                            ),
-                            child: Text(".") /* add child content here */,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                vertical: 10.h,
-              ),
-              child: text(
-                context,
-                "What kind of Grains are you looking to sell?",
-                22.sp,
-                AppColors.darkGreen,
-                bold: true,
-              ),
-            ),
-            loading
-                ? Center(
-                    child: Lottie.asset(
-                    'assets/json/Loading 2.json',
-                    width: CustomSizes().dynamicWidth(context, 0.6),
-                  ))
-                : Container(
-                    height: CustomSizes().dynamicHeight(context, .65),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ListView.builder(
-                              shrinkWrap: true,
-                              physics: ClampingScrollPhysics(),
-                              itemCount: allpost.length,
-                              itemBuilder: (ctx, index) {
-                                DateTime p = DateTime.parse(
-                                    allpost[index].createdAt.toString());
-                                String formattedDate =
-                                    DateFormat('dd-MM-yyyy hh:mm a').format(p);
-                                return PostCard(
-                                  allpost[index].image,
-                                  formattedDate,
-                                  allpost[index].description,
-                                  allpost[index].productId,
-                                  allpost[index].price,
-                                  allpost[index].unit,
-                                  widget.title.toString(),
-                                );
-                              }),
-                        ],
-                      ),
-                    ),
                   ),
-          ],
-        ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(
+              vertical: 10.h,
+            ),
+            child: text(
+              "What kind of Grains are you looking to sell?",
+              22.sp,
+              AppColors.darkGreen,
+              bold: true,
+            ),
+          ),
+          SizedBox(
+            height: CustomSizes().dynamicHeight(context, .65),
+            child: Wrap(
+              runSpacing: 15.h,
+              spacing: 15.w,
+              children: [
+                catCard(context, "Wheat", "assets/png/ghandom.png"),
+                catCard(context, "Cotton", "assets/png/coton.png"),
+                catCard(context, "Paddy", "assets/png/handrice.png"),
+                catCard(context, "Maize", "assets/png/gCorn.png"),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget PostCard(img, date, desc, item, rate, unit, cateforey) {
+  Widget postCard(img, date, desc, item, rate, unit, cateforey) {
     return GestureDetector(
       onTap: () {
-        AppRoutes.push(context, UnderConstruction());
+        AppRoutes.push(context, const UnderConstruction());
       },
       child: Column(
         children: [
@@ -300,7 +276,7 @@ class _FarmerPostState extends State<FarmerPost> {
                               image: NetworkImage('$img'),
                               fit: BoxFit.cover,
                             )),
-                  child: Text(".") /* add child content here */,
+                  child: const Text("."),
                 ),
                 SizedBox(
                   height: 10.h,
@@ -314,14 +290,12 @@ class _FarmerPostState extends State<FarmerPost> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             text(
-                              context,
                               cateforey.toString(),
                               24.sp,
                               AppColors.darkGreen,
                               bold: true,
                             ),
                             text(
-                              context,
                               date.toString(),
                               18.sp,
                               AppColors.darkGreen,
@@ -329,7 +303,6 @@ class _FarmerPostState extends State<FarmerPost> {
                           ],
                         ),
                         text(
-                          context,
                           desc.toString(),
                           20.sp,
                           AppColors.darkGreen,
@@ -359,8 +332,8 @@ class _FarmerPostState extends State<FarmerPost> {
                                   ),
                                 ],
                               ),
-                              child: text(context, item.toString(), 22.sp,
-                                  AppColors.darkGreen,
+                              child: text(
+                                  item.toString(), 22.sp, AppColors.darkGreen,
                                   bold: true),
                             ),
                             Container(
@@ -385,7 +358,6 @@ class _FarmerPostState extends State<FarmerPost> {
                                 ],
                               ),
                               child: text(
-                                context,
                                 rate.toString(),
                                 24.sp,
                                 AppColors.darkGreen,
@@ -409,7 +381,6 @@ class _FarmerPostState extends State<FarmerPost> {
                                 ],
                               ),
                               child: text(
-                                context,
                                 unit.toString(),
                                 24.sp,
                                 AppColors.darkGreen,
@@ -428,5 +399,4 @@ class _FarmerPostState extends State<FarmerPost> {
       ),
     );
   }
-
 }

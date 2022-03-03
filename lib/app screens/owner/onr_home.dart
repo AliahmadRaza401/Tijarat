@@ -79,7 +79,6 @@ class _OwnerHomeState extends State<OwnerHome> {
                                   width: 12.h,
                                 ),
                                 text(
-                                  context,
                                   "Overview",
                                   30.sp,
                                   AppColors.buttonGreen,
@@ -163,7 +162,6 @@ class _OwnerHomeState extends State<OwnerHome> {
                               width: 12.h,
                             ),
                             text(
-                              context,
                               "Orders",
                               30.sp,
                               AppColors.buttonGreen,
@@ -209,7 +207,6 @@ class _OwnerHomeState extends State<OwnerHome> {
                       width: 12.h,
                     ),
                     text(
-                      context,
                       "Graph",
                       30.sp,
                       AppColors.buttonGreen,
@@ -286,7 +283,6 @@ Widget ownerChoiceCard(context, title, image, value, value2, icon, cColor) {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         text(
-          context,
           title,
           22.sp,
           AppColors.customWhite,
@@ -297,7 +293,6 @@ Widget ownerChoiceCard(context, title, image, value, value2, icon, cColor) {
           height: 54.h,
         ),
         text(
-          context,
           value,
           40.sp,
           AppColors.customWhite,
@@ -321,7 +316,6 @@ Widget ownerChoiceCard(context, title, image, value, value2, icon, cColor) {
                   color: cColor,
                 ),
                 text(
-                  context,
                   value2,
                   14.sp,
                   cColor,
@@ -371,7 +365,6 @@ Widget ownerOrderCard(context, image, title) {
             top: 12.h,
           ),
           child: text(
-            context,
             title,
             20.sp,
             AppColors.customWhite,

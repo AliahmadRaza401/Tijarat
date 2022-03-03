@@ -92,7 +92,6 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           text(
-                            context,
                             "Welcome",
                             36.sp,
                             AppColors.customBlack,
@@ -151,7 +150,6 @@ class _LoginState extends State<Login> {
                                   // ).show(context);
                                 },
                                 child: text(
-                                  context,
                                   "Forgot Password",
                                   18.sp,
                                   AppColors.buttonGreen,
@@ -240,7 +238,6 @@ class _LoginState extends State<Login> {
                                           Align(
                                             alignment: Alignment.topCenter,
                                             child: text(
-                                              context,
                                               "Sign Up",
                                               36.sp,
                                               AppColors.customBlack,
@@ -264,7 +261,6 @@ class _LoginState extends State<Login> {
                             },
                           ),
                           text(
-                            context,
                             "or connect with",
                             20.sp,
                             AppColors.customBlack.withOpacity(.8),
@@ -378,7 +374,6 @@ Widget signUpChoice(context, title) {
             child: title == "owner"
                 ? Center(
                     child: text(
-                      context,
                       "As Factory\nOwner",
                       24.sp,
                       AppColors.customWhite,
@@ -388,7 +383,6 @@ Widget signUpChoice(context, title) {
                   )
                 : Center(
                     child: text(
-                      context,
                       "As Farmer",
                       24.sp,
                       AppColors.customWhite,

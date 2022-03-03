@@ -154,7 +154,6 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
                                 width: 12.h,
                               ),
                               text(
-                                context,
                                 "All Post",
                                 30.sp,
                                 AppColors.darkGreen,
@@ -260,14 +259,12 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             text(
-                              context,
                               cateforey.toString(),
                               24.sp,
                               AppColors.darkGreen,
                               bold: true,
                             ),
                             text(
-                              context,
                               date.toString(),
                               18.sp,
                               AppColors.darkGreen,
@@ -275,7 +272,6 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
                           ],
                         ),
                         text(
-                          context,
                           desc.toString(),
                           20.sp,
                           AppColors.darkGreen,
@@ -305,7 +301,7 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
                                   ),
                                 ],
                               ),
-                              child: text(context, item.toString(), 22.sp,
+                              child: text( item.toString(), 22.sp,
                                   AppColors.darkGreen,
                                   bold: true),
                             ),
@@ -331,7 +327,6 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
                                 ],
                               ),
                               child: text(
-                                context,
                                 rate.toString(),
                                 24.sp,
                                 AppColors.darkGreen,
@@ -355,7 +350,6 @@ class _AllPostsScreenState extends State<AllPostsScreen> {
                                 ],
                               ),
                               child: text(
-                                context,
                                 unit.toString(),
                                 24.sp,
                                 AppColors.darkGreen,

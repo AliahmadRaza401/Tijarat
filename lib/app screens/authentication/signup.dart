@@ -111,7 +111,6 @@ class _SignupState extends State<Signup> {
                           height: 30.h,
                         ),
                         text(
-                          context,
                           "Signup",
                           36.sp,
                           AppColors.customBlack,

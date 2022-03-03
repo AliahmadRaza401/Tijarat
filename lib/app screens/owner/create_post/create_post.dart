@@ -185,7 +185,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                           width: 12.h,
                         ),
                         text(
-                          context,
                           "Select Category",
                           30.sp,
                           AppColors.buttonGreen,
@@ -267,7 +266,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                           width: 12.h,
                         ),
                         text(
-                          context,
                           "Select Product",
                           30.sp,
                           AppColors.buttonGreen,
@@ -374,7 +372,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                         width: 12.h,
                       ),
                       text(
-                        context,
                         "Add Description",
                         30.sp,
                         AppColors.buttonGreen,
@@ -437,7 +434,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                         width: 12.h,
                       ),
                       text(
-                        context,
                         "Add Image",
                         30.sp,
                         AppColors.buttonGreen,
@@ -493,7 +489,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                                     color: const Color(0xffc4c4c4),
                                   ),
                                   text(
-                                    context,
                                     "Open Camera",
                                     18.sp,
                                     const Color(0xffc4c4c4),
@@ -529,7 +524,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                                     color: const Color(0xffc4c4c4),
                                   ),
                                   text(
-                                    context,
                                     "Browse",
                                     18.sp,
                                     const Color(0xffc4c4c4),
@@ -600,7 +594,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                         width: 12.h,
                       ),
                       text(
-                        context,
                         "Special Offers",
                         30.sp,
                         AppColors.buttonGreen,
@@ -609,7 +602,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                     ],
                   ),
                   text(
-                    context,
                     "Select any offer you want to give",
                     22.sp,
                     AppColors.buttonGreen,
@@ -667,7 +659,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
                         width: 12.h,
                       ),
                       text(
-                        context,
                         "Price",
                         30.sp,
                         AppColors.buttonGreen,
@@ -816,7 +807,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
       ),
       child: Center(
         child: text(
-          context,
           title,
           20.sp,
           _selectedCategorey[index]
@@ -843,7 +833,6 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
       ),
       child: Center(
         child: text(
-          context,
           title,
           20.sp,
           _selectedProduct[index]
@@ -859,6 +848,8 @@ class _CreatePostStepperState extends State<CreatePostStepper> {
   Future<void> openFilePicker() async {
     var image = await pickImageFromGalleryOrCamera(context);
     if (image == null) return;
+
+    print(image.path);
 
     setState(() => _image = image);
   }

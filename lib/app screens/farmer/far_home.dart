@@ -6,6 +6,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 import 'package:tijarat/app%20screens/farmer/far_post.dart';
 import 'package:tijarat/model/topRatePostModel.dart';
 import 'package:tijarat/navbar/onr_navbar.dart';
@@ -16,13 +18,10 @@ import 'package:tijarat/utils/dynamic_sizes.dart';
 import 'package:tijarat/widgets/appbar/far_app_bar.dart';
 import 'package:tijarat/widgets/form_fields.dart';
 import 'package:tijarat/widgets/text_widget.dart';
-import 'package:http/http.dart' as http;
 import 'package:tijarat/widgets/underconstruction.dart';
 
 import '../../api/api.dart';
-import '../../model/allpostList.dart';
 import '../../utils/constants.dart';
-import '../../widgets/appbar/onr_app_bar.dart';
 
 class FarmerHome extends StatefulWidget {
   const FarmerHome({Key? key}) : super(key: key);
@@ -38,42 +37,42 @@ class _FarmerHomeState extends State<FarmerHome> {
   bool isSwitched = false;
 
   List<TopRatePostModel> allpost = [
-    TopRatePostModel(
-      id: "id",
-      productName: "Corn",
-      price: "750",
-      unit: "KG",
-      image:
-          'https://askthefoodgeek.com/wp-content/uploads/2017/02/corn-in-season.jpg',
-      createdAt: DateTime.now(),
-      categoryName: "categoryName",
-      factoryName: "Akhtar Factory",
-      userName: "ad",
-    ),
-    TopRatePostModel(
-      id: "id",
-      productName: "Rice",
-      price: "1800",
-      unit: "KG",
-      image:
-          'https://www.mounthopewholesale.com/wp-content/uploads/2015/04/RLG.jpg',
-      createdAt: DateTime.now(),
-      categoryName: "categoryName",
-      factoryName: "Raza Mils",
-      userName: "ad",
-    ),
-    TopRatePostModel(
-      id: "id",
-      productName: "Vegetables",
-      price: "500",
-      unit: "KG",
-      image:
-          'https://www.kindpng.com/picc/m/46-464276_vegetable-basket-fruit-clip-art-transparent-background-fruits.png',
-      createdAt: DateTime.now(),
-      categoryName: "categoryName",
-      factoryName: "Alharm Factory",
-      userName: "ad",
-    ),
+    // TopRatePostModel(
+    //   id: "id",
+    //   productName: "Corn",
+    //   price: "750",
+    //   unit: "KG",
+    //   image:
+    //       'https://askthefoodgeek.com/wp-content/uploads/2017/02/corn-in-season.jpg',
+    //   createdAt: DateTime.now(),
+    //   categoryName: "categoryName",
+    //   factoryName: "Akhtar Factory",
+    //   userName: "ad",
+    // ),
+    // TopRatePostModel(
+    //   id: "id",
+    //   productName: "Rice",
+    //   price: "1800",
+    //   unit: "KG",
+    //   image:
+    //       'https://www.mounthopewholesale.com/wp-content/uploads/2015/04/RLG.jpg',
+    //   createdAt: DateTime.now(),
+    //   categoryName: "categoryName",
+    //   factoryName: "Raza Mils",
+    //   userName: "ad",
+    // ),
+    // TopRatePostModel(
+    //   id: "id",
+    //   productName: "Vegetables",
+    //   price: "500",
+    //   unit: "KG",
+    //   image:
+    //       'https://www.kindpng.com/picc/m/46-464276_vegetable-basket-fruit-clip-art-transparent-background-fruits.png',
+    //   createdAt: DateTime.now(),
+    //   categoryName: "categoryName",
+    //   factoryName: "Alharm Factory",
+    //   userName: "ad",
+    // ),
   ];
   bool loading = true;
 
@@ -128,7 +127,7 @@ class _FarmerHomeState extends State<FarmerHome> {
     var mytoken = await SpServices.getUserToken();
     print('mytoken: $mytoken');
     setState(() {
-      token = mytoken == null ? authToken : mytoken;
+      token = mytoken ?? authToken;
       userName = name ?? "Farmer";
       isOwner = owner ?? false;
     });
@@ -175,7 +174,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                         //   ),
                         // ],
                         allpost
-                            .map((item) => sliderContainr(
+                            .map((item) => sliderContainer(
                                   item.image.toString(),
                                   item.productName.toString(),
                                   item.price.toString(),
@@ -190,7 +189,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: text(
-                      context,
                       "Hi, $userName",
                       28.sp,
                       AppColors.darkGreen,
@@ -198,7 +196,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                     ),
                   ),
                   text(
-                    context,
                     "You can sell your fields by selecting the factory which gives you the best price",
                     20.sp,
                     AppColors.darkGreen,
@@ -254,14 +251,12 @@ class _FarmerHomeState extends State<FarmerHome> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               text(
-                                context,
                                 "Agri Commodities",
                                 28.sp,
                                 AppColors.customWhite,
                                 bold: true,
                               ),
                               text(
-                                context,
                                 "Lorem ipsum lorem",
                                 22.sp,
                                 AppColors.customWhite,
@@ -279,7 +274,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     text(
-                                      context,
                                       "Select",
                                       20.sp,
                                       AppColors.darkGreen,
@@ -296,7 +290,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                             ],
                           ),
                           Image.asset(
-                            "assets/grains.png",
+                            "assets/png/grain.png",
                             width: 190.w,
                             height: 140.h,
                           ),
@@ -320,7 +314,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                               FarmerPost(
                                 title: "Fine Products",
                                 desc: "Lorem ipsum lorem",
-                                img: "assets/vagetable.png",
+                                img: "assets/png/fineProd.png",
                               ),
                             );
                           },
@@ -354,14 +348,12 @@ class _FarmerHomeState extends State<FarmerHome> {
                                   ],
                                 ),
                                 text(
-                                  context,
                                   "Fine Products",
                                   28.sp,
                                   AppColors.customWhite,
                                   bold: true,
                                 ),
                                 text(
-                                  context,
                                   "Lorem ipsum lorem",
                                   22.sp,
                                   AppColors.customWhite,
@@ -380,7 +372,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       text(
-                                        context,
                                         "Select",
                                         20.sp,
                                         AppColors.darkGreen,
@@ -403,13 +394,55 @@ class _FarmerHomeState extends State<FarmerHome> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                AppRoutes.push(
-                                  context,
-                                  FarmerPost(
-                                    title: "Fruits",
-                                    desc: "Lorem ipsum lorem",
-                                    img: "assets/fruits.png",
-                                  ),
+                                showDialog(
+                                  barrierDismissible: true,
+                                  useSafeArea: true,
+                                  context: context,
+                                  barrierColor: Colors.white60,
+                                  builder: (context) {
+                                    return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          39.r,
+                                        ),
+                                      ),
+                                      backgroundColor: AppColors.customWhite,
+                                      insetPadding: EdgeInsets.all(
+                                        CustomSizes()
+                                            .dynamicWidth(context, 0.04),
+                                      ),
+                                      child: Container(
+                                        width: 500.w,
+                                        height: 480.h,
+                                        color: AppColors.noColor,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topCenter,
+                                              child: text(
+                                                "Fruits",
+                                                36.sp,
+                                                AppColors.customBlack,
+                                                bold: true,
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                catChoiceChip(
+                                                    context, "Seasonal"),
+                                                catChoiceChip(
+                                                    context, "Regular"),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                               child: Container(
@@ -436,7 +469,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         text(
-                                          context,
                                           "Fruits",
                                           28.sp,
                                           AppColors.customWhite,
@@ -450,7 +482,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                                       ],
                                     ),
                                     text(
-                                      context,
                                       "Lorem ipsum lorem",
                                       22.sp,
                                       AppColors.customWhite,
@@ -494,7 +525,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         text(
-                                          context,
                                           "Spices\n& Pulses",
                                           28.sp,
                                           AppColors.customWhite,
@@ -508,7 +538,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                                       ],
                                     ),
                                     text(
-                                      context,
                                       "Lorem ipsum lorem",
                                       22.sp,
                                       AppColors.customWhite,
@@ -530,46 +559,44 @@ class _FarmerHomeState extends State<FarmerHome> {
   }
 
   farmerModeChange(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Farmer',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              )),
-          SizedBox(
-            width: 10,
-          ),
-          Switch(
-            value: isSwitched,
-            onChanged: (value) {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => OwnerNavBar()));
-              setState(() {
-                isSwitched = value;
-              });
-            },
-            activeTrackColor: AppColors.darkGreen,
-            activeColor: Colors.blue,
-            inactiveTrackColor: AppColors.lightGreen,
-            inactiveThumbColor: AppColors.darkGreen,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          Text('Owner',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              )),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Farmer',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            )),
+        SizedBox(
+          width: 10,
+        ),
+        Switch(
+          value: isSwitched,
+          onChanged: (value) {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => OwnerNavBar()));
+            setState(() {
+              isSwitched = value;
+            });
+          },
+          activeTrackColor: AppColors.darkGreen,
+          activeColor: Colors.blue,
+          inactiveTrackColor: AppColors.lightGreen,
+          inactiveThumbColor: AppColors.darkGreen,
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text('Owner',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            )),
+      ],
     );
   }
 
-  Widget sliderContainr(img, item, rate, unit, fName) {
+  Widget sliderContainer(img, item, rate, unit, fName) {
     return GestureDetector(
       onTap: () {
         AppRoutes.push(context, UnderConstruction());
@@ -607,7 +634,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       text(
-                        context,
                         item ?? "",
                         28.sp,
                         AppColors.darkGreen,
@@ -615,8 +641,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                         maxLines: 1,
                       ),
                       text(
-                        context,
-                        "${rate} / ${unit} ",
+                        "$rate / $unit ",
                         28.sp,
                         AppColors.darkGreen,
                         maxLines: 1,
@@ -675,7 +700,6 @@ class _FarmerHomeState extends State<FarmerHome> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   text(
-                    context,
                     fName ?? "",
                     28.sp,
                     Colors.white,
@@ -694,4 +718,74 @@ class _FarmerHomeState extends State<FarmerHome> {
       ),
     );
   }
+}
+
+Widget catChoiceChip(context, title) {
+  return InkWell(
+    onTap: () {
+      AppRoutes.push(
+        context,
+        FarmerPost(
+          title: "Fruits",
+          desc: "Lorem ipsum lorem",
+          img: "assets/fruits.png",
+        ),
+      );
+    },
+    child: Container(
+      width: 210.w,
+      height: 280.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.r),
+        color: AppColors.customWhite,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            width: 210.w,
+            height: 210.h,
+            child: Center(
+              child: title == "Regular"
+                  ? Image.asset("assets/gif/Signup as Owner.gif")
+                  : LottieBuilder.asset("assets/json/Seasonal.json"),
+            ),
+          ),
+          Container(
+            width: 210.w,
+            height: 70.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(20.r),
+                bottomLeft: Radius.circular(20.r),
+              ),
+              gradient: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.darkGreen,
+                  AppColors.lightGreen,
+                ],
+              ),
+            ),
+            child: Center(
+              child: text(
+                title,
+                24.sp,
+                AppColors.customWhite,
+                bold: true,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
