@@ -39,8 +39,7 @@ Widget inputTextField(context, label, myController,
         hintText: label,
         suffixIcon: Image.asset(
           "$icon",
-          width: 24.w,
-          height: 24.h,
+          scale: 6.0,
           color: const Color(0xffC4C4C4),
         ),
         hintStyle: TextStyle(
@@ -111,7 +110,7 @@ Widget inputTextField1(context, label, myController,
         hintText: label,
         prefixIcon: Image.asset(
           "$icon",
-          scale: 4.0,
+          scale: 6.0,
           color: AppColors.customBlack,
         ),
         hintStyle: TextStyle(

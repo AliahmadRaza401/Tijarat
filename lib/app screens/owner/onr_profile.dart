@@ -35,7 +35,10 @@ class _OwnerProfileState extends State<OwnerProfile> {
                   child: CircleAvatar(
                     radius: 80.r,
                     backgroundColor: AppColors.customGrey2,
-                    child: Image.asset("assets/formField/user.png"),
+                    child: Image.asset(
+                      "assets/formField/dp.png",
+                      scale: 1.4,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -63,11 +66,11 @@ class _OwnerProfileState extends State<OwnerProfile> {
                   height: 10.h,
                 ),
                 profileText("assets/formField/user.png", "Name", ""),
-                profileText("assets/formField/user.png", "Address", ""),
+                profileText("assets/formField/address.png", "Address", ""),
                 profileText("assets/formField/mail.png", "Email", ""),
-                profileText("assets/formField/user.png", "Phone Number", ""),
+                profileText("assets/formField/phone.png", "Phone Number", ""),
                 profileText("assets/formField/user.png", "User name", ""),
-                profileText("assets/formField/user.png", "Created On", ""),
+                profileText("assets/formField/calendar.png", "Created On", ""),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -115,7 +118,7 @@ class _OwnerProfileState extends State<OwnerProfile> {
                     );
                   },
                   child: profileText(
-                    "assets/formField/user.png",
+                    "assets/formField/logout.png",
                     "Logout",
                     "",
                   ),

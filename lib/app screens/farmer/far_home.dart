@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,49 +37,48 @@ class _FarmerHomeState extends State<FarmerHome> {
   bool isSwitched = false;
 
   List<TopRatePostModel> allpost = [
-    TopRatePostModel(
-      id: "id",
-      productName: "Corn",
-      price: "750",
-      unit: "KG",
-      image:
-          'https://askthefoodgeek.com/wp-content/uploads/2017/02/corn-in-season.jpg',
-      createdAt: DateTime.now(),
-      categoryName: "categoryName",
-      factoryName: "Akhtar Factory",
-      userName: "ad",
-    ),
-    TopRatePostModel(
-      id: "id",
-      productName: "Rice",
-      price: "1800",
-      unit: "KG",
-      image:
-          'https://www.mounthopewholesale.com/wp-content/uploads/2015/04/RLG.jpg',
-      createdAt: DateTime.now(),
-      categoryName: "categoryName",
-      factoryName: "Raza Mils",
-      userName: "ad",
-    ),
-    TopRatePostModel(
-      id: "id",
-      productName: "Vegetables",
-      price: "500",
-      unit: "KG",
-      image:
-          'https://www.kindpng.com/picc/m/46-464276_vegetable-basket-fruit-clip-art-transparent-background-fruits.png',
-      createdAt: DateTime.now(),
-      categoryName: "categoryName",
-      factoryName: "Alharm Factory",
-      userName: "ad",
-    ),
+    // TopRatePostModel(
+    //   id: "id",
+    //   productName: "Corn",
+    //   price: "750",
+    //   unit: "KG",
+    //   image:
+    //       'https://askthefoodgeek.com/wp-content/uploads/2017/02/corn-in-season.jpg',
+    //   createdAt: DateTime.now(),
+    //   categoryName: "categoryName",
+    //   factoryName: "Akhtar Factory",
+    //   userName: "ad",
+    // ),
+    // TopRatePostModel(
+    //   id: "id",
+    //   productName: "Rice",
+    //   price: "1800",
+    //   unit: "KG",
+    //   image:
+    //       'https://www.mounthopewholesale.com/wp-content/uploads/2015/04/RLG.jpg',
+    //   createdAt: DateTime.now(),
+    //   categoryName: "categoryName",
+    //   factoryName: "Raza Mils",
+    //   userName: "ad",
+    // ),
+    // TopRatePostModel(
+    //   id: "id",
+    //   productName: "Vegetables",
+    //   price: "500",
+    //   unit: "KG",
+    //   image:
+    //       'https://www.kindpng.com/picc/m/46-464276_vegetable-basket-fruit-clip-art-transparent-background-fruits.png',
+    //   createdAt: DateTime.now(),
+    //   categoryName: "categoryName",
+    //   factoryName: "Alharm Factory",
+    //   userName: "ad",
+    // ),
   ];
   bool loading = true;
 
   Map<String, String> get headers => {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": "Bearer $token",
       };
 
   Future<List<TopRatePostModel>> getRequest() async {
@@ -164,25 +162,15 @@ class _FarmerHomeState extends State<FarmerHome> {
                       enlargeCenterPage: true,
                       scrollDirection: Axis.horizontal,
                     ),
-                    items:
-                        //  [
-                        //   sliderContainr(
-                        //     "assets/vagetable.png",
-                        //     allpost[0].productName.toString(),
-                        //     allpost[0].price.toString(),
-                        //     allpost[0].unit.toString(),
-                        //     allpost[0].factoryName.toString(),
-                        //   ),
-                        // ],
-                        allpost
-                            .map((item) => sliderContainer(
-                                  item.image.toString(),
-                                  item.productName.toString(),
-                                  item.price.toString(),
-                                  item.unit.toString(),
-                                  item.factoryName.toString(),
-                                ))
-                            .toList(),
+                    items: allpost
+                        .map((item) => sliderContainer(
+                              item.image.toString(),
+                              item.productName.toString(),
+                              item.price.toString(),
+                              item.unit.toString(),
+                              item.factoryName.toString(),
+                            ))
+                        .toList(),
                   ),
                   SizedBox(
                     height: 20.sp,
@@ -226,7 +214,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                         FarmerPost(
                           title: "Agri Commodities",
                           desc: "Lorem ipsum lorem",
-                          img: "assets/grains.png",
+                          img: "assets/png/grain.png",
                         ),
                       );
                     },
@@ -342,7 +330,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      "assets/vagetable.png",
+                                      "assets/png/fineProd.png",
                                       width: 200.w,
                                       height: 160.h,
                                     ),
@@ -423,7 +411,7 @@ class _FarmerHomeState extends State<FarmerHome> {
                                             Align(
                                               alignment: Alignment.topCenter,
                                               child: text(
-                                                "Fruits",
+                                                "Fruities",
                                                 36.sp,
                                                 AppColors.customBlack,
                                                 bold: true,
@@ -493,14 +481,15 @@ class _FarmerHomeState extends State<FarmerHome> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                AppRoutes.push(
-                                  context,
-                                  FarmerPost(
-                                    title: "Spices & Pulses",
-                                    desc: "Lorem ipsum lorem",
-                                    img: "assets/spices.png",
-                                  ),
-                                );
+                                AppRoutes.push(context, UnderConstruction());
+                                // AppRoutes.push(
+                                //   context,
+                                //   FarmerPost(
+                                //     title: "Spices & Pulses",
+                                //     desc: "Lorem ipsum lorem",
+                                //     img: "assets/spices.png",
+                                //   ),
+                                // );
                               },
                               child: Container(
                                 width: 245.w,
@@ -563,11 +552,13 @@ class _FarmerHomeState extends State<FarmerHome> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Farmer',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            )),
+        Text(
+          'Farmer',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
         SizedBox(
           width: 10,
         ),
@@ -588,11 +579,13 @@ class _FarmerHomeState extends State<FarmerHome> {
         SizedBox(
           width: 10,
         ),
-        Text('Owner',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            )),
+        Text(
+          'Owner',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
       ],
     );
   }
@@ -609,9 +602,7 @@ class _FarmerHomeState extends State<FarmerHome> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(14.r),
           image: DecorationImage(
-            image: AssetImage(
-              "assets/png/fac.png"
-            ),
+            image: AssetImage("assets/png/fac.png"),
             fit: BoxFit.cover,
           ),
         ),
@@ -701,11 +692,13 @@ Widget catChoiceChip(context, title) {
     onTap: () {
       AppRoutes.push(
         context,
-        FarmerPost(
-          title: "Fruits",
-          desc: "Lorem ipsum lorem",
-          img: "assets/fruits.png",
-        ),
+        title == "Regular"
+            ? UnderConstruction()
+            : FarmerPost(
+                title: title,
+                desc: "Lorem ipsum lorem",
+                img: "assets/fruits.png",
+              ),
       );
     },
     child: Container(

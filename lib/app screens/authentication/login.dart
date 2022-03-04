@@ -141,10 +141,11 @@ class _LoginState extends State<Login> {
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: () {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text("Coming Soon..."),
-                                  ));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("Coming Soon..."),
+                                    ),
+                                  );
                                   // MotionToast.info(
                                   //   description: const Text("Coming Soon..."),
                                   // ).show(context);

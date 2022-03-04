@@ -158,7 +158,11 @@ class _FarmerPostState extends State<FarmerPost> {
                         ),
                       ),
                       text(
-                        widget.title,
+                        widget.title == "Regular"
+                            ? "Fuities"
+                            : widget.title == "Seasonal"
+                                ? "Fuities"
+                                : widget.title,
                         36.sp,
                         Colors.white,
                         bold: true,
@@ -231,10 +235,10 @@ class _FarmerPostState extends State<FarmerPost> {
                         runSpacing: 15.h,
                         spacing: 15.w,
                         children: [
-                          catCard(context, "Wheat", "assets/png/ghandom.png"),
-                          catCard(context, "Cotton", "assets/png/coton.png"),
-                          catCard(context, "Paddy", "assets/png/handrice.png"),
-                          catCard(context, "Maize", "assets/png/gCorn.png"),
+                          catCard(context, "Flour", "assets/png/flour.png"),
+                          catCard(context, "Cotton", "assets/png/cotton.png"),
+                          catCard(context, "Sooji", "assets/png/sooji.png"),
+                          catCard(context, "Maize", "assets/png/maize.png"),
                         ],
                       )
                     : widget.title == "Spices & Pulses"
@@ -251,35 +255,44 @@ class _FarmerPostState extends State<FarmerPost> {
                               catCard(context, "Maize", "assets/png/gCorn.png"),
                             ],
                           )
-                        : widget.title == "Fruits"
+                        : widget.title == "Regular"
                             ? Wrap(
                                 runSpacing: 15.h,
                                 spacing: 15.w,
                                 children: [
-                                  catCard(context, "Wheat",
-                                      "assets/png/ghandom.png"),
-                                  catCard(context, "Cotton",
-                                      "assets/png/coton.png"),
-                                  catCard(context, "Paddy",
-                                      "assets/png/handrice.png"),
                                   catCard(
-                                      context, "Maize", "assets/png/gCorn.png"),
+                                      context, "Daily Bucket", "assets/png/mango.png"),
+                                  catCard(context, "Special Bucket",
+                                      "assets/png/orange.png"),
                                 ],
                               )
-                            : Wrap(
-                                runSpacing: 15.h,
-                                spacing: 15.w,
-                                children: [
-                                  catCard(context, "Wheat",
-                                      "assets/png/ghandom.png"),
-                                  catCard(context, "Cotton",
-                                      "assets/png/coton.png"),
-                                  catCard(context, "Paddy",
-                                      "assets/png/handrice.png"),
-                                  catCard(
-                                      context, "Maize", "assets/png/gCorn.png"),
-                                ],
-                              ),
+                            : widget.title == "Seasonal"
+                                ? Wrap(
+                                    runSpacing: 15.h,
+                                    spacing: 15.w,
+                                    children: [
+                                      catCard(context, "Mango",
+                                          "assets/png/mango.png"),
+                                      catCard(context, "Orange",
+                                          "assets/png/orange.png"),
+                                      catCard(context, "Dates",
+                                          "assets/png/dates.png"),
+                                    ],
+                                  )
+                                : Wrap(
+                                    runSpacing: 15.h,
+                                    spacing: 15.w,
+                                    children: [
+                                      catCard(context, "Wheat",
+                                          "assets/png/ghandom.png"),
+                                      catCard(context, "Cotton",
+                                          "assets/png/coton.png"),
+                                      catCard(context, "Paddy",
+                                          "assets/png/handrice.png"),
+                                      catCard(context, "Maize",
+                                          "assets/png/gCorn.png"),
+                                    ],
+                                  ),
           ),
         ],
       ),

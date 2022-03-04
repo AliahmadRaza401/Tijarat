@@ -53,11 +53,13 @@ Widget catCard(context, name, image, {page = ""}) {
                     SizedBox(
                       width: 40.w,
                     ),
-                    text(
-                      name,
-                      26.sp,
-                      AppColors.customWhite,
-                      bold: true,
+                    Flexible(
+                      child: text(
+                        name,
+                        26.sp,
+                        AppColors.customWhite,
+                        bold: true,
+                      ),
                     ),
                     Icon(
                       Icons.navigate_next_rounded,
