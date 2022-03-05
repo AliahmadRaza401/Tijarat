@@ -170,18 +170,27 @@ class _FarmerFactoryListState extends State<FarmerFactoryList> {
                           child: TabBarView(
                             physics: const NeverScrollableScrollPhysics(),
                             children: [
-                              ListView.builder(
-                                itemCount: factoryList.length,
-                                itemBuilder: (context, i) {
-                                  return factoryTRateCard(
-                                    factoryList[i]["factory_name"].toString(),
-                                    factoryList[i]["price"].toString(),
-                                    factoryList[i]["unit"].toString(),
-                                    factoryList[i]["special_offer"].toString(),
-                                    factoryList[i]["factory_image"].toString(),
-                                  );
-                                },
-                              ),
+                              loading == false
+                                  ? ListView.builder(
+                                      itemCount: factoryList.length,
+                                      itemBuilder: (context, i) {
+                                        return factoryTRateCard(
+                                          factoryList[i]["factory_name"]
+                                              .toString(),
+                                          factoryList[i]["price"].toString(),
+                                          factoryList[i]["unit"].toString(),
+                                          factoryList[i]["special_offer"]
+                                              .toString(),
+                                          factoryList[i]["factory_image"]
+                                              .toString(),
+                                        );
+                                      },
+                                    )
+                                  : const Center(
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.customWhite,
+                                      ),
+                                    ),
                               Center(
                                 child: text(
                                   "Nothing to Show",
