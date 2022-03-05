@@ -31,7 +31,7 @@ class _FarmerFactoryListState extends State<FarmerFactoryList> {
     });
     factoryList.clear();
     print("fetching Post");
-    final response = await http.get(Uri.parse("${API.getProductFactoryList}2/"),
+    final response = await http.get(Uri.parse("${API.getProductFactoryList}1/"),
         headers: headers);
 
     var responseData = json.decode(response.body);
