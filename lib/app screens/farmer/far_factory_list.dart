@@ -234,10 +234,14 @@ Widget factoryTRateCard(factoryName, rate, unit, pickup, image) {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            text(
-              factoryName,
-              36.sp,
-              AppColors.darkGreen,
+            SizedBox(
+              width: 200.w,
+              child: text(
+                factoryName,
+                36.sp,
+                AppColors.darkGreen,
+                maxLines: 1,
+              ),
             ),
             text(
               "$rate/$unit",
@@ -250,9 +254,10 @@ Widget factoryTRateCard(factoryName, rate, unit, pickup, image) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   text(
-                    "${pickup.toString().substring(0, 10)} ...",
+                    pickup.toString().substring(0, 11),
                     22.sp,
                     AppColors.darkGreen,
+                    maxLines: 1,
                   ),
                   Icon(
                     Icons.keyboard_arrow_right_rounded,
