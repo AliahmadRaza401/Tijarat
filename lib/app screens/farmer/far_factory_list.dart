@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
+import 'package:tijarat/api/api.dart';
 import 'package:tijarat/utils/app_color.dart';
 import 'package:tijarat/utils/dynamic_sizes.dart';
 
 import '../../utils/app_routes.dart';
+import '../../utils/constants.dart';
 import '../../widgets/text_widget.dart';
 
 class FarmerFactoryList extends StatefulWidget {
@@ -17,6 +22,39 @@ class FarmerFactoryList extends StatefulWidget {
 }
 
 class _FarmerFactoryListState extends State<FarmerFactoryList> {
+  List factoryList = [];
+  bool loading = true;
+
+  Future getFactoryList() async {
+    setState(() {
+      loading = true;
+    });
+    factoryList.clear();
+    print("fetching Post");
+    final response = await http.get(Uri.parse("${API.getProductFactoryList}2/"),
+        headers: headers);
+
+    var responseData = json.decode(response.body);
+    print('responseData: $responseData');
+    for (var data in responseData['data']['data']) {
+      print('responseData123: $data');
+
+      //Adding user to the list.
+      setState(() {
+        factoryList.add(data);
+        loading = false;
+      });
+    }
+    return factoryList;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getFactoryList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -132,46 +170,24 @@ class _FarmerFactoryListState extends State<FarmerFactoryList> {
                           child: TabBarView(
                             physics: const NeverScrollableScrollPhysics(),
                             children: [
-                              SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    factoryTRateCard(
-                                      "Factory 1",
-                                      "100/Kg",
-                                      "Free Pickup",
-                                      "assets/png/fac.png",
-                                    ),
-                                    factoryTRateCard(
-                                      "Factory 2",
-                                      "90/Kg",
-                                      "Pickup Charges",
-                                      "assets/png/fac.png",
-                                    ),
-                                    factoryTRateCard(
-                                      "Factory 3",
-                                      "120/Kg",
-                                      "Free Pickup",
-                                      "assets/png/fac.png",
-                                    ),
-                                  ],
-                                ),
+                              ListView.builder(
+                                itemCount: factoryList.length,
+                                itemBuilder: (context, i) {
+                                  return factoryTRateCard(
+                                    factoryList[i]["factory_name"].toString(),
+                                    factoryList[i]["price"].toString(),
+                                    factoryList[i]["unit"].toString(),
+                                    factoryList[i]["special_offer"].toString(),
+                                    factoryList[i]["factory_image"].toString(),
+                                  );
+                                },
                               ),
-                              SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    factoryTRateCard(
-                                      "Factory 1",
-                                      "105/Kg",
-                                      "Free Pickup",
-                                      "assets/png/fac.png",
-                                    ),
-                                    factoryTRateCard(
-                                      "Factory 2",
-                                      "85/Kg",
-                                      "Pickup Charges",
-                                      "assets/png/fac.png",
-                                    ),
-                                  ],
+                              Center(
+                                child: text(
+                                  "Nothing to Show",
+                                  24.sp,
+                                  AppColors.customWhite,
+                                  bold: true,
                                 ),
                               ),
                             ],
@@ -190,7 +206,7 @@ class _FarmerFactoryListState extends State<FarmerFactoryList> {
   }
 }
 
-Widget factoryTRateCard(factoryName, rate, pickup, image) {
+Widget factoryTRateCard(factoryName, rate, unit, pickup, image) {
   return Container(
     width: 512.w,
     height: 140.h,
@@ -215,7 +231,7 @@ Widget factoryTRateCard(factoryName, rate, pickup, image) {
               AppColors.darkGreen,
             ),
             text(
-              rate,
+              "$rate/$unit",
               22.sp,
               AppColors.darkGreen,
             ),
@@ -225,7 +241,7 @@ Widget factoryTRateCard(factoryName, rate, pickup, image) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   text(
-                    pickup,
+                    "${pickup.toString().substring(0, 10)} ...",
                     22.sp,
                     AppColors.darkGreen,
                   ),
@@ -244,7 +260,7 @@ Widget factoryTRateCard(factoryName, rate, pickup, image) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14.r),
             image: DecorationImage(
-              image: AssetImage(
+              image: NetworkImage(
                 image,
               ),
               fit: BoxFit.cover,

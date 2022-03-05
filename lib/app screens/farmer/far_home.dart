@@ -94,7 +94,7 @@ class _FarmerHomeState extends State<FarmerHome> {
         productName: data['product_name'],
         price: data['price'],
         unit: data['unit'],
-        image: data['image'],
+        image: data['factory_image'],
         createdAt: DateTime.parse(data['created_at']),
         categoryName: data['category_name'],
         factoryName: data['factory_name'],
@@ -602,7 +602,7 @@ class _FarmerHomeState extends State<FarmerHome> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(14.r),
           image: DecorationImage(
-            image: AssetImage("assets/png/fac.png"),
+            image: NetworkImage(img),
             fit: BoxFit.cover,
           ),
         ),
