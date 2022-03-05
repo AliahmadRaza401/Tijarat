@@ -224,7 +224,7 @@ class _FarmerPostState extends State<FarmerPost> {
                     runSpacing: 15.h,
                     spacing: 15.w,
                     children: [
-                      catCard(context, "Wheat", "assets/png/ghandom.png"),
+                      catCard(context, "Wheat", "assets/png/ghandom.png", page: true),
                       catCard(context, "Cotton", "assets/png/coton.png"),
                       catCard(context, "Paddy", "assets/png/handrice.png"),
                       catCard(context, "Maize", "assets/png/gCorn.png"),

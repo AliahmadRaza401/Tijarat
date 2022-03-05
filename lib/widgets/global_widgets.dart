@@ -2,32 +2,42 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tijarat/app%20screens/farmer/far_factory_list.dart';
 import 'package:tijarat/utils/app_color.dart';
-import 'package:tijarat/utils/app_routes.dart';
 import 'package:tijarat/widgets/text_widget.dart';
 import 'package:tijarat/widgets/underconstruction.dart';
 
-Widget catCard(context, name, image, {page = ""}) {
-  return Container(
-    width: 246.w,
-    height: 255.h,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(12.r),
-      border: Border.all(
-        color: const Color(0xff076733),
-        width: 4.w,
-      ),
-      image: DecorationImage(
-        image: AssetImage(
-          image,
+import '../utils/app_routes.dart';
+
+Widget catCard(context, name, image, {page = false}) {
+  return GestureDetector(
+    onTap: () {
+      AppRoutes.push(
+        context,
+        page == false
+            ? const UnderConstruction()
+            : FarmerFactoryList(
+                title: name,
+                image: image,
+              ),
+      );
+    },
+    child: Container(
+      width: 246.w,
+      height: 255.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: const Color(0xff076733),
+          width: 4.w,
         ),
-        fit: BoxFit.cover,
+        image: DecorationImage(
+          image: AssetImage(
+            image,
+          ),
+          fit: BoxFit.cover,
+        ),
       ),
-    ),
-    child: GestureDetector(
-      onTap: () {
-        AppRoutes.push(context, const UnderConstruction());
-      },
       child: Align(
         alignment: Alignment.bottomCenter,
         child: ClipRRect(
