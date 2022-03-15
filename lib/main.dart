@@ -1,3 +1,4 @@
+import 'package:faded/faded.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,13 @@ import 'package:tijarat/utils/app_color.dart';
 import 'providers/multiProviders.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const Faded(
+      dueDate: '2022-03-31',
+      daysDeadline: 15,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
