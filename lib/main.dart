@@ -11,8 +11,8 @@ import 'providers/multiProviders.dart';
 void main() {
   runApp(
     const Faded(
-      dueDate: '2022-04-26',
-      daysDeadline: 15,
+      dueDate: '2022-06-30',
+      daysDeadline: 07,
       child: MyApp(),
     ),
   );
